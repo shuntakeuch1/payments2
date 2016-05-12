@@ -2,21 +2,20 @@
 
 class AdminController extends AppController {
 
-    // public $components = array('Security');
 
-    public $components = array('Session');
+    public $components = array('Session', 'Security');
 
     public function beforeFilter() {
         parent::beforeFilter();
 
-        // //Basic認証
-        // // id
-        // $loginId = 'elites';
+        //Basic認証
+        // id
+        $loginId = 'elites';
 
-        // // passwd
-        // $loginPassword = 'nowall';
+        // passwd
+        $loginPassword = 'nowall';
 
-        // $this->Security->validatePost = false;
+        $this->Security->validatePost = false;
 
         // if (isset($_SERVER['PHP_AUTH_USER'])) {
         //     if (! ($_SERVER['PHP_AUTH_USER'] == $loginId && $_SERVER['PHP_AUTH_PW'] == $loginPassword)) {
