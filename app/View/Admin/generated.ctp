@@ -257,7 +257,7 @@
 
                         <tr>
                           <td>決済URL</td>
-                          <td><?=$sendData['Admin']['key'];?></td>
+                          <td>https://elite.sc/payments/key/<?=$sendData['Admin']['key'];?></td>
                         </tr>
                       </table>
                     </div>
