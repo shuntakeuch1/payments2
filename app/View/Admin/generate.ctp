@@ -233,51 +233,137 @@
                     <div class="padd">
 
                     <!-- Form starts.  -->
-                      <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">NOWALL担当者</label>
-                          <div class="col-md-8">
-                          <input type="text" class="form-control" placeholder="NOWALL担当者">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">お客様名</label>
-                          <div class="col-md-8">
-                          <input type="text" class="form-control" placeholder="お客様名">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">EMAIL</label>
-                          <div class="col-md-8">
-                          <input type="text" class="form-control" placeholder="EMAIL">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">決済内容</label>
-                          <div class="col-md-8">
-                          <input type="text" class="form-control" placeholder="決済内容">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">決済金額</label>
-                          <div class="col-md-8">
-                          <input type="text" class="form-control" placeholder="決済金額">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-2 control-label">定期課金日</label>
-                          <div class="col-md-8">
-                          <input type="text" class="form-control" placeholder="定期課金日">
-                          ※空白の場合は一時課金になります
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="col-md-offset-2 col-md-4">
-                          <button type="button" class="btn btn-block btn-primary">発行する</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
+                      <?=$this->Form->create('Admin',array(
+                                    'url' => array(
+                                        'controller' => 'admin',
+                                        'action' => 'generate'),
+                                    'inputDefaults' => array(
+                                        'div' => 'form-group',
+                                        'wrapInput' =>false
+                                    ),
+                                    'class' => 'form-horizontal',
+                                    'novalidate' => true
+                                    ));?>
+
+                    <?=$this->Form->input('nowall-name', array(
+                                    'type' => 'text',
+                                    'label' => array(
+                                        'text' => 'NOWALL担当者',
+                                        'class' => 'col col-md-2 control-label',
+                                        ),
+                                    'between' => '<div class="col-md-8">',
+                                    'after' => '</div>',
+                                    'placeholder' => 'NOWALL担当者',
+                                    'class' => 'form-control',
+                                    'error' => array(
+                                        'attributes' => array(
+                                            'wrap' => 'div',
+                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
+                                        )
+                                    ),
+                                    )); ?>
+
+                    <?=$this->Form->input('name', array(
+                                    'type' => 'text',
+                                    'label' => array(
+                                        'text' => 'お客様名',
+                                        'class' => 'col col-md-2 control-label',
+                                    ),
+                                    'between' => '<div class="col-md-8">',
+                                    'after' => '</div>',
+                                    'placeholder' => 'お客様名',
+                                    'class' => 'form-control',
+                                    'error' => array(
+                                        'attributes' => array(
+                                            'wrap' => 'div',
+                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
+                                        )
+                                    ),
+                                    )); ?>
+
+
+                    <?=$this->Form->input('email', array(
+                                    'type' => 'text',
+                                    'label' => array(
+                                        'text' => 'EMAIL',
+                                        'class' => 'col col-md-2 control-label',
+                                        ),
+                                    'between' => '<div class="col-md-8">',
+                                    'after' => '</div>',
+                                    'placeholder' => 'EMAIL',
+                                    'class' => 'form-control',
+                                    'error' => array(
+                                        'attributes' => array(
+                                            'wrap' => 'div',
+                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
+                                        )
+                                    ),
+                                    )); ?>
+
+                    <?=$this->Form->input('summary', array(
+                                    'type' => 'text',
+                                    'label' => array(
+                                        'text' => '決済内容',
+                                        'class' => 'col col-md-2 control-label',
+                                        ),
+                                    'between' => '<div class="col-md-8">',
+                                    'after' => '</div>',
+                                    'placeholder' => '決済内容',
+                                    'class' => 'form-control',
+                                    'error' => array(
+                                        'attributes' => array(
+                                            'wrap' => 'div',
+                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
+                                        )
+                                    ),
+                                    )); ?>
+
+                    <?=$this->Form->input('amount', array(
+                                    'type' => 'text',
+                                    'label' => array(
+                                        'text' => '決済金額',
+                                        'class' => 'col col-md-2 control-label',
+                                        ),
+                                    'between' => '<div class="col-md-8">',
+                                    'after' => '</div>',
+                                    'placeholder' => '決済金額',
+                                    'class' => 'form-control',
+                                    'error' => array(
+                                        'attributes' => array(
+                                            'wrap' => 'div',
+                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
+                                        )
+                                    ),
+                                    )); ?>
+
+                    <?=$this->Form->input('day', array(
+                                    'type' => 'text',
+                                    'label' => array(
+                                        'text' => '定期課金日',
+                                        'class' => 'col col-md-2 control-label',
+                                        ),
+                                    'between' => '<div class="col-md-8">',
+                                    'after' => '※空白の場合は一時課金になります</div>',
+                                    'placeholder' => '定期課金日',
+                                    'class' => 'form-control',
+                                    'error' => array(
+                                        'attributes' => array(
+                                            'wrap' => 'div',
+                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
+                                        )
+                                    ),
+                                    )); ?>
+
+                    <?=$this->Form->input('発行する', array(
+                                    'type' => 'submit',
+                                    'label' => false,
+                                    'before' => '<div class="col-md-offset-2 col-md-4">',
+                                    'after' => '</div>',
+                                    'class' => 'btn btn-block btn-primary'
+                                    )); ?>
+
+                    <?=$this->form->end();?>
+
                   </div>
                 </div>
               </div>
