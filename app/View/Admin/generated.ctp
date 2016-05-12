@@ -226,38 +226,36 @@
                   </div>
                   <div class="widget-content">
                     <div class="table-responsive">
-                      <table class="table table-bordered ">
+                      <table class="table table-bordered table-generated">
                         <tr>
-                          <td>NOWALL担当者</td>
-                          <td><?=$sendData['Admin']['nowall-name'];?></td>
+                          <td class="col-md-3">NOWALL担当者</td>
+                          <td class="col-md-9"><?=$sendData['Admin']['nowall-name'];?></td>
+                        </tr>
+                        <tr>
+                          <td class="col-md-3">お名前</td>
+                          <td class="col-md-9"><?=$sendData['Admin']['name'];?></td>
                         </tr>
 
                         <tr>
-                          <td>お名前</td>
-                          <td><?=$sendData['Admin']['name'];?></td>
+                          <td class="col-md-3">メールアドレス</td>
+                          <td class="col-md-9"><?=$sendData['Admin']['email'];?></td>
                         </tr>
 
                         <tr>
-                          <td>メールアドレス</td>
-                          <td><?=$sendData['Admin']['email'];?></td>
-                        </tr>
-
-                        <tr>
-                          <td>決済金額</td>
-                          <td><?=number_format($sendData['Admin']['amount'])."円";?>
+                          <td class="col-md-3">決済金額</td>
+                          <td class="col-md-9"><?=number_format($sendData['Admin']['amount'])."円";?>
                               <?php if($sendData['Admin']['day']) echo "(毎月)";
                                     else echo "(今月1回)";?>
                           </td>
                         </tr>
 
                         <tr>
-                          <td>決済内容</td>
-                          <td><?=$sendData['Admin']['summary'];?></td>
+                          <td class="col-md-3">決済内容</td>
+                          <td class="col-md-9"><?=$sendData['Admin']['summary'];?></td>
                         </tr>
-
                         <tr>
-                          <td>決済URL</td>
-                          <td>https://elite.sc/payments/key/<?=$sendData['Admin']['key'];?></td>
+                          <td class="col-xs-3 col-sm-3 col-md-3">決済URL</td>
+                          <td class="col-xs-9 col-sm-9 col-md-9"><?=$sendData['Admin']['url'];?></td>
                         </tr>
                       </table>
                     </div>

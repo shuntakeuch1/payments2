@@ -14,6 +14,7 @@
         echo $this->Html->css('../theme/css/style');
         echo $this->Html->css('../theme/css/widgets');
 
+        echo $this->Html->css('Admin');
 
         echo $this->fetch('meta');
         echo $this->fetch('css');
