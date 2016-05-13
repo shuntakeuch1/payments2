@@ -1,5 +1,5 @@
 <?php
-
+App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 
 class AdminController extends AppController {
@@ -50,6 +50,18 @@ class AdminController extends AppController {
                             "&day=". urlencode($this->request->data['Admin']['day']);
 
                 $this->request->data['Admin'] += array('url' => $url);
+
+                // プレフィックスルーティングを追加
+                $request = new CakeRequest();
+
+                $aa = $request->addParams(array(
+    'controller' => 'registrations', 'action' => 'admin_index',
+    'plugin' => null, 'prefix' => 'admin', 'admin' => true,
+    'ext' => 'html'
+));
+
+
+
 
                 // ここからメール送信
                 $email = new CakeEmail('default');
