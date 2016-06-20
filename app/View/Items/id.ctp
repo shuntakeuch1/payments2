@@ -78,19 +78,19 @@
             <!-- <div style="width:800px; margin:0 auto;"> -->
             <table style="width:100%;">
             <tr>
-            <?=$this->Form->create("Item")?>
+            <?=$this->Form->create('User',array('acrion'=>'add'))?>
             <td style ="width:30%; border:solid 1px #808080;">NOWALL担当者</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('Item')?></td>
+            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('name')?></td>
             </tr>
 
             <tr>
             <td style ="width:30%; border:solid 1px #808080;">お名前</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('Item')?></td>
+            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('customer_id')?></td>
             </tr>
 
             <tr>
             <td style ="width:30%; border:solid 1px #808080;">メールアドレス</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('Item')?></td>
+            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('email')?></td>
             </tr>
 
             <tr>
@@ -100,7 +100,7 @@
 
             <tr>
             <td style ="width:30%; border:solid 1px #808080;">決済内容</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$items['Item']['description'] ?></td>
+            <td style ="width:70%; border:solid 1px #808080;"><?=$items['Item']['name'] ?></td>
             </tr>
 
             <tr>

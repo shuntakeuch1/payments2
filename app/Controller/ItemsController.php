@@ -41,4 +41,17 @@ class ItemsController extends AppController
     $this->set('items',$this->Item->findByCha_rec_id($cha_rec_id));
   }
 
+  public function add()
+  {
+    if($this->request->is('post'))
+    {
+      $this->User->set($this->data);
+      if($this->User->validates())
+      {
+        $this->User>save($this->data);
+        $this->redirect('index');
+      }
+    }
+  }
+
 }
