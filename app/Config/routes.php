@@ -33,6 +33,7 @@
  * ...個別決済画面用遷移
  */
 //fromkey
+    Router::connect('/key/577984b503d27', array('controller' => 'key', 'action' => 'index')); //time:1467581621
     Router::connect('/key/57812c19847ea', array('controller' => 'key', 'action' => 'index')); //time:1468083225
 //tokey
 /**

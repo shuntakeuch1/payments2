@@ -2,7 +2,7 @@
       <div class="container">
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
-          <a href="http://elite.sc/" class="navbar-brand">ELITES</a>
+          <a href="/" class="navbar-brand">ELITES PAYMENTS</a>
         </div>
       </div>
     </div>
