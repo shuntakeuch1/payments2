@@ -59,6 +59,9 @@ class KeyController extends AppController {
             preg_match('/\/key\/(.*?)\?/s', $_SERVER['REQUEST_URI'], $key);
             // 時間を抽出
             preg_match('/^.*'.$key['1'].'.*$/um',$current, $tmp1);
+
+            if(empty($tmp1)) die("URLが間違っているか、発行後24時間経過したため、アクセスできません");
+
             preg_match_all('/time:(\w+)/s', $tmp1['0'], $tmp1,PREG_SET_ORDER);
             if(time() - $tmp1['0']['1'] > 86400){
                 $current = preg_replace('/^.*time:'.$tmp1['0']['1'].'*$/um','',$current);
