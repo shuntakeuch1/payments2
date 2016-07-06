@@ -96,6 +96,7 @@
 <input type="hidden" name="summary" value=<?=$summary; ?>>
 <input type="hidden" name="amount" value=<?=$amount; ?>>
 <input type="hidden" name="day" value=<?=$day; ?>>
+<input type="hidden" name="key" value=<?=$key; ?>>
 
 </form>
                     </div>
