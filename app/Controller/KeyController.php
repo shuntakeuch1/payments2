@@ -10,7 +10,7 @@ class KeyController extends AppController {
 
     public $uses = array('User', 'CardHash', 'Charge', 'Recursion');
 
-    //public $components = array('Security');
+    public $components = array('Session');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -201,42 +201,39 @@ class KeyController extends AppController {
             catch (\WebPay\ErrorResponse\ErrorResponseException $e) {
                 $error = $e->data->error;
 
-                switch ($error->causedBy) {
-                    case 'buyer':
-                        // カードエラーなど、購入者に原因がある
-                        // エラーメッセージをそのまま表示するのがわかりやすい
-                    debug(a);
-                        break;
-                    case 'insufficient':
-                        // 実装ミスに起因する
-                            debug(b);
-                        break;
-                    case 'missing':
-                        // リクエスト対象のオブジェクトが存在しない
-                            debug(c);
-                        break;
-                    case 'service':
-                        // WebPayに起因するエラー
-                            debug(d);
-                        break;
-                    default:
-                        // 未知のエラー
-                            debug(e);
-                        break;
-                }
+                // switch ($error->causedBy) {
+                //     case 'buyer':
+                //         // カードエラーなど、購入者に原因がある
+                //         // エラーメッセージをそのまま表示するのがわかりやすい
+                //         break;
+                //     case 'insufficient':
+                //         // 実装ミスに起因する
+                //         break;
+                //     case 'missing':
+                //         // リクエスト対象のオブジェクトが存在しない
+                //         break;
+                //     case 'service':
+                //         // WebPayに起因するエラー
+                //         break;
+                //     default:
+                //         // 未知のエラー
+                //         break;
+                // }
 
-                $this->redirect(array('Controller'=>'error', 'action'=>'index'));
+                $this->request->data += array('error' => $error->causedBy);
+                $this->Session->write('sendData', $this->request->data);
+                $this->redirect(array('controller'=>'error', 'action'=>'index'));
 
             } catch (\WebPay\ApiException $e) {
                     // APIからのレスポンスが受け取れない場合。接続エラーなど
-                    debug(aaa);
-                    debug($e);
-                    debug(f);
+                    $this->request->data += array('error' => $e);
+                    $this->Session->write('sendData', $this->request->data);
                     $this->redirect(array('controller'=>'error', 'action'=>'index'));
             } catch (\Exception $e) {
                     // WebPayとは関係ない例外の場合
-                    debug(g);
-                    $this->redirect(array('Controller'=>'error', 'action'=>'index'));
+                    $this->request->data += array('error' => $e);
+                    $this->Session->write('sendData', $this->request->data);
+                    $this->redirect(array('controller'=>'error', 'action'=>'index'));
             }
 
             // ここからルーティングファイルから該当項目を削除
@@ -249,6 +246,9 @@ class KeyController extends AppController {
             $delroute = preg_replace('/\n\n/',"\n",$delroute);
             // 結果をファイルに書き出し
             file_put_contents($file, $delroute);
+
+            // 決済完了画面へリダイレクト
+            $this->Session->write('sendData', $this->request->data);
 
             $this->redirect(array('controller'=>'purchased', 'action'=>'index'));
         }
