@@ -19,7 +19,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
@@ -34,6 +33,16 @@
  * ...個別決済画面用遷移
  */
 //fromkey
+    Router::connect('/key/5780ffb937f03', array('controller' => 'key', 'action' => 'index')); //time:1468071865
+    Router::connect('/key/5780ff98e218c', array('controller' => 'key', 'action' => 'index')); //time:1468071832
+    Router::connect('/key/5780ff3c839a8', array('controller' => 'key', 'action' => 'index')); //time:1468071740
+    Router::connect('/key/5780fe716e6b5', array('controller' => 'key', 'action' => 'index')); //time:1468071537
+    Router::connect('/key/5780fe684e581', array('controller' => 'key', 'action' => 'index')); //time:1468071528
+    Router::connect('/key/5780fe3b687ec', array('controller' => 'key', 'action' => 'index')); //time:1468071483
+    Router::connect('/key/5780fd8611c72', array('controller' => 'key', 'action' => 'index')); //time:1468071302
+    Router::connect('/key/5780fd2ac715e', array('controller' => 'key', 'action' => 'index')); //time:1468071210
+    Router::connect('/key/5780fccda4388', array('controller' => 'key', 'action' => 'index')); //time:1468071117
+    Router::connect('/key/5780f8b720a9f', array('controller' => 'key', 'action' => 'index')); //time:1468070071
     Router::connect('/key/5780e10fe38a7', array('controller' => 'key', 'action' => 'index')); //time:1468064015
 //tokey
 /**

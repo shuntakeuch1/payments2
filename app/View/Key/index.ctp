@@ -57,27 +57,27 @@
                         <h3>決済情報を入力する</h3>
 
 <form method="post" action="index">
-<table class="table table-bordered">
+<table class="table table-bordered table-generated">
   <tbody><tr>
-    <th>担当者名</th><td><?=$nowallname;?></td>
+    <th class="col-md-2">担当者名</th><td class="col-md-11"><?=$nowallname;?></td>
   </tr>
   <tr>
-    <th>お名前</th><td><?=$name;?>様</td>
+    <th class="col-md-2">お名前</th><td class="col-md-11"><?=$name;?>様</td>
   </tr>
   <tr>
-    <th>メールアドレス</th><td><?=$email;?></td>
+    <th class="col-md-2">メールアドレス</th><td class="col-md-11"><?=$email;?></td>
   </tr>
   <tr>
-    <th>決済金額</th><td><?=number_format($amount)."円 (";
+    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 (";
                                 if(empty($day)) echo "今月のみ)";
                                 else echo "毎月".$day."日)";?></td>
   </tr>
   <tr>
-    <th>決済内容</th><td><?=$summary;?></td>
+    <th class="col-md-2">決済内容</th><td class="col-md-11"><?=$summary;?></td>
   </tr>
   <tr>
-    <th>カード情報</th>
-    <td>
+    <th class="col-md-2">カード情報</th>
+    <td class="col-md-11">
   <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_cKKcPY89vgl2ba03eD0zAgix" data-lang="ja" data-partial="true"></script>
       (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
     </td>

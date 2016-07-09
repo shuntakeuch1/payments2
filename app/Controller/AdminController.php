@@ -53,14 +53,13 @@ class AdminController extends AppController {
                              ->from(array('test@example.com' => 'test'))
                              ->to($this->request->data['Admin']['email'])
                              ->subject('決済URL通知メール')
-                             ->send('決済URLはこちらです。'. $url);
+                             ->send($this->emailcontent_url($this->request->data['Admin']['name'],$url));
 
                 $res = $email->config(array('log' => 'emails'))
                              ->from(array('test@example.com' => 'test'))
                              ->to($this->request->data['Admin']['email'])
                              ->subject('ID/PW通知メール')
-                             ->send('ID:elites PW:nowall
-                                でログインしてください。');
+                             ->send($this->emailcontent_idpw($this->request->data['Admin']['name']));
 
                 // POSTの内容をSESSIONに保存
                 $this->Session->write('sendData', $this->request->data);
@@ -87,9 +86,17 @@ class AdminController extends AppController {
         }
     }
 
-    private function basicAuthError() {
-            header('WWW-Authenticate: Basic realm="Please enter your ID and password"');
-            header('HTTP/1.0 401 Unauthorized');
-            die("Invalid id / password combination.  Please try again");
+    private function emailcontent_url($name, $url) {
+
+        $emailcontent = $name. "様\n\nお世話になっております。\nELITES事務局です。\n\nこちらから課金情報の登録をお願いします。\n\n". $url."\n\nこのURLはメール送信後24時間有効です。\n\nまた本メールは自動送信のため、返信しないようお願いします。";
+
+        return $emailcontent;
+    }
+
+    private function emailcontent_idpw($name) {
+
+        $emailcontent = $name. "様\n\nお世話になっております。\nELITES事務局です。\n\n課金情報登録ページ用のID/PWを送信致します。\n課金情報登録用URLを閲覧する際には、このID/PWを使用してください。\n\nID: elites\nPW: nowall\n\nまた本メールは自動送信のため、返信しないようお願いします。";
+
+        return $emailcontent;
     }
 }
