@@ -8,13 +8,9 @@ use WebPay\WebPay;
 
 class KeyController extends AppController {
 
-<<<<<<< HEAD
     public $uses = array('User', 'CardHash', 'Charge', 'Recursion');
 
     //public $components = array('Security');
-=======
-    //public $components = array('Session', 'Security');
->>>>>>> origin/dev
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -27,12 +23,8 @@ class KeyController extends AppController {
         // $loginPassword = 'nowall';
 
         // $this->Security->validatePost = false;
-<<<<<<< HEAD
         // $this->Security->csrfUseOnce = false;
         // $this->Security->csrfExpires = '+1 hour';
-
-=======
->>>>>>> origin/dev
 
         // if (isset($_SERVER['PHP_AUTH_USER'])) {
         //     if (! ($_SERVER['PHP_AUTH_USER'] == $loginId && $_SERVER['PHP_AUTH_PW'] == $loginPassword)) {
@@ -43,7 +35,6 @@ class KeyController extends AppController {
         //     $this->basicAuthError();
         // }//Basic認証END
 
-<<<<<<< HEAD
         switch (true) {
             case !isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']):
             case $_SERVER['PHP_AUTH_USER'] !== 'elites':
@@ -95,15 +86,11 @@ class KeyController extends AppController {
         }
     }
 
-=======
-    }
->>>>>>> origin/dev
    public function index() {
         $this->layout = 'keyLayout';
 
         if ($this->request->is('post'))
         {
-<<<<<<< HEAD
             // ここからWEBPAY
             try{
                 $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
@@ -211,21 +198,6 @@ class KeyController extends AppController {
                     $this->Recursion->save($recursion_savedata);
                 }
             }
-=======
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
-
-            $webpay->setAcceptLanguage('ja');
-
-            try{
-                    $webpay->charge->create(array(
-                                           "amount"=>$this->request->data['amount'],
-                                           "currency"=>"jpy",
-                                           "card"=>$this->request->data['webpay-token'],
-                                           "description" => "PHP からのアイテムの購入"
-                                           )
-                                        );
-                }
->>>>>>> origin/dev
             catch (\WebPay\ErrorResponse\ErrorResponseException $e) {
                 $error = $e->data->error;
 
@@ -252,18 +224,14 @@ class KeyController extends AppController {
                             debug(e);
                         break;
                 }
-<<<<<<< HEAD
 
                 $this->redirect(array('Controller'=>'error', 'action'=>'index'));
 
-=======
->>>>>>> origin/dev
             } catch (\WebPay\ApiException $e) {
                     // APIからのレスポンスが受け取れない場合。接続エラーなど
                     debug(aaa);
                     debug($e);
                     debug(f);
-<<<<<<< HEAD
                     $this->redirect(array('controller'=>'error', 'action'=>'index'));
             } catch (\Exception $e) {
                     // WebPayとは関係ない例外の場合
@@ -283,12 +251,6 @@ class KeyController extends AppController {
             file_put_contents($file, $delroute);
 
             $this->redirect(array('controller'=>'purchased', 'action'=>'index'));
-=======
-            } catch (\Exception $e) {
-                    // WebPayとは関係ない例外の場合
-                    debug(g);
-            }
->>>>>>> origin/dev
         }
         else
         {
@@ -310,24 +272,12 @@ class KeyController extends AppController {
             $day = $this->request->query('day');
             $this->set('day', urldecode($day));
 
-<<<<<<< HEAD
             // URL内の$keyを取得
             preg_match('/\/key\/(.*?)\?/s', $_SERVER['REQUEST_URI'], $key);
             $this->set('key', $key['1']);
 
-=======
->>>>>>> origin/dev
             if(empty($nowallname)||empty($name)||empty($email)||empty($summary)||empty($amount))
                 die("URLが間違っています.  Please try again");
         }
    }
-<<<<<<< HEAD
-=======
-
-    private function basicAuthError() {
-            header('WWW-Authenticate: Basic realm="Please enter your ID and password"');
-            header('HTTP/1.0 401 Unauthorized');
-            die("Invalid id / password combination.  Please try again");
-    }
->>>>>>> origin/dev
 }

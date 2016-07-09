@@ -19,10 +19,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
@@ -32,22 +28,13 @@
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-<<<<<<< HEAD
     Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 /**
  * ...個別決済画面用遷移
  */
 //fromkey
-    Router::connect('/key/577a8bf8a41c2', array('controller' => 'key', 'action' => 'index')); //time:146764901611
+    Router::connect('/key/5780e10fe38a7', array('controller' => 'key', 'action' => 'index')); //time:1468064015
 //tokey
-=======
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-/**
- * ...個別決済画面用遷移
- */
-    Router::connect('/key/*', array('controller' => 'key', 'action' => 'index'));
-
->>>>>>> origin/dev
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
@@ -57,8 +44,4 @@
  * Load the CakePHP default routes. Only remove this if you do not want to use
  * the built-in default routes.
  */
-<<<<<<< HEAD
     require CAKE . 'Config' . DS . 'routes.php';
-=======
-	require CAKE . 'Config' . DS . 'routes.php';
->>>>>>> origin/dev
