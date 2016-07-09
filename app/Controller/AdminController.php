@@ -45,6 +45,7 @@ class AdminController extends AppController {
                 // 結果をファイルに書き出し
                 file_put_contents($file, $addroute);
 
+
                 // ここからメール送信
                 $email = new CakeEmail('default');
 
