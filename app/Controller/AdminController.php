@@ -2,6 +2,7 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 
+<<<<<<< HEAD
 require "/var/www/html/payments/app/Vendor/autoload.php";
 use WebPay\WebPay;
 
@@ -15,6 +16,36 @@ class AdminController extends AppController {
 
     public function generate() {
 
+=======
+class AdminController extends AppController {
+
+    public $components = array('Session', 'Security');
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+
+        //Basic認証
+        // id
+        $loginId = 'elites';
+
+        // passwd
+        $loginPassword = 'nowall';
+
+        $this->Security->validatePost = false;
+
+        // if (isset($_SERVER['PHP_AUTH_USER'])) {
+        //     if (! ($_SERVER['PHP_AUTH_USER'] == $loginId && $_SERVER['PHP_AUTH_PW'] == $loginPassword)) {
+        //         $this->basicAuthError();
+        //     }
+        // } else {
+        //     // 失敗したら途中で処理終了
+        //     $this->basicAuthError();
+        // }//Basic認証END
+
+    }
+
+    public function generate() {
+>>>>>>> origin/dev
         $this->layout = 'adminLayout';
 
         if ($this->request->is('post'))
@@ -36,6 +67,7 @@ class AdminController extends AppController {
 
                 $this->request->data['Admin'] += array('url' => $url);
 
+<<<<<<< HEAD
 
                 // ここからルーティング追加
                 $file = '/var/www/html/payments/app/Config/routes.php';
@@ -45,6 +77,18 @@ class AdminController extends AppController {
                 $addroute = preg_replace("/\/\/fromkey/","//fromkey\n    Router::connect('/key/".$key. "', array('controller' => 'key', 'action' => 'index')); //time:".time(),$current);
                 // 結果をファイルに書き出し
                 file_put_contents($file, $addroute);
+=======
+                // プレフィックスルーティングを追加
+                $request = new CakeRequest();
+
+                $aa = $request->addParams(array(
+    'controller' => 'registrations', 'action' => 'admin_index',
+    'plugin' => null, 'prefix' => 'admin', 'admin' => true,
+    'ext' => 'html'
+));
+
+
+>>>>>>> origin/dev
 
 
                 // ここからメール送信

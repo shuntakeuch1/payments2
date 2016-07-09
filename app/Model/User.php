@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
     App::uses('AppModel', 'Model');
 
     class User extends AppModel{
@@ -9,3 +10,8 @@
           public $hasOne = array('CardHash');
 
     }
+=======
+class User extends AppModel
+{
+}
+>>>>>>> origin/dev
