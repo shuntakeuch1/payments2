@@ -6,6 +6,9 @@
     <title>
         個別決済画面発行ページ
     </title>
+
+    <link rel="shortcut icon" href="http://elite.sc/assets_front/images/favicon.ico">
+
     <?php
         echo $this->Html->meta('icon');
 

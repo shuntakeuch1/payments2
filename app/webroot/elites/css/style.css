@@ -712,7 +712,8 @@ Sections
 .module-small,
 .module-header {
 	position: relative;
-	padding: 140px 0;
+	/* padding: 140px 0; */
+	padding: 10px 0;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	-webkit-background-size: cover;
@@ -1547,7 +1548,7 @@ Responsive Media Querries
         background: rgba(255, 255, 255, .9);
         padding: 70px 20px;
     }
-    
+
     .content-box-title{
         margin: 5px 0 0;
         font-size: 16px;

@@ -4,7 +4,7 @@ Place here your custom CSS styles
 ------------------------------------------------------------------ */
 body {
 	/* font-family: "Lato","Lucida Grande","游ゴシック","YuGothic","Hiragino Kaku Gothic ProN",'ヒラギノ角ゴ Pro W3',"Hiragino Kaku Gothic Pro","メイリオ", Meiryo, "ＭＳ ゴシック",sans-serif !important; */
-	font-family: "Roboto", "Noto Sans CJK JP","Noto Sans JP", "ヒラギノ角ゴ ProN W3","HiraKakuProN-W3","游ゴシック", YuGothic,"メイリオ", Meiryo, Helvetica, Arial, sans-serif !important;	
+	font-family: "Roboto", "Noto Sans CJK JP","Noto Sans JP", "ヒラギノ角ゴ ProN W3","HiraKakuProN-W3","游ゴシック", YuGothic,"メイリオ", Meiryo, Helvetica, Arial, sans-serif !important;
 }
 
 .col-xs-12 {
@@ -15,16 +15,16 @@ body {
     color: #E4CA3B;
 }
 
-section.module {
+/* section.module {
     padding: 70px 0;
-}
+} */
 
 .content-box .font-inc
 {
     text-transform: none;
 }
 
-.navbar-custom {
+/* .navbar-custom {
   	background: rgba(0, 0, 0, 0.901961);
 }
 .navbar-brand {
@@ -38,7 +38,7 @@ section.module {
     height: 100%;
     float: left;
     padding: 7.5px;
-}
+} */
 
 .overlay {
     background-color: rgba(23, 24, 27, 0.8);
@@ -59,7 +59,7 @@ section.module {
 
 .footer-content .title {
     color: #ddd;
-} 
+}
 
 .footer-content table {
     color: #FFF;

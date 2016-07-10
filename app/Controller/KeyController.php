@@ -8,7 +8,7 @@ use WebPay\WebPay;
 
 class KeyController extends AppController {
 
-    public $uses = array('User', 'CardHash', 'Charge', 'Recursion');
+    public $uses = array('User', 'CardHash', 'Charge', 'Recursion', 'Key');
 
     public $components = array('Session');
 
@@ -56,6 +56,11 @@ class KeyController extends AppController {
             // 現在のaction名が24時間を超えていたら他ページに飛ばす
             // action名を取得
             preg_match('/\/key\/(.*?)\?/s', $_SERVER['REQUEST_URI'], $key);
+
+            if(!isset($key['1'])){
+                die("URLが間違っているか、発行後24時間経過したため、アクセスできません");
+            }
+
             // 時間を抽出
             preg_match('/^.*'.$key['1'].'.*$/um',$current, $tmp1);
 
@@ -91,166 +96,185 @@ class KeyController extends AppController {
 
         if ($this->request->is('post'))
         {
-            // ここからWEBPAY
-            try{
-                $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
-                $webpay->setAcceptLanguage('ja');
+            // バリデーション
+            $this->Key->set($this->request->data);
 
-                $token = $webpay->token->retrieve($this->request->data['webpay-token']);
+            if($this->Key->validates())
+            {
+                // ここからWEBPAY
+                try{
+                    $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+                    $webpay->setAcceptLanguage('ja');
 
-                // ここから顧客登録関連
-                // 既に顧客登録しているか
-                $params = array(
-                    'conditions' => array(
-                        'email' => $this->request->data['email'],
-                        'fingerprint' => $token->card->fingerprint,
-                        )
-                    );
-                $customer = $this->User->find('first', $params);
+                    $token = $webpay->token->retrieve($this->request->data['webpay-token']);
 
-                // 新規顧客
-                if(empty($customer)){
-                    // 同じメールアドレスは登録しているか
+                    // ここから顧客登録関連
+                    // 既に顧客登録しているか
                     $params = array(
                         'conditions' => array(
-                        'email' => $this->request->data['email'],
-                        )
-                    );
-                    $emailcount = $this->User->find('count', $params);
+                            'email' => $this->request->data['email'],
+                            'fingerprint' => $token->card->fingerprint,
+                            )
+                        );
+                    $customer = $this->User->find('first', $params);
 
-                    // 過去に同じEMAILで登録がある場合、名前に数字を付加してから登録
-                    if($emailcount>0){
-                        $this->request->data['name'] = $this->request->data['name'] . ($emailcount + 1);
+                    // 新規顧客
+                    if(empty($customer)){
+                        // 同じメールアドレスは登録しているか
+                        $params = array(
+                            'conditions' => array(
+                            'email' => $this->request->data['email'],
+                            )
+                        );
+                        $emailcount = $this->User->find('count', $params);
+
+                        // 過去に同じEMAILで登録がある場合、名前に数字を付加してから登録
+                        if($emailcount>0){
+                            $this->request->data['name'] = $this->request->data['name'] . ($emailcount + 1);
+                        }
+
+                        // 新規顧客登録
+                        $return_cu = $webpay->customer->create(array(
+                                "card"=>$this->request->data['webpay-token'],
+                                "email"=>$this->request->data['email'],
+                                "description"=>""
+                                ));
+
+                        $customer_id = $return_cu->id;
+
+                        // DB登録(Usersテーブル)
+                        $user_savedata = array(
+                            'email' => $this->request->data['email'],
+                            'customer_id' => $customer_id,
+                            'name' => $this->request->data['name']
+                            );
+
+                        $this->User->save($user_savedata);
+
+                        $user_id = $this->User->id;
+
+                        // DB登録(Card_Hashesテーブル)
+                        $cardhashes_savedata = array(
+                            'user_id' => $user_id,
+                            'fingerprint' => $token->card->fingerprint
+                            );
+                        $this->CardHash->save($cardhashes_savedata);
+                    }
+                    // 過去に課金あり
+                    else{
+                        $customer_id = $customer['User']['customer_id'];
+                        $user_id = $customer['User']['id'];
                     }
 
-                    // 新規顧客登録
-                    $return_cu = $webpay->customer->create(array(
-                            "card"=>$this->request->data['webpay-token'],
-                            "email"=>$this->request->data['email'],
-                            "description"=>""
-                            ));
-
-                    $customer_id = $return_cu->id;
-
-                    // DB登録(Usersテーブル)
-                    $user_savedata = array(
-                        'email' => $this->request->data['email'],
-                        'customer_id' => $customer_id,
-                        'name' => $this->request->data['name']
+                    // ここから課金登録関連
+                    // 一時課金のとき
+                    if(empty($this->request->data['day'])){
+                        $return_ch = $webpay->charge->create(array(
+                            "amount"=>$this->request->data['amount'],
+                            "currency"=>"jpy",
+                            "customer"=>$customer_id,
+                            "description" => ""
+                            )
                         );
 
-                    $this->User->save($user_savedata);
-
-                    $user_id = $this->User->id;
-
-                    // DB登録(Card_Hashesテーブル)
-                    $cardhashes_savedata = array(
-                        'user_id' => $user_id,
-                        'fingerprint' => $token->card->fingerprint
+                        // DB登録
+                        // Chargesテーブル
+                        $charge_savedata = array(
+                            'user_id' => $user_id,
+                            'charge_id' => $return_ch->id,
+                            'summary' => $this->request->data['summary'],
+                            'amount' => $this->request->data['amount']
                         );
-                    $this->CardHash->save($cardhashes_savedata);
+                        $this->Charge->save($charge_savedata);
+                    }
+                    // 定期課金のとき
+                    else{
+                        $return_re = $webpay->recursion->create(array(
+                            "amount"=>$this->request->data['amount'],
+                            "currency"=>"jpy",
+                            "customer"=>$customer_id,
+                            "period"=>"month",
+                            "description" => ""
+                        ));
+
+                        // DB登録
+                        // Recursionsテーブル
+                        $recursion_savedata = array(
+                            'user_id' => $user_id,
+                            'recursion_id' => $return_re->id,
+                            'summary' => $this->request->data['summary'],
+                            'amount' => $this->request->data['amount']
+                        );
+                        $this->Recursion->save($recursion_savedata);
+                    }
                 }
-                // 過去に課金あり
-                else{
-                    $customer_id = $customer['User']['customer_id'];
-                    $user_id = $customer['User']['id'];
+                catch (\WebPay\ErrorResponse\ErrorResponseException $e) {
+                    $error = $e->data->error;
+
+                    // switch ($error->causedBy) {
+                    //     case 'buyer':
+                    //         // カードエラーなど、購入者に原因がある
+                    //         // エラーメッセージをそのまま表示するのがわかりやすい
+                    //         break;
+                    //     case 'insufficient':
+                    //         // 実装ミスに起因する
+                    //         break;
+                    //     case 'missing':
+                    //         // リクエスト対象のオブジェクトが存在しない
+                    //         break;
+                    //     case 'service':
+                    //         // WebPayに起因するエラー
+                    //         break;
+                    //     default:
+                    //         // 未知のエラー
+                    //         break;
+                    // }
+
+                    $this->request->data += array('error' => $error->causedBy);
+                    $this->Session->write('sendData', $this->request->data);
+                    $this->redirect(array('controller'=>'error', 'action'=>'index'));
+
+                } catch (\WebPay\ApiException $e) {
+                        // APIからのレスポンスが受け取れない場合。接続エラーなど
+                        $this->request->data += array('error' => $e);
+                        $this->Session->write('sendData', $this->request->data);
+                        $this->redirect(array('controller'=>'error', 'action'=>'index'));
+                } catch (\Exception $e) {
+                        // WebPayとは関係ない例外の場合
+                        $this->request->data += array('error' => $e);
+                        $this->Session->write('sendData', $this->request->data);
+                        $this->redirect(array('controller'=>'error', 'action'=>'index'));
                 }
 
-                // ここから課金登録関連
-                // 一時課金のとき
-                if(empty($this->request->data['day'])){
-                    $return_ch = $webpay->charge->create(array(
-                        "amount"=>$this->request->data['amount'],
-                        "currency"=>"jpy",
-                        "customer"=>$customer_id,
-                        "description" => ""
-                        )
-                    );
+                // ここからルーティングファイルから該当項目を削除
+                // ルーティングファイルの指定
+                $file = '/var/www/html/payments/app/Config/routes.php';
+                // ファイルをオープンして既存のコンテンツを取得
+                $current = file_get_contents($file);
+                // 該当するルーティングを削除
+                $delroute = preg_replace('/^.*'.$this->request->data['key'].'.*$/um','',$current);
+                $delroute = preg_replace('/\n\n/',"\n",$delroute);
+                // 結果をファイルに書き出し
+                file_put_contents($file, $delroute);
 
-                    // DB登録
-                    // Chargesテーブル
-                    $charge_savedata = array(
-                        'user_id' => $user_id,
-                        'charge_id' => $return_ch->id,
-                        'summary' => $this->request->data['summary'],
-                        'amount' => $this->request->data['amount']
-                    );
-                    $this->Charge->save($charge_savedata);
-                }
-                // 定期課金のとき
-                else{
-                    $return_re = $webpay->recursion->create(array(
-                        "amount"=>$this->request->data['amount'],
-                        "currency"=>"jpy",
-                        "customer"=>$customer_id,
-                        "period"=>"month",
-                        "description" => ""
-                    ));
-
-                    // DB登録
-                    // Recursionsテーブル
-                    $recursion_savedata = array(
-                        'user_id' => $user_id,
-                        'recursion_id' => $return_re->id,
-                        'summary' => $this->request->data['summary'],
-                        'amount' => $this->request->data['amount']
-                    );
-                    $this->Recursion->save($recursion_savedata);
-                }
-            }
-            catch (\WebPay\ErrorResponse\ErrorResponseException $e) {
-                $error = $e->data->error;
-
-                // switch ($error->causedBy) {
-                //     case 'buyer':
-                //         // カードエラーなど、購入者に原因がある
-                //         // エラーメッセージをそのまま表示するのがわかりやすい
-                //         break;
-                //     case 'insufficient':
-                //         // 実装ミスに起因する
-                //         break;
-                //     case 'missing':
-                //         // リクエスト対象のオブジェクトが存在しない
-                //         break;
-                //     case 'service':
-                //         // WebPayに起因するエラー
-                //         break;
-                //     default:
-                //         // 未知のエラー
-                //         break;
-                // }
-
-                $this->request->data += array('error' => $error->causedBy);
+                // 決済完了画面へリダイレクト
                 $this->Session->write('sendData', $this->request->data);
-                $this->redirect(array('controller'=>'error', 'action'=>'index'));
 
-            } catch (\WebPay\ApiException $e) {
-                    // APIからのレスポンスが受け取れない場合。接続エラーなど
-                    $this->request->data += array('error' => $e);
-                    $this->Session->write('sendData', $this->request->data);
-                    $this->redirect(array('controller'=>'error', 'action'=>'index'));
-            } catch (\Exception $e) {
-                    // WebPayとは関係ない例外の場合
-                    $this->request->data += array('error' => $e);
-                    $this->Session->write('sendData', $this->request->data);
-                    $this->redirect(array('controller'=>'error', 'action'=>'index'));
+                $this->redirect(array('controller'=>'purchased', 'action'=>'index'));
             }
+            else // バリデーション失敗
+            {
+                if(isset($this->Key->validationErrors['agree'])) $this->set('agree_error', $this->Key->validationErrors['agree']);
+                if(isset($this->Key->validationErrors['webpaytoken_error'])) $this->set('webpaytoken_error', $this->Key->validationErrors['webpay-token']);
 
-            // ここからルーティングファイルから該当項目を削除
-            // ルーティングファイルの指定
-            $file = '/var/www/html/payments/app/Config/routes.php';
-            // ファイルをオープンして既存のコンテンツを取得
-            $current = file_get_contents($file);
-            // 該当するルーティングを削除
-            $delroute = preg_replace('/^.*'.$this->request->data['key'].'.*$/um','',$current);
-            $delroute = preg_replace('/\n\n/',"\n",$delroute);
-            // 結果をファイルに書き出し
-            file_put_contents($file, $delroute);
-
-            // 決済完了画面へリダイレクト
-            $this->Session->write('sendData', $this->request->data);
-
-            $this->redirect(array('controller'=>'purchased', 'action'=>'index'));
+                $this->set('nowallname', $this->request->data['nowallname']);
+                $this->set('name', $this->request->data['name']);
+                $this->set('email', $this->request->data['email']);
+                $this->set('summary', $this->request->data['summary']);
+                $this->set('amount', $this->request->data['amount']);
+                $this->set('day', $this->request->data['day']);
+                $this->set('key', $this->request->data['key']);
+            }
         }
         else
         {

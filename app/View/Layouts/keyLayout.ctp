@@ -17,6 +17,11 @@
         echo $this->Html->meta('icon');
 
         echo $this->Html->css('../theme/css/bootstrap.min');
+        echo $this->Html->css('../theme/css/jquery-ui');
+        echo $this->Html->css('../theme/css/jquery.gritter');
+        echo $this->Html->css('../theme/css/font-awesome.min');
+        echo $this->Html->css('../theme/css/style');
+        echo $this->Html->css('../theme/css/widgets');
 
         echo $this->Html->css('../elites/css/simpletextrotator');
         echo $this->Html->css('../elites/css/font-awesome.min');
