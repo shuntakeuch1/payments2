@@ -33,7 +33,7 @@
  * ...個別決済画面用遷移
  */
 //fromkey
-    Router::connect('/key/5780e10fe38a7', array('controller' => 'key', 'action' => 'index')); //time:1468064015
+    Router::connect('/key/57812c19847ea', array('controller' => 'key', 'action' => 'index')); //time:1468083225
 //tokey
 /**
  * Load all plugin routes. See the CakePlugin documentation on

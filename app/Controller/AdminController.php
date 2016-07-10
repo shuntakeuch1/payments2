@@ -71,18 +71,20 @@ class AdminController extends AppController {
     }
 
     public function generated() {
-        $this->layout = 'adminLayout';
+        $this->layout = 'adminLayout';$this->Session->write = array();
 
-        if(!$_SESSION['sendData'])
+        if(!SessionComponent::check('sendData'))
         {
             $this->redirect(array('action' => 'generate'));
         }
         else
         {
+            $this->Session->read('sendData');
+
             $this->set('sendData', $_SESSION['sendData']);
 
             // セッションの内容を消す
-            $_SESSION = array();
+            $this->Session->delete('sendData');
         }
     }
 
