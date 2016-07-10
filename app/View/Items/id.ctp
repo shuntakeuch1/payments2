@@ -11,26 +11,21 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
     <!-- Styles -->
     <!-- Bootstrap CSS -->
-    <!-- <link href="theme/css/bootstrap.min.css" rel="stylesheet"> -->
     <?php echo $this->Html->css('css/bootstrap.min')?>
     <!-- jQuery UI -->
-    <!-- <link rel="stylesheet" href="theme/css/jquery-ui.css"> -->
     <?php echo $this->Html->css('css/jquery-ui.css')?>
     <!-- jQuery Gritter -->
-    <!-- <link rel="stylesheet" href="theme/css/jquery.gritter.css"> -->
     <?php echo $this->Html->css('css/jquery.gritter.css')?>
     <!-- Font awesome CSS -->
-    <!-- <link href="theme/css/font-awesome.min.css" rel="stylesheet"> -->
     <?php echo $this->Html->css('css/font-awesome.min.css')?>
     <!-- Custom CSS -->
     <?php echo $this->Html->css('css/style.css')?>
-    <!-- <link href="theme/css/style.css" rel="stylesheet"> -->
     <!-- Widgets stylesheet -->
     <?php echo $this->Html->css('css/widgets.css')?>
     <?php echo $this->Html->css('css/mainbar-margin-left0.css')?>
-    <!-- <link href="theme/css/widgets.css" rel="stylesheet"> -->
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="#">
@@ -55,69 +50,91 @@
 
     <!-- Main content starts -->
     <div class="content">
-      <!-- Sidebar -->
-
-      <!-- Sidebar ends -->
-
       <!-- Main bar -->
       <div class="mainbar">
         <!-- Page heading -->
         <div class="page-head">
           <!-- Page heading -->
-          <h2 class="pull-left">一般決済画面
+          <h2 class="pull-left">
             <!-- page meta -->
-
           </h2>
           <!-- Breadcrumb -->
 
           <div class="clearfix"></div>
           </div>
 
-          <div class="container">
-            <div class="col-sm-12">
-            <!-- <div style="width:800px; margin:0 auto;"> -->
-            <table style="width:100%;">
-            <tr>
-            <?=$this->Form->create('User',array('acrion'=>'add'))?>
-            <td style ="width:30%; border:solid 1px #808080;">NOWALL担当者</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('name')?></td>
-            </tr>
+    <div class ="container">
+    <form action="../purchased" method="post">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="widget wlightblue">
+            <!-- Widget head -->
+                <div class="widget-head">
+                    <div class="pull-left">一般決済画面</div>
+                    <div class="clearfix"></div>
+                </div>
 
-            <tr>
-            <td style ="width:30%; border:solid 1px #808080;">お名前</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('customer_id')?></td>
-            </tr>
+          <div class="widget-content">
+            <div class="padd">
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-2">NOWALL担当者</div>
+    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
+      <input type="text" class="form-control input-sm" id="nowall_name" placeholder="NOWALL担当者" size="70" name="nowall_name" required="required">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-2">お名前</div>
+    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
+      <input type="text" class="form-control input-sm" id="name" placeholder="お名前" size="70" name="name" required="required">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-2">メールアドレス</div>
+    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
+      <input type="email" class="form-control input-sm" id="email" placeholder="メールアドレス" size="70" name="email" required="required">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-2">決済金額</div>
+    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
+    <strong><?=h(number_format($items['Item']['amount'])) ?>円</strong>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-2">決済内容</div>
+    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
+    <strong><?=h($items['Item']['name']) ?></strong>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-2">カード情報</div>
+    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
+    <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_97c0q0acA0A2eaTgr1gwa4PK" data-lang="ja" data-partial="true"></script>
+                (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
+    </div>
+</div>
+<div class="row" style="margin-top:30px;">
+    <div class="checkbox col-sm-offset-4" >
+        <label>
+            <input type="checkbox" name="last_check" required>上記内容を確認した上で支払いを行います。
+        </label>
+    </div>
+    <div class="col-sm-offset-4 col-sm-4">
+    <input class="btn btn-success btn-block" type='submit' value='送信'>
+    </div>
+</div>
 
-            <tr>
-            <td style ="width:30%; border:solid 1px #808080;">メールアドレス</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$this->Form->text('email')?></td>
-            </tr>
-
-            <tr>
-            <td style ="width:30%; border:solid 1px #808080;">決済金額</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$items['Item']['amount'] ?>円</td>
-            </tr>
-
-            <tr>
-            <td style ="width:30%; border:solid 1px #808080;">決済内容</td>
-            <td style ="width:70%; border:solid 1px #808080;"><?=$items['Item']['name'] ?></td>
-            </tr>
-
-            <tr>
-            <td style ="width:30%; border:solid 1px #808080;">カード情報</td>
-            <td style ="width:70%; border:solid 1px #808080;"></td>
-            </tr>
-
-            </table>
             </div>
-
-            <div style="text-align:center;">
-              <?=$this->Form->checkbox('')?>上記の内容を確認した上で支払いを行います。
-              <?=$this->Form->end('決済する')?>
             </div>
-          </div>
+            <input type="hidden" name="amount" value=<?=h($items['Item']['amount']);?> />
+            <input type="hidden" name="description" value=<?=h($items['Item']['name']);?> />
 
-    <!-- Scroll to top -->
+        </form>
+
+        </div>
+    </div>
+
+    </div>
+    </div>
 
     <!-- Javascript files -->
     <!-- jQuery -->
@@ -130,12 +147,12 @@
     <?php //echo $this->Html->js('js/jquery-ui.min.js')?>
     <!-- <script src="js/jquery-ui.min.js"></script> -->
     <!-- jQuery Gritter -->
-    <script src="js/jquery.gritter.min.js"></script>
+    <!-- <script src="js/jquery.gritter.min.js"></script> -->
     <!-- Respond JS for IE8 -->
-    <script src="js/respond.min.js"></script>
+    <!-- <script src="js/respond.min.js"></script> -->
     <!-- HTML5 Support for IE -->
-    <script src="js/html5shiv.js"></script>
+    <!-- <script src="js/html5shiv.js"></script> -->
     <!-- Custom JS -->
-    <script src="js/custom.js"></script>
+    <!-- <script src="js/custom.js"></script> -->
   </body>
 </html>
