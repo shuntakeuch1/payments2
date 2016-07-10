@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 
-require "/var/www/html/payments/vendors/autoload.php";
+require VENDORS . 'autoload.php';
 use WebPay\WebPay;
 
 class AdminController extends AppController {
@@ -37,7 +37,7 @@ class AdminController extends AppController {
 
 
                 // ここからルーティング追加
-                $file = '/var/www/html/payments/app/Config/routes.php';
+                $file = APP . "Config/routes.php";
                 // ファイルをオープンして既存のコンテンツを取得
                 $current = file_get_contents($file);
                 // 新しいルートをファイルに追加
@@ -52,13 +52,13 @@ class AdminController extends AppController {
                 $res = $email->config(array('log' => 'emails'))
                              ->from(array('test@example.com' => 'test'))
                              ->to($this->request->data['Admin']['email'])
-                             ->subject('決済URL通知メール')
+                             ->subject('[ELITES] 決済URL通知メール')
                              ->send($this->emailcontent_url($this->request->data['Admin']['name'],$url));
 
                 $res = $email->config(array('log' => 'emails'))
                              ->from(array('test@example.com' => 'test'))
                              ->to($this->request->data['Admin']['email'])
-                             ->subject('ID/PW通知メール')
+                             ->subject('[ELITES] ID/PW通知メール')
                              ->send($this->emailcontent_idpw($this->request->data['Admin']['name']));
 
                 // POSTの内容をSESSIONに保存

@@ -3,7 +3,7 @@
 // App::import('Vendor', 'autoload');
 // App::uses('WebPay', 'WebPay');
 
-require "/var/www/html/payments/vendors/autoload.php";
+require VENDORS . 'autoload.php';
 use WebPay\WebPay;
 
 class KeyController extends AppController {
@@ -48,7 +48,7 @@ class KeyController extends AppController {
         if (!$this->request->is('post'))
         {
             // ここから24時間前のルーティングを削除
-            $file = '/var/www/html/payments/app/Config/routes.php';
+            $file = APP . "Config/routes.php";
 
             // ファイルをオープンして既存のコンテンツを取得
             $current = file_get_contents($file);
@@ -103,7 +103,7 @@ class KeyController extends AppController {
             {
                 // ここからWEBPAY
                 try{
-                    $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+                    $webpay = new WebPay('test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl');
                     $webpay->setAcceptLanguage('ja');
 
                     $token = $webpay->token->retrieve($this->request->data['webpay-token']);
@@ -248,7 +248,7 @@ class KeyController extends AppController {
 
                 // ここからルーティングファイルから該当項目を削除
                 // ルーティングファイルの指定
-                $file = '/var/www/html/payments/app/Config/routes.php';
+                $file = APP . "Config/routes.php";
                 // ファイルをオープンして既存のコンテンツを取得
                 $current = file_get_contents($file);
                 // 該当するルーティングを削除
