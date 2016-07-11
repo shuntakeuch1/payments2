@@ -10,6 +10,8 @@
         echo $this->Html->meta('icon');
 
         echo $this->Html->css('../theme/css/bootstrap.min');
+        echo $this->Html->css('../theme/css/jquery-ui');
+        echo $this->Html->css('../theme/css/jquery.gritter');
         echo $this->Html->css('../theme/css/font-awesome.min');
         echo $this->Html->css('../theme/css/style');
         echo $this->Html->css('../theme/css/widgets');
@@ -45,6 +47,16 @@
 
         </div>
     </div>
+
+        <!-- Javascript files -->
+        <!-- jQuery -->
+        <?php echo $this->Html->script('../theme/js/jquery'); ?>
+        <?php echo $this->Html->script('../theme/js/bootstrap.min');?>
+        <?php echo $this->Html->script('../theme/js/jquery-ui.min');?>
+        <?php echo $this->Html->script('../theme/js/jquery.gritter.min');?>
+        <?php echo $this->Html->script('../theme/js/respond.min');?>
+        <?php echo $this->Html->script('../theme/js/html5shiv');?>
+        <?php echo $this->Html->script('../theme/js/admincustom');?>
 
 </body>
 </html>

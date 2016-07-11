@@ -2,31 +2,15 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 
+require "/var/www/html/payments/app/Vendor/autoload.php";
+use WebPay\WebPay;
+
 class AdminController extends AppController {
 
-    public $components = array('Session', 'Security');
+    public $components = array('Session');
 
     public function beforeFilter() {
         parent::beforeFilter();
-
-        //Basic認証
-        // id
-        $loginId = 'elites';
-
-        // passwd
-        $loginPassword = 'nowall';
-
-        $this->Security->validatePost = false;
-
-        // if (isset($_SERVER['PHP_AUTH_USER'])) {
-        //     if (! ($_SERVER['PHP_AUTH_USER'] == $loginId && $_SERVER['PHP_AUTH_PW'] == $loginPassword)) {
-        //         $this->basicAuthError();
-        //     }
-        // } else {
-        //     // 失敗したら途中で処理終了
-        //     $this->basicAuthError();
-        // }//Basic認証END
-
     }
 
     public function generate() {
@@ -51,16 +35,15 @@ class AdminController extends AppController {
 
                 $this->request->data['Admin'] += array('url' => $url);
 
-                // プレフィックスルーティングを追加
-                $request = new CakeRequest();
 
-                $aa = $request->addParams(array(
-    'controller' => 'registrations', 'action' => 'admin_index',
-    'plugin' => null, 'prefix' => 'admin', 'admin' => true,
-    'ext' => 'html'
-));
-
-
+                // ここからルーティング追加
+                $file = '/var/www/html/payments/app/Config/routes.php';
+                // ファイルをオープンして既存のコンテンツを取得
+                $current = file_get_contents($file);
+                // 新しいルートをファイルに追加
+                $addroute = preg_replace("/\/\/fromkey/","//fromkey\n    Router::connect('/key/".$key. "', array('controller' => 'key', 'action' => 'index')); //time:".time(),$current);
+                // 結果をファイルに書き出し
+                file_put_contents($file, $addroute);
 
 
                 // ここからメール送信
@@ -70,14 +53,13 @@ class AdminController extends AppController {
                              ->from(array('test@example.com' => 'test'))
                              ->to($this->request->data['Admin']['email'])
                              ->subject('決済URL通知メール')
-                             ->send('決済URLはこちらです。'. $url);
+                             ->send($this->emailcontent_url($this->request->data['Admin']['name'],$url));
 
                 $res = $email->config(array('log' => 'emails'))
                              ->from(array('test@example.com' => 'test'))
                              ->to($this->request->data['Admin']['email'])
                              ->subject('ID/PW通知メール')
-                             ->send('ID:elites PW:nowall
-                                でログインしてください。');
+                             ->send($this->emailcontent_idpw($this->request->data['Admin']['name']));
 
                 // POSTの内容をSESSIONに保存
                 $this->Session->write('sendData', $this->request->data);
@@ -89,24 +71,34 @@ class AdminController extends AppController {
     }
 
     public function generated() {
-        $this->layout = 'adminLayout';
+        $this->layout = 'adminLayout';$this->Session->write = array();
 
-        if(!$_SESSION['sendData'])
+        if(!SessionComponent::check('sendData'))
         {
             $this->redirect(array('action' => 'generate'));
         }
         else
         {
+            $this->Session->read('sendData');
+
             $this->set('sendData', $_SESSION['sendData']);
 
             // セッションの内容を消す
-            $_SESSION = array();
+            $this->Session->delete('sendData');
         }
     }
 
-    private function basicAuthError() {
-            header('WWW-Authenticate: Basic realm="Please enter your ID and password"');
-            header('HTTP/1.0 401 Unauthorized');
-            die("Invalid id / password combination.  Please try again");
+    private function emailcontent_url($name, $url) {
+
+        $emailcontent = $name. "様\n\nお世話になっております。\nELITES事務局です。\n\nこちらから課金情報の登録をお願いします。\n\n". $url."\n\nこのURLはメール送信後24時間有効です。\n\nまた本メールは自動送信のため、返信しないようお願いします。";
+
+        return $emailcontent;
+    }
+
+    private function emailcontent_idpw($name) {
+
+        $emailcontent = $name. "様\n\nお世話になっております。\nELITES事務局です。\n\n課金情報登録ページ用のID/PWを送信致します。\n課金情報登録用URLを閲覧する際には、このID/PWを使用してください。\n\nID: elites\nPW: nowall\n\nまた本メールは自動送信のため、返信しないようお願いします。";
+
+        return $emailcontent;
     }
 }

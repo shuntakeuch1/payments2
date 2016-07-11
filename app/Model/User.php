@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 App::uses('AppModel', 'Model');
 class User extends AppModel
 {
@@ -21,3 +22,15 @@ class User extends AppModel
   );
 
 }
+=======
+    App::uses('AppModel', 'Model');
+
+    class User extends AppModel{
+
+          public $hasMany = array('Charge', 'Recursion');
+
+          public $hasOne = array('CardHash');
+
+    }
+
+>>>>>>> d849adec6c71011c7f5fa911f74d38b4f879f6d0
