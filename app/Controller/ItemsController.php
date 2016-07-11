@@ -123,7 +123,11 @@ class ItemsController extends AppController
         $this->redirect(array('controller'=>'error','action'=>'index'));
     }
       //成功画面へ
-      $this->Session->write('email',$email);
+      $this->Session->write(
+        array('email'=> $email,
+          'name'=>$name,
+          'amount'=>$amount,
+          'description'=>$description));
       $this->redirect(array('controller'=>'purchased','action'=>'index'));
     }
     }
