@@ -55,58 +55,50 @@
 
 		<!-- Main content starts -->
 		<div class="content">
-			<!-- Sidebar -->
-
-			<!-- Sidebar ends -->
-
-			<!-- Main bar -->
 			<div class="mainbar">
 				<!-- Page heading -->
 				<div class="page-head">
 					<!-- Page heading -->
 					<h2 class="pull-left">商材一覧画面
 						<!-- page meta -->
-
 					</h2>
 					<!-- Breadcrumb -->
-
 					<div class="clearfix"></div>
-					</div>
+				</div>
 
-				<!-- 商品一覧の作成 -->
 				<div class="container">
 					<div class="col-sm-12">
+            <div class="widget wlightblue">
+            <!-- Widget head -->
+                <div class="widget-head">
+
+					<div class="pull-left">商材一覧</div>
+					<div class="clearfix"></div>
+						</div>
+
+						</div>
+	          <div class="widget-content">
+            <div class="padd">
+				<!-- 商品一覧の作成 -->
+
 						<!-- <div style = "width:800px;margin:0 auto; "> -->
 							<?php foreach($items as $item) :?>
 								<?=$this->Html->link('
-								<table style="border:solid 1px #000; margin-bottom:10px; width:100%;">'
+								<table class="table-hover" style="border:solid 1px #000; margin-bottom:10px; width:100%;">'
 								,array('action'=>'id',$item['Item']['cha_rec_id'])
 								,array('escape' =>false)
 								)?>
 									<tr>
-										<td style = "width:30%;"><?=$item['Item']['name']?>
+										<td class="col-sm-4"><?=h($item['Item']['name'])?>
 										</td>
-										<td style = "width:70%; border-left:solid 1px #000;"><?=$item['Item']['description']?><br><?=$item['Item']['amount']?>円
+										<td  class="col-sm-8" style = "border-left:solid 1px #000;"><?=h($item['Item']['description'])?><br><?=h(number_format($item['Item']['amount']))?>円
 										</td>
 									</tr>
 								</table>
 							<?php endforeach ;?>
 						</div>
 					</div>
-								<style type="text/css">
-								a {
-								    -webkit-transition: .5s;
-								    -moz-transition: .5s;
-								    -ms-transition: .5s;
-								    -o-transition: .5s;
-								    transition: .5s;
-								}
-								a:hover {
-								color:#87ceeb;
-								text-decoration:underline;
-								opacity: .3;
-								}
-								</style>
+
 
 							<!-- ページネーション機能 -->
 							<div style = "text-align:center;">
@@ -116,7 +108,8 @@
 							echo $this->Paginator->next(' 次へ >');
 							?>
 							</div>
-
+						</div>
+					</div>
 
 		<!-- Scroll to top -->
 
