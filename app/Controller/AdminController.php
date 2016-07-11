@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 
-require "/var/www/html/payments/app/Vendor/autoload.php";
+require "/var/www/html/payments/vendors/autoload.php";
 use WebPay\WebPay;
 
 class AdminController extends AppController {

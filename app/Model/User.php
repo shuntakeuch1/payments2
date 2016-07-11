@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppModel', 'Model');
+<<<<<<< HEAD
 
 class User extends AppModel{
 
@@ -8,6 +9,12 @@ class User extends AppModel{
 
   public $hasOne = array('CardHash');
 
+=======
+class User extends AppModel
+{
+  public $hasMany = array('Charge', 'Recursion');
+  public $hasOne = array('CardHash');
+>>>>>>> a2d156b326e9e6f75f4503c5318ecbcebf2018f7
   public $name = 'User';
   public $validates = array(
   'email'=>array(
@@ -26,6 +33,9 @@ class User extends AppModel{
   );
 
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> a2d156b326e9e6f75f4503c5318ecbcebf2018f7
