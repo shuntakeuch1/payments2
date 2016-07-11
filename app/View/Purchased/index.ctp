@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <!-- Title here -->
-    <title>申し込み失敗画面</title>
+    <title>決済完了画面</title>
     <!-- Description, Keywords and Author -->
     <meta name="description" content="Your description">
     <meta name="keywords" content="Your,Keywords">
