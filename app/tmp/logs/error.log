@@ -965,3 +965,265 @@ Stack Trace:
 #3 /var/www/html/payments/lib/Cake/Core/App.php(943): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2016-07-11 19:08:31 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:08:31 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery-ui.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:08:31 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery.gritter.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:08:32 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:08:39 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery-ui.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:08:39 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery.gritter.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:08:57 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:08:57 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery.gritter.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:08:57 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery-ui.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:08:57 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:09:29 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery-ui.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:09:29 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:09:29 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery.gritter.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:09:29 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:09:41 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery.gritter.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:09:41 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:09:41 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery-ui.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:10:04 Error: [MissingControllerException] Controller class ElitesController could not be found.
+Exception Attributes: array (
+  'class' => 'ElitesController',
+  'plugin' => NULL,
+)
+Request URL: /payments/elites/css/animate.min.css
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:10:04 Error: [MissingControllerException] Controller class ElitesController could not be found.
+Exception Attributes: array (
+  'class' => 'ElitesController',
+  'plugin' => NULL,
+)
+Request URL: /payments/elites/css/vertical.css
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:10:04 Error: [MissingControllerException] Controller class ElitesController could not be found.
+Exception Attributes: array (
+  'class' => 'ElitesController',
+  'plugin' => NULL,
+)
+Request URL: /payments/elites/css/slider.css
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:13:33 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery.gritter.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:13:33 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery-ui.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:13:41 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2016-07-11 19:13:41 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery.gritter.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:13:41 Error: [MissingActionException] Action AdminController::css() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'css',
+)
+Request URL: /payments/admin/css/jquery-ui.css
+Stack Trace:
+#0 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#1 /var/www/html/payments/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest))
+#2 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2016-07-11 19:13:42 Error: [MissingControllerException] Controller class ThemeController could not be found.
+Exception Attributes: array (
+  'class' => 'ThemeController',
+  'plugin' => NULL,
+)
+Request URL: /payments/theme/js/admincustom.js
+Stack Trace:
+#0 /var/www/html/payments/app/webroot/index.php(111): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
