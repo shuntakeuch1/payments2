@@ -43,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="index.html" class="navbar-brand"> <span class="bold">ELITES</span></a>
+          <a href="index.html" class="navbar-brand"> <span class="bold">ELITES PAYMENTS</span></a>
         </div>
       </div>
     </div>
@@ -108,13 +108,13 @@
 <div class="row">
     <div class="col-sm-offset-1 col-sm-2">カード情報</div>
     <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-<!--     <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_97c0q0acA0A2eaTgr1gwa4PK" data-lang="ja" data-partial="true"></script> -->
+    <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_97c0q0acA0A2eaTgr1gwa4PK" data-lang="ja" data-partial="true"></script>
                 (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
     </div>
 </div>
 <div class="row" style="margin-top:30px;">
-    <div class="checkbox col-sm-offset-4" >
-        <label>
+    <div class="checkbox col-sm-offset-4"  >
+        <label style="margin-left:5px;">
             <input type="checkbox" name="last_check" required>上記内容を確認した上で支払いを行います。
         </label>
     </div>
@@ -134,22 +134,6 @@
    alert(token.id);
  }
 </script> -->
-
-<script type="text/javascript">
-var a = function callback(token) {
-   document.write(token.id);
- }
-
-</script>
-<?php
-$vari=<<<EOF
-<script type="text/javascript">
-callback(token.id);
-</script>
-EOF;
-?>
-<input type="hidden" name="webpa" value=<?=$vari; ?> />
-<script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_97c0q0acA0A2eaTgr1gwa4PK" data-partial="true" data-on-created="callback"></script>
 
 
         </form>

@@ -1,7 +1,9 @@
 <?php
 
-require_once "webpay-php-full-2.2.2/autoload.php";
-use WebPay\WebPay;
+require VENDORS . 'autoload.php';
+
+// require_once "webpay-php-full-2.2.2/autoload.php";
+// use WebPay\WebPay;
 // require "/var/www/html/payments/vendors/autoload.php";
 // use WebPay\WebPay;
 
@@ -15,9 +17,12 @@ class ItemsController extends AppController
 
   public function index()
   {
+    $this->set('maxitem',$this->Item->find('count','all'));
+    $p_limit = 5;
+    $this->set('p_limit',$p_limit);
     $this->autoLayout = false;  // レイアウトをOFFにする
     $this->Paginator->settings = array(
-        'limit' => 5,
+        'limit' => $p_limit,
         'order' => array('created' => 'desc'),
         'recusive' =>3
       );
@@ -40,10 +45,13 @@ class ItemsController extends AppController
       if($this->User->validates()){
     // API リクエスト
     try {
-          $webpay = new WebPay('test_secret_cDu1Jtaxzaph6NMemY1SC1UF');
+          // $webpay = new WebPay('test_secret_cDu1Jtaxzaph6NMemY1SC1UF');
+          $webpay = new WebPay('test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl');
           //エラー日本語化
           $webpay->setAcceptLanguage('ja');
           //取得したdataの定義
+
+
           $nowall_name = $this->request->data['nowall_name'];
           $name = $this->request->data['name'];
           $amount = $this->request->data['amount'];
@@ -51,11 +59,18 @@ class ItemsController extends AppController
           $token = $this->request->data['webpay-token'];
           $description = $this->request->data['description'];
           //emailあるか確認 なかったらcutomer_id作成
+          $finger_tmp = $webpay->token->retrieve($token);
+          $finger_tmp = $finger_tmp->card->fingerprint;
+          //カード情報もチェック
           $emailcount = $this->User->find('count',array(
                                           'conditions' => array(
-                                                'email' => $email))
+                                                'email' => $email,
+                                                'fingerprint' => $finger_tmp
+                                                )
+                                          )
           );
-          if(empty($emailcount))
+
+          if($emailcount==0)
           {
             //顧客生成
             $customers = $webpay->customer->create(array("card"=>$token,"email"=>$email));
@@ -71,6 +86,7 @@ class ItemsController extends AppController
           }else{
             //customer_idと課金のひも付け
             $customer = $this->User->findByEmail($email);
+            debug($customer);
             $customer_id = $customer['User']['customer_id'];
             $user_id = $customer['User']['id'];
           };
@@ -84,7 +100,6 @@ class ItemsController extends AppController
           //課金idの保存
           $charge_id = $charge_id->id;
           $this->Charge->save(['user_id'=>$user_id,'charge_id'=>$charge_id,'amount'=>$amount]);
-          debug($charge_id);
 
     } catch (\WebPay\ErrorResponse\ErrorResponseException $e) {
         $error = $e->data->error;
@@ -115,6 +130,7 @@ class ItemsController extends AppController
         $this->redirect(array('controller'=>'error','action'=>'index'));
     } catch (\WebPay\ApiException $e) {
         // APIからのレスポンスが受け取れない場合。接続エラーなど
+      exit;
         $this->Session->write('err_message',$error->message);
         $this->redirect(array('controller'=>'error','action'=>'index'));
     } catch (\Exception $e) {
