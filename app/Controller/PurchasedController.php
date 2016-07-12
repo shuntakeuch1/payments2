@@ -20,7 +20,7 @@ class PurchasedController extends AppController
     $this->Session->delete('sendData');
     //読み込む設定ファイルの変数名を指定
     $email = new CakeEmail('default');
-    $email->from(array('test@example.com'=>'NoWall'));
+    $email->from(array('info@nowall.co.jp'=>'ELITES事務局'));
     $email->to($email_addr);
     $email->subject('[ELITES]決済完了メール');
     //メール送信する
