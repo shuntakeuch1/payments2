@@ -45,13 +45,6 @@
                     'message' => '決済金額を正しく入力してください'
                 ),
             ),
-            'day' => array(
-                'rule1' => array(
-                    'rule' => array('range', 0, 32),
-                    'message' => '定期課金日を正しく入力してください',
-                    'allowEmpty' => true
-                ),
-            ),
           );
 
     }

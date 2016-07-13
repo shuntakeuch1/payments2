@@ -68,7 +68,7 @@
                         <tr>
                           <td class="col-md-3">決済金額</td>
                           <td class="col-md-9"><?=number_format($sendData['Admin']['amount'])."円";?>
-                              <?php if($sendData['Admin']['day']) echo "(毎月)";
+                              <?php if($sendData['Admin']['period']) echo "(月額)";
                                     else echo "(今月1回)";?>
                           </td>
                         </tr>

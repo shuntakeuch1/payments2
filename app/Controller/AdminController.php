@@ -31,7 +31,7 @@ class AdminController extends AppController {
                 $email = urlencode($this->request->data['Admin']['email']);
                 $summary = urlencode($this->request->data['Admin']['summary']);
                 $amount = urlencode($this->request->data['Admin']['amount']);
-                $day = urlencode($this->request->data['Admin']['day']);
+                $period = urlencode($this->request->data['Admin']['period']);
 
                 // URL作成
                 $url = "https://elite.sc/payments/key/". $key. "?".
@@ -40,7 +40,7 @@ class AdminController extends AppController {
                             "&email=". urlencode($email).
                             "&summary=". urlencode($summary).
                             "&amount=". urlencode($amount).
-                            "&day=". urlencode($day);
+                            "&period=". urlencode($period);
 
                 $this->request->data['Admin'] += array('url' => $url);
 
