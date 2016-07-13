@@ -1,9 +1,9 @@
 <?php
 
-require VENDORS . 'autoload.php';
-use WebPay\WebPay;
-// require_once "webpay-php-full-2.2.2/autoload.php";
+// require VENDORS . 'autoload.php';
 // use WebPay\WebPay;
+require_once "webpay-php-full-2.2.2/autoload.php";
+use WebPay\WebPay;
 // require "/var/www/html/payments/vendors/autoload.php";
 // use WebPay\WebPay;
 
@@ -61,13 +61,16 @@ class ItemsController extends AppController
           $finger_tmp = $webpay->token->retrieve($token);
           $finger_tmp = $finger_tmp->card->fingerprint;
           //カード情報もチェック
-          $emailcount = $this->User->find('count',array(
+          $emailcount = $this->User->find('first',array(
                                           'conditions' => array(
                                                 'email' => $email,
                                                 'fingerprint' => $finger_tmp
                                                 )
                                           )
           );
+          // debug($finger_tmp);
+          // debug($emailcount);
+          // exit;
 
           if($emailcount==0)
           {
