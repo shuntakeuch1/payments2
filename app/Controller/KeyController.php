@@ -153,7 +153,7 @@ class KeyController extends AppController {
                             "amount"=>$this->request->data['amount'],
                             "currency"=>"jpy",
                             "customer"=>$customer_id,
-                            "description" => ""
+                            "description" => $this->request->data['summary']
                             )
                         );
 
@@ -174,7 +174,7 @@ class KeyController extends AppController {
                             "currency"=>"jpy",
                             "customer"=>$customer_id,
                             "period"=>"month",
-                            "description" => ""
+                            "description" => $this->request->data['summary']
                         ));
 
                         // DB登録
