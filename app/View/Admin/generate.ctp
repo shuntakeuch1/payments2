@@ -154,22 +154,12 @@
                                     ),
                                     )); ?>
 
-                    <?=$this->Form->input('day', array(
-                                    'type' => 'text',
-                                    'label' => array(
-                                        'text' => '定期課金日',
-                                        'class' => 'col col-md-2 control-label',
-                                        ),
-                                    'between' => '<div class="col-md-8">',
-                                    'after' => '※空白の場合は一時課金になります</div>',
-                                    'placeholder' => '10',
-                                    'class' => 'form-control',
-                                    'error' => array(
-                                        'attributes' => array(
-                                            'wrap' => 'div',
-                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
-                                        )
-                                    ),
+                    <?=$this->Form->input('period', array(
+                                    'type' => 'checkbox',
+                                    'label' => false,
+                                    'before' => '<label class="col-md-2 control-label">毎月課金</label><label class="col-md-1"></label>',
+                                    'between' => '<label class="control-label">※チェックしない場合は一時課金になります</label>',
+                                    'checked' => false,
                                     )); ?>
 
                     <?=$this->Form->input('発行する', array(

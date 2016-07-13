@@ -26,21 +26,37 @@ class AdminController extends AppController {
             {
                 $key = uniqid();
 
-                $nowallname = urlencode($this->request->data['Admin']['nowall-name']);
-                $name = urlencode($this->request->data['Admin']['name']);
-                $email = urlencode($this->request->data['Admin']['email']);
-                $summary = urlencode($this->request->data['Admin']['summary']);
-                $amount = urlencode($this->request->data['Admin']['amount']);
-                $day = urlencode($this->request->data['Admin']['day']);
+                // 暗号化
+                $cipher = md5('FKF6IR8A');
+                $td  = mcrypt_module_open('des', '', 'ecb', '');
+                $cipher = substr($cipher, 0, mcrypt_enc_get_key_size($td));
+                $iv  = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
+
+                //暗号化モジュール初期化
+                if (mcrypt_generic_init($td, $cipher, $iv) < 0) {
+                    die("エラー");
+                }
+
+                $nowallname = mcrypt_generic($td, $this->request->data['Admin']['nowall-name']);
+                mcrypt_generic_init($td, $cipher, $iv);
+                $name = mcrypt_generic($td, $this->request->data['Admin']['name']);
+                mcrypt_generic_init($td, $cipher, $iv);
+                $email = mcrypt_generic($td, $this->request->data['Admin']['email']);
+                mcrypt_generic_init($td, $cipher, $iv);
+                $summary = mcrypt_generic($td, $this->request->data['Admin']['summary']);
+                mcrypt_generic_init($td, $cipher, $iv);
+                $amount = mcrypt_generic($td, $this->request->data['Admin']['amount']);
+                mcrypt_generic_init($td, $cipher, $iv);
+                $period = mcrypt_generic($td, $this->request->data['Admin']['period']);
 
                 // URL作成
                 $url = "https://elite.sc/payments/key/". $key. "?".
-                            "nowall-name=". urlencode($nowallname).
-                            "&name=". urlencode($name).
-                            "&email=". urlencode($email).
-                            "&summary=". urlencode($summary).
-                            "&amount=". urlencode($amount).
-                            "&day=". urlencode($day);
+                            "nowall-name=". $nowallname.
+                            "&name=". $name.
+                            "&email=". $email.
+                            "&summary=". $summary.
+                            "&amount=". $amount.
+                            "&period=". $period;
 
                 $this->request->data['Admin'] += array('url' => $url);
 
