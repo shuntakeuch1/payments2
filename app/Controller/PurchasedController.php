@@ -8,12 +8,12 @@ class PurchasedController extends AppController
   public function index()
   {
     $this->autoLayout = false;  // レイアウトをOFFにする
-    $email_addr = $this->Session->read('email');
-    $name = $this->Session->read('name');
-    $amount = $this->Session->read('amount');
-    $description = $this->Session->read('description');
-    $this->Session->delete(array('email','name','amount','description'));
-
+    $tmp = $this->Session->read('sendData');
+    $email_addr = $tmp["email"];
+    $name = $tmp["name"];
+    $amount = $tmp["amount"];
+    $description = $tmp["description"];
+    $this->Session->delete('sendData');
     //読み込む設定ファイルの変数名を指定
     $email = new CakeEmail('default');
     $email->from(array('test@example.com'=>'NoWall'));

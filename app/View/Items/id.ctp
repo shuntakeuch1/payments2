@@ -108,7 +108,7 @@
 <div class="row">
     <div class="col-sm-offset-1 col-sm-2">カード情報</div>
     <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-    <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_97c0q0acA0A2eaTgr1gwa4PK" data-lang="ja" data-partial="true"></script>
+    <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_94I0ag7bXenugPP1HrcG175s" data-lang="ja" data-partial="true"></script>
                 (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
     </div>
 </div>

@@ -1,13 +1,13 @@
 <?php
 
 require VENDORS . 'autoload.php';
-
+use WebPay\WebPay;
 // require_once "webpay-php-full-2.2.2/autoload.php";
 // use WebPay\WebPay;
 // require "/var/www/html/payments/vendors/autoload.php";
 // use WebPay\WebPay;
 
-// App::items('AppController','Controller');
+// App::item('AppController','Controller');
 class ItemsController extends AppController
 {
   public $name = 'Items';
@@ -40,12 +40,11 @@ class ItemsController extends AppController
   {
     if($this->request->is('post'))
     {
-      debug($this->User->set($this->request->data));
+      // debug($this->User->set($this->request->data));
       // debug($this->request->data);
       if($this->User->validates()){
     // API リクエスト
     try {
-          // $webpay = new WebPay('test_secret_cDu1Jtaxzaph6NMemY1SC1UF');
           $webpay = new WebPay('test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl');
           //エラー日本語化
           $webpay->setAcceptLanguage('ja');
@@ -107,23 +106,23 @@ class ItemsController extends AppController
             case 'buyer':
                 // カードエラーなど、購入者に原因がある
                 // エラーメッセージをそのまま表示するのがわかりやすい
-                $this->Session->write(array('err_message'=>$error->message,'nowall_name'=>$nowall_name));
+                $this->Session->write('sendData', array('error'=>$error->message,'nowallname'=>$nowall_name));
                 break;
             case 'insufficient':
                 // 実装ミスに起因する
-                $this->Session->write('err_message',$error->message);
+                $this->Session->write('sendData', array('error'=>$error->message,'nowallname'=>$nowall_name));
                 break;
             case 'missing':
                 // リクエスト対象のオブジェクトが存在しない
-                $this->Session->write('err_message',$error->message);
+                $this->Session->write('sendData', array('error'=>$error->message,'nowallname'=>$nowall_name));
                 break;
             case 'service':
                 // WebPayに起因するエラー
-                $this->Session->write('err_message',$error->message);
+                $this->Session->write('sendData', array('error'=>$error->message,'nowallname'=>$nowall_name));
                 break;
             default:
                 // 未知のエラー
-                $this->Session->write('err_message',$error->message);
+                $this->Session->write('sendData', array('error'=>$error->message,'nowallname'=>$nowall_name));
                 break;
         }
         //申込失敗画面へ
@@ -131,15 +130,15 @@ class ItemsController extends AppController
     } catch (\WebPay\ApiException $e) {
         // APIからのレスポンスが受け取れない場合。接続エラーなど
       exit;
-        $this->Session->write('err_message',$error->message);
+        $this->Session->write('sendData', array('error'=>$error->message,'nowallname'=>$nowall_name));
         $this->redirect(array('controller'=>'error','action'=>'index'));
     } catch (\Exception $e) {
         // WebPayとは関係ない例外の場合
-        $this->Session->write('err_message',$error->message);
+        $this->Session->write('sendData', array('error'=>$error->message,'nowallname'=>$nowall_name));
         $this->redirect(array('controller'=>'error','action'=>'index'));
     }
       //成功画面へ
-      $this->Session->write(
+      $this->Session->write('sendData',
         array('email'=> $email,
           'name'=>$name,
           'amount'=>$amount,

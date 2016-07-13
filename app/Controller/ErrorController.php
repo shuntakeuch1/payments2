@@ -46,11 +46,10 @@ class ErrorController extends AppController {
   public function index(){
     $this->autoLayout = false;  // レイアウトをOFFにする
 
-    $nowall_name = $this->Session->read('nowall_name');
-    $error = $this->Session->read('err_message');
-    $this->set(array('error'=>$error,'nowall_name'=>$nowall_name));
-    $this->Session->delete('err_message');
-    $this->Session->delete('nowall_name');
+    $tmp = $this->Session->read('sendData');
+    $this->set(array('error'=>$tmp["error"],'nowall_name'=>$tmp["nowallname"]));
+    $this->Session->delete('sendData');
+
   }
 
   public function __construct($request = null, $response = null) {
