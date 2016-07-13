@@ -33,7 +33,7 @@
                                     <th class="col-md-2">メールアドレス</th><td class="col-md-11"><?=$email;?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 (";
+                                    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 ";
                                         if(!$period) echo "(今月のみ)";
                                         else echo "(月額)";?></td>
                                 </tr>

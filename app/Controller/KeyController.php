@@ -278,29 +278,23 @@ class KeyController extends AppController {
         }
         else
         {
-            $nowallname = $this->request->query('nowall-name');
-            $nowallname = urldecode($nowallname);
-            $this->set('nowallname', urldecode($nowallname));
+            $nowallname = $this->base64_urlsafe_decode($this->request->query('nowall-name'));
+            $this->set('nowallname', $nowallname);
 
-            $name = $this->request->query('name');
-            $name = urldecode($name);
-            $this->set('name', urldecode($name));
+            $name = $this->base64_urlsafe_decode($this->request->query('name'));
+            $this->set('name', $name);
 
-            $email = $this->request->query('email');
-            $email = urldecode($email);
-            $this->set('email', urldecode($email));
+            $email = $this->base64_urlsafe_decode($this->request->query('email'));
+            $this->set('email', $email);
 
-            $summary = $this->request->query('summary');
-            $summary = urldecode($summary);
-            $this->set('summary', urldecode($summary));
+            $summary = $this->base64_urlsafe_decode($this->request->query('summary'));
+            $this->set('summary', $summary);
 
-            $amount = $this->request->query('amount');
-            $amount = urldecode($amount);
-            $this->set('amount', urldecode($amount));
+            $amount = $this->base64_urlsafe_decode($this->request->query('amount'));
+            $this->set('amount', $amount);
 
-            $period = $this->request->query('period');
-            $period = urldecode($period);
-            $this->set('period', urldecode($period));
+            $period = $this->base64_urlsafe_decode($this->request->query('period'));
+            $this->set('period', $period);
 
             // URL内の$keyを取得
             preg_match('/\/key\/(.*?)\?/s', $_SERVER['REQUEST_URI'], $key);
@@ -310,4 +304,9 @@ class KeyController extends AppController {
                 die("URLが間違っています.  Please try again");
         }
    }
+
+    private function base64_urlsafe_decode($val) {
+        $val = str_replace(array('_','-', '.'), array('+', '/', '='), $val);
+        return base64_decode($val);
+    }
 }
