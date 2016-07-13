@@ -33,9 +33,9 @@
                                     <th class="col-md-2">メールアドレス</th><td class="col-md-11"><?=$email;?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 ";
-                                        if(!$period) echo "(今月のみ)";
-                                        else echo "(月額)";?></td>
+                                    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 (";
+                                        if(empty($day)) echo "今月のみ)";
+                                        else echo "毎月".$day."日)";?></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-2">決済内容</th><td class="col-md-11"><?=$summary;?></td>
@@ -63,7 +63,7 @@
                         <input type="hidden" name="email" value=<?=$email; ?>>
                         <input type="hidden" name="summary" value=<?=$summary; ?>>
                         <input type="hidden" name="amount" value=<?=$amount; ?>>
-                        <input type="hidden" name="period" value=<?=$period; ?>>
+                        <input type="hidden" name="day" value=<?=$day; ?>>
                         <input type="hidden" name="key" value=<?=$key; ?>>
                         </form>
                     </div>

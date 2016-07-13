@@ -168,7 +168,7 @@ class KeyController extends AppController {
 
                     // ここから課金登録関連
                     // 一時課金のとき
-                    if(!$this->request->data['period']){
+                    if(empty($this->request->data['day'])){
                         $return_ch = $webpay->charge->create(array(
                             "amount"=>$this->request->data['amount'],
                             "currency"=>"jpy",
@@ -272,7 +272,7 @@ class KeyController extends AppController {
                 $this->set('email', $this->request->data['email']);
                 $this->set('summary', $this->request->data['summary']);
                 $this->set('amount', $this->request->data['amount']);
-                $this->set('period', $this->request->data['period']);
+                $this->set('day', $this->request->data['day']);
                 $this->set('key', $this->request->data['key']);
             }
         }
@@ -298,9 +298,9 @@ class KeyController extends AppController {
             $amount = urldecode($amount);
             $this->set('amount', urldecode($amount));
 
-            $period = $this->request->query('period');
-            $period = urldecode($period);
-            $this->set('period', urldecode($period));
+            $day = $this->request->query('day');
+            $day = urldecode($day);
+            $this->set('day', urldecode($day));
 
             // URL内の$keyを取得
             preg_match('/\/key\/(.*?)\?/s', $_SERVER['REQUEST_URI'], $key);
