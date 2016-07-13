@@ -48,7 +48,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="index.html" class="navbar-brand"> <span class="bold">ELITES</span></a>
+					<a href="index.html" class="navbar-brand"> <span class="bold">ELITES PAYMENTS</span></a>
 				</div>
 			</div>
 		</div>
@@ -88,48 +88,31 @@
 								,array('action'=>'id',$item['Item']['cha_rec_id'])
 								,array('escape' =>false)
 								)?>
-									<tr>
+								<tr>
 										<td class="col-sm-4"><?=h($item['Item']['name'])?>
 										</td>
 										<td  class="col-sm-8" style = "border-left:solid 1px #000;"><?=h($item['Item']['description'])?><br><?=h(number_format($item['Item']['amount']))?>円
 										</td>
 									</tr>
 								</table>
+								<!-- linkヘルパー終了用 -->
+							</a>
 							<?php endforeach ;?>
-						</div>
-					</div>
-
-
-							<!-- ページネーション機能 -->
-							<div style = "text-align:center;">
-							<?php
-							echo $this->Paginator->prev('< 前へ ');
-							echo $this->Paginator->numbers();
-							echo $this->Paginator->next(' 次へ >');
-							?>
 							</div>
 						</div>
 					</div>
+					</div>
 
-		<!-- Scroll to top -->
+			<!-- ページネーション機能 -->
+			<div style = "text-align:center;">
+			<?php
+				if($p_limit <= $maxitem){
+				echo $this->Paginator->prev('< 前へ ');
+				echo $this->Paginator->numbers();
+				echo $this->Paginator->next(' 次へ >');
+				}
+			?>
+			</div>
 
-		<!-- Javascript files -->
-		<!-- jQuery -->
-		<?php // echo $this->Html->script('js/jquery.js', array('inline' => false))?>
-		<!-- <script src="js/jquery.js"></script> -->
-		<!-- Bootstrap JS -->
-		<?php //echo $this->Html->js('js/bootstrap.min.js')?>
-		<!-- <script src="js/bootstrap.min.js"></script> -->
-		<!-- jQuery UI -->
-		<?php //echo $this->Html->js('js/jquery-ui.min.js')?>
-		<!-- <script src="js/jquery-ui.min.js"></script> -->
-		<!-- jQuery Gritter -->
-		<script src="js/jquery.gritter.min.js"></script>
-		<!-- Respond JS for IE8 -->
-		<script src="js/respond.min.js"></script>
-		<!-- HTML5 Support for IE -->
-		<script src="js/html5shiv.js"></script>
-		<!-- Custom JS -->
-		<script src="js/custom.js"></script>
 	</body>
 </html>
