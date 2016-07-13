@@ -24,14 +24,21 @@ class AdminController extends AppController {
             {
                 $key = uniqid();
 
+                $nowallname = urlencode($this->request->data['Admin']['nowall-name']);
+                $name = urlencode($this->request->data['Admin']['name']);
+                $email = urlencode($this->request->data['Admin']['email']);
+                $summary = urlencode($this->request->data['Admin']['summary']);
+                $amount = urlencode($this->request->data['Admin']['amount']);
+                $day = urlencode($this->request->data['Admin']['day']);
+
                 // URL作成
                 $url = "https://elite.sc/payments/key/". $key. "?".
-                            "nowall-name=". urlencode($this->request->data['Admin']['nowall-name']).
-                            "&name=". urlencode($this->request->data['Admin']['name']).
-                            "&email=". urlencode($this->request->data['Admin']['email']).
-                            "&summary=". urlencode($this->request->data['Admin']['summary']).
-                            "&amount=". urlencode($this->request->data['Admin']['amount']).
-                            "&day=". urlencode($this->request->data['Admin']['day']);
+                            "nowall-name=". urlencode($nowallname).
+                            "&name=". urlencode($name).
+                            "&email=". urlencode($email).
+                            "&summary=". urlencode($summary).
+                            "&amount=". urlencode($amount).
+                            "&day=". urlencode($day);
 
                 $this->request->data['Admin'] += array('url' => $url);
 

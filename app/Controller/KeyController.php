@@ -58,13 +58,13 @@ class KeyController extends AppController {
             preg_match('/\/key\/(.*?)\?/s', $_SERVER['REQUEST_URI'], $key);
 
             if(!isset($key['1'])){
-                die("URLが間違っているか、発行後24時間経過したため、アクセスできません");
+                die("不正アクセス");
             }
 
             // 時間を抽出
             preg_match('/^.*'.$key['1'].'.*$/um',$current, $tmp1);
 
-            if(empty($tmp1)) die("URLが間違っているか、発行後24時間経過したため、アクセスできません");
+            if(empty($tmp1)) die("URLが間違っています");
 
             preg_match_all('/time:(\w+)/s', $tmp1['0'], $tmp1,PREG_SET_ORDER);
             if(time() - $tmp1['0']['1'] > 86400){
@@ -279,21 +279,27 @@ class KeyController extends AppController {
         else
         {
             $nowallname = $this->request->query('nowall-name');
+            $nowallname = urldecode($nowallname);
             $this->set('nowallname', urldecode($nowallname));
 
             $name = $this->request->query('name');
+            $name = urldecode($name);
             $this->set('name', urldecode($name));
 
             $email = $this->request->query('email');
+            $email = urldecode($email);
             $this->set('email', urldecode($email));
 
             $summary = $this->request->query('summary');
+            $summary = urldecode($summary);
             $this->set('summary', urldecode($summary));
 
             $amount = $this->request->query('amount');
+            $amount = urldecode($amount);
             $this->set('amount', urldecode($amount));
 
             $day = $this->request->query('day');
+            $day = urldecode($day);
             $this->set('day', urldecode($day));
 
             // URL内の$keyを取得
