@@ -245,7 +245,7 @@ class KeyController extends AppController {
             else // バリデーション失敗
             {
                 if(isset($this->Key->validationErrors['agree'])) $this->set('agree_error', $this->Key->validationErrors['agree']);
-                if(isset($this->Key->validationErrors['webpaytoken_error'])) $this->set('webpaytoken_error', $this->Key->validationErrors['webpay-token']);
+                if(isset($this->Key->validationErrors['webpay-token'])) $this->set('webpaytoken_error', $this->Key->validationErrors['webpay-token']);
 
                 $this->set('nowallname', $this->request->data['nowallname']);
                 $this->set('name', $this->request->data['name']);
