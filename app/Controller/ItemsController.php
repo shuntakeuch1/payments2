@@ -61,7 +61,7 @@ class ItemsController extends AppController
           $finger_tmp = $webpay->token->retrieve($token);
           $finger_tmp = $finger_tmp->card->fingerprint;
           //カード情報もチェック
-          $emailcount = $this->User->find('count',array(
+          $customer = $this->User->find('first',array(
                                           'conditions' => array(
                                                 'email' => $email,
                                                 'fingerprint' => $finger_tmp
@@ -69,23 +69,36 @@ class ItemsController extends AppController
                                           )
           );
 
-          if($emailcount==0)
+          if(empty($customer))
           {
+            // メールアドレスが既に登録済のとき⇒カード情報が異なるため、新規顧客で登録
+            $params = array(
+                            'conditions' => array(
+                            'email' => $this->request->data['email'],
+                            )
+                        );
+            $emailcount = $this->User->find('count', $params);
+
+            // 過去に同じEMAILで登録がある場合、名前に数字を付加してから登録
+            if($emailcount>0){
+                $name = $name . ($emailcount + 1);
+            }
+
+
             //顧客生成
             $customers = $webpay->customer->create(array("card"=>$token,"email"=>$email));
             $customer_id = $customers->id;
+
             //users_id生成
             $this->User->save(['email'=>$email,'customer_id'=>$customer_id,'name'=>$name]);
             //users_id取得
-            $customer = $this->User->findByEmail($email);
-            $user_id = $customer['User']['id'];
+            $user_id = $this->User->id;
+
             //card_hash保存
             $fingerprint = $customers->activeCard->fingerprint;
             $this->CardHash->save(['user_id'=>$user_id,'fingerprint'=>$fingerprint]);
           }else{
             //customer_idと課金のひも付け
-            $customer = $this->User->findByEmail($email);
-            debug($customer);
             $customer_id = $customer['User']['customer_id'];
             $user_id = $customer['User']['id'];
           };
