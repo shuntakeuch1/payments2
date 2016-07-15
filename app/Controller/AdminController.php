@@ -26,14 +26,21 @@ class AdminController extends AppController {
             {
                 $key = uniqid();
 
+                $nowallname = $this->base64_urlsafe_encode($this->request->data['Admin']['nowall-name']);
+                $name = $this->base64_urlsafe_encode($this->request->data['Admin']['name']);
+                $email = $this->base64_urlsafe_encode($this->request->data['Admin']['email']);
+                $summary = $this->base64_urlsafe_encode($this->request->data['Admin']['summary']);
+                $amount = $this->base64_urlsafe_encode($this->request->data['Admin']['amount']);
+                $period = $this->base64_urlsafe_encode($this->request->data['Admin']['period']);
+
                 // URL作成
                 $url = "https://elite.sc/payments/key/". $key. "?".
-                            "nowall-name=". urlencode($this->request->data['Admin']['nowall-name']).
-                            "&name=". urlencode($this->request->data['Admin']['name']).
-                            "&email=". urlencode($this->request->data['Admin']['email']).
-                            "&summary=". urlencode($this->request->data['Admin']['summary']).
-                            "&amount=". urlencode($this->request->data['Admin']['amount']).
-                            "&day=". urlencode($this->request->data['Admin']['day']);
+                            "nowall-name=". $nowallname.
+                            "&name=". $name.
+                            "&email=". $email.
+                            "&summary=". $summary.
+                            "&amount=". $amount.
+                            "&period=". $period;
 
                 $this->request->data['Admin'] += array('url' => $url);
 
@@ -102,5 +109,10 @@ class AdminController extends AppController {
         $emailcontent = $name. "様\n\nお世話になっております。\nELITES事務局です。\n\n課金情報登録ページ用のID/PWを送信致します。\n課金情報登録用URLを閲覧する際には、このID/PWを使用してください。\n\nID: elites\nPW: nowall\n\nまた本メールは自動送信のため、返信しないようお願いします。";
 
         return $emailcontent;
+    }
+
+    private function base64_urlsafe_encode($val) {
+        $val = base64_encode($val);
+        return str_replace(array('+', '/', '='), array('_', '-', '.'), $val);
     }
 }

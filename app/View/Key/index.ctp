@@ -33,9 +33,9 @@
                                     <th class="col-md-2">メールアドレス</th><td class="col-md-11"><?=$email;?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 (";
-                                        if(empty($day)) echo "今月のみ)";
-                                        else echo "毎月".$day."日)";?></td>
+                                    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 ";
+                                        if(!$period) echo "(今月のみ)";
+                                        else echo "(月額)";?></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-2">決済内容</th><td class="col-md-11"><?=$summary;?></td>
@@ -43,7 +43,7 @@
                                 <tr>
                                     <th class="col-md-2">カード情報</th>
                                     <td class="col-md-11">
-                                        <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_cKKcPY89vgl2ba03eD0zAgix" data-lang="ja" data-partial="true"></script>
+                                        <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_94I0ag7bXenugPP1HrcG175s" data-lang="ja" data-partial="true"></script>
                                         (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
                                         <?php if(isset($webpaytoken_error['0'])) echo "<br><span class=\"text-danger\">".$webpaytoken_error['0']."</span>";?>
                                     </td>
@@ -63,7 +63,7 @@
                         <input type="hidden" name="email" value=<?=$email; ?>>
                         <input type="hidden" name="summary" value=<?=$summary; ?>>
                         <input type="hidden" name="amount" value=<?=$amount; ?>>
-                        <input type="hidden" name="day" value=<?=$day; ?>>
+                        <input type="hidden" name="period" value=<?=$period; ?>>
                         <input type="hidden" name="key" value=<?=$key; ?>>
                         </form>
                     </div>

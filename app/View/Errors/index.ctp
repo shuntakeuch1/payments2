@@ -43,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="index.html" class="navbar-brand"> <span class="bold">ELITES</span></a>
+          <a href="index.html" class="navbar-brand"> <span class="bold">ELITES PAYMENTS</span></a>
         </div>
       </div>
     </div>

@@ -125,6 +125,8 @@
 
             </div>
             </div>
+            <input type="hidden" name="id" value=<?=h($items['Item']['id']);?> />
+            <input type="hidden" name="cha_rec_id" value=<?=h($items['Item']['cha_rec_id']);?> />
             <input type="hidden" name="amount" value=<?=h($items['Item']['amount']);?> />
             <input type="hidden" name="description" value=<?=h($items['Item']['name']);?> />
         <!-- <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_97c0q0acA0A2eaTgr1gwa4PK" data-lang="ja" data-partial="true"></script> -->
