@@ -15,26 +15,6 @@ class KeyController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
 
-        // //Basic認証
-        // // id
-        // $loginId = 'elites';
-
-        // // passwd
-        // $loginPassword = 'nowall';
-
-        // $this->Security->validatePost = false;
-        // $this->Security->csrfUseOnce = false;
-        // $this->Security->csrfExpires = '+1 hour';
-
-        // if (isset($_SERVER['PHP_AUTH_USER'])) {
-        //     if (! ($_SERVER['PHP_AUTH_USER'] == $loginId && $_SERVER['PHP_AUTH_PW'] == $loginPassword)) {
-        //         $this->basicAuthError();
-        //     }
-        // } else {
-        //     // 失敗したら途中で処理終了
-        //     $this->basicAuthError();
-        // }//Basic認証END
-
         switch (true) {
             case !isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']):
             case $_SERVER['PHP_AUTH_USER'] !== 'elites':
