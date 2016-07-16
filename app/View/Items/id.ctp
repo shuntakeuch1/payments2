@@ -63,8 +63,11 @@
           <div class="clearfix"></div>
           </div>
 
+<?=$this->Session->flash() ?>
     <div class ="container">
     <form action="../purchased" method="post">
+
+    <?php echo $this->Form->error('User.nowall_name'); ?>
         <div class="col-md-offset-1 col-md-10">
             <div class="widget wlightblue">
             <!-- Widget head -->

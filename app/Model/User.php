@@ -10,20 +10,25 @@ class User extends AppModel
 
   public $name = 'User';
 
-  public $validates = array(
-  'email'=>array(
-      'rule' => array('email'),
-      'message' => 'メールアドレスを入力してください'
-      ),
+  public $validate = array(
   'nowall_name' => array(
-    'rule' =>array('notBlank')
-    ),
-  'name' => array(
-    'rule' =>array('notBlank')
-    ),
-  'last_check' => array(
-    'rule' =>array('notBlank')
-    )
+    'rule' =>array('notBlank'),
+    'required' => true,
+    // 'allowEmpty' => false,
+    'message' => ' 担当者名を入力してください'
+     )
+    // ,
+  // 'email'=>array(
+  //     'rule' => array('email'),
+  //     'message' => 'メールアドレスを入力してください'
+  //     ),
+  // 'name' => array(
+  //   'rule' =>array('notBlank')
+  //   )
+  // ,
+  // 'last_check' => array(
+  //   'rule' =>array('notBlank')
+  //   )
   );
 
 }

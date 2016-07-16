@@ -1,9 +1,9 @@
 <?php
 
-require VENDORS . 'autoload.php';
-use WebPay\WebPay;
-// require_once "webpay-php-full-2.2.2/autoload.php";
+// require VENDORS . 'autoload.php';
 // use WebPay\WebPay;
+require_once "webpay-php-full-2.2.2/autoload.php";
+use WebPay\WebPay;
 // require "/var/www/html/payments/vendors/autoload.php";
 // use WebPay\WebPay;
 
@@ -42,6 +42,8 @@ class ItemsController extends AppController
     {
       // debug($this->User->set($this->request->data));
       // debug($this->request->data);
+      $this->User->set($this->request->data);
+      // $data=array('nowall_name' => $this->request->data['nowall_name']);
       if($this->User->validates()){
     // API リクエスト
     try {
@@ -116,7 +118,8 @@ class ItemsController extends AppController
                   ));
                 //課金idの保存
                 $charge_id = $charge_id->id;
-                $this->Charge->save(['user_id'=>$user_id,'charge_id'=>$charge_id,'amount'=>$amount]);
+                $this->Charge->save(['user_id'=>$user_id,'charge_id'=>$charge_id,'summary'=>$description,'amount'=>$amount]);
+                $this->Item->save(array('Item' => array("id"=>$id,'cha_rec_id' => $charge_id),false,array('cha_rec_id')));
           }else{
                 //定額処理
                 $return_re = $webpay->recursion->create(array(
@@ -124,7 +127,7 @@ class ItemsController extends AppController
                     "currency"=>"jpy",
                     "customer"=>$customer_id,
                     "period"=>"month",
-                    "description" => ""
+                    "description" => $description
                 ));
                 // DB登録
                 // Recursionsテーブル
@@ -189,8 +192,12 @@ class ItemsController extends AppController
         $this->Session->write('sendData',$Data);
         $this->redirect(array('controller'=>'purchased','action'=>'index'));
       }
+      else{
+        // $this->render('id/'$this->request->data['cha_rec_id']);
+        // $this->Session->setFlash('hoge');
+        $this->redirect($this->referer());
+      }
     }
-
   }
 
 }
