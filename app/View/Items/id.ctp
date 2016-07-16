@@ -43,7 +43,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="index.html" class="navbar-brand"> <span class="bold">ELITES PAYMENTS</span></a>
+          <a href="index.html" class="navbar-brand"> <span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+ ELITES PAYMENTS</span></a>
         </div>
       </div>
     </div>
