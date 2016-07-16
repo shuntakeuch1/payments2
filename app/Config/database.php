@@ -70,9 +70,9 @@ class DATABASE_CONFIG {
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
-    'login' => 'root',
-    'password' => '',
-    'database' => 'payments',
+    'login' => 'm_shimada',
+    'password' => 'ubxh3js@',
+    'database' => 'm_shimada',
     'prefix' => '',
     'encoding' => 'utf8',
   );
