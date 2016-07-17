@@ -2,7 +2,8 @@
       <div class="container">
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
-          <a href="#" class="navbar-brand">ELITES PAYMENTS</a>
+          <a href="index.html" class="navbar-brand"> <span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+ ELITES PAYMENTS</span></a>
         </div>
       </div>
     </div>
@@ -27,18 +28,18 @@
                                 <tr>
                                     <th class="col-md-2">担当者名</th>
                                     <td class="col-md-11">
-                                      <input type="text" class="input-sm col-sm-5" id="nowall_name" placeholder="担当者" name="nowall_name" required="required">
+                                      <input type="text" class="input-md col-sm-5" id="nowall_name" placeholder="担当者" name="nowall_name" required="required">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-2">お名前</th>
                                     <td class="col-md-11">
-                                    <input type="text" class="input-sm col-sm-5" id="name" placeholder="お名前" name="name" required="required">
+                                    <input type="text" class="input-md col-sm-5" id="name" placeholder="お名前" name="name" required="required">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-2">メールアドレス</th><td class="col-md-11">
-                                    <input type="email" class="input-sm col-sm-8" id="email" placeholder="メールアドレス" name="email" required="required">
+                                    <input type="email" class="input-md col-sm-8" id="email" placeholder="メールアドレス" name="email" required="required">
                                     </td>
                                 </tr>
                                 <tr>
@@ -145,4 +146,3 @@
 
     <div class="clearfix"></div>
     </div><!--/ Content ends -->
-

@@ -2,7 +2,7 @@
       <div class="container">
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
-          <a href="/payments/admin/generate" class="navbar-brand">ELITES PAYMENTS</a>
+          <a href="/payments/admin/generate" class="navbar-brand"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ELITES PAYMENTS</a>
         </div>
       </div>
     </div>

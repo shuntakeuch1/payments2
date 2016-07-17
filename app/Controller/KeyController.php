@@ -153,7 +153,7 @@ class KeyController extends AppController {
                             "amount"=>$this->request->data['amount'],
                             "currency"=>"jpy",
                             "customer"=>$customer_id,
-                            "description" => ""
+                            "description" => $this->request->data['summary']
                             )
                         );
 
@@ -174,7 +174,7 @@ class KeyController extends AppController {
                             "currency"=>"jpy",
                             "customer"=>$customer_id,
                             "period"=>"month",
-                            "description" => ""
+                            "description" => $this->request->data['summary']
                         ));
 
                         // DB登録
@@ -245,7 +245,7 @@ class KeyController extends AppController {
             else // バリデーション失敗
             {
                 if(isset($this->Key->validationErrors['agree'])) $this->set('agree_error', $this->Key->validationErrors['agree']);
-                if(isset($this->Key->validationErrors['webpaytoken_error'])) $this->set('webpaytoken_error', $this->Key->validationErrors['webpay-token']);
+                if(isset($this->Key->validationErrors['webpay-token'])) $this->set('webpaytoken_error', $this->Key->validationErrors['webpay-token']);
 
                 $this->set('nowallname', $this->request->data['nowallname']);
                 $this->set('name', $this->request->data['name']);
