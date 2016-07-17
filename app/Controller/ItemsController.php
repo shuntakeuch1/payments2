@@ -122,7 +122,6 @@ class ItemsController extends AppController
                 //課金idの保存
                 $charge_id = $charge_id->id;
                 $this->Charge->save(['user_id'=>$user_id,'charge_id'=>$charge_id,'summary'=>$description,'amount'=>$amount]);
-                $this->Item->save(array('Item' => array("id"=>$id,'cha_rec_id' => $charge_id),false,array('cha_rec_id')));
           }else{
                 //定額処理
                 $return_re = $webpay->recursion->create(array(
@@ -141,8 +140,6 @@ class ItemsController extends AppController
                     'amount' => $this->request->data['amount']
                 );
                 $this->Recursion->save($recursion_savedata);
-                //Itemsテーブル更新
-                $this->Item->save(array('Item' => array("id"=>$id,'cha_rec_id' => $return_re->id),false,array('cha_rec_id')));
                 //(月額)表示用
                 $period = "dummy";
           }
