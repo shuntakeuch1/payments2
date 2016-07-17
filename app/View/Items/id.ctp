@@ -1,171 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <!-- Title here -->
-    <title>一般決済画面</title>
-    <!-- Description, Keywords and Author -->
-    <meta name="description" content="Your description">
-    <meta name="keywords" content="Your,Keywords">
-    <meta name="author" content="ResponsiveWebInc">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <!-- Styles -->
-    <!-- Bootstrap CSS -->
-    <?php echo $this->Html->css('css/bootstrap.min')?>
-    <!-- jQuery UI -->
-    <?php echo $this->Html->css('css/jquery-ui.css')?>
-    <!-- jQuery Gritter -->
-    <?php echo $this->Html->css('css/jquery.gritter.css')?>
-    <!-- Font awesome CSS -->
-    <?php echo $this->Html->css('css/font-awesome.min.css')?>
-    <!-- Custom CSS -->
-    <?php echo $this->Html->css('css/style.css')?>
-    <!-- Widgets stylesheet -->
-    <?php echo $this->Html->css('css/widgets.css')?>
-    <?php echo $this->Html->css('css/mainbar-margin-left0.css')?>
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="#">
-  </head>
-
-  <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
       <div class="container">
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="index.html" class="navbar-brand"> <span class="bold">ELITES PAYMENTS</span></a>
+          <a href="#" class="navbar-brand">ELITES PAYMENTS</a>
         </div>
       </div>
     </div>
 
     <!-- Main content starts -->
     <div class="content">
-      <!-- Main bar -->
-      <div class="mainbar">
-        <!-- Page heading -->
-        <div class="page-head">
-          <!-- Page heading -->
-          <h2 class="pull-left">
-            <!-- page meta -->
-          </h2>
-          <!-- Breadcrumb -->
 
-          <div class="clearfix"></div>
-          </div>
 
-<?=$this->Session->flash() ?>
-    <div class ="container">
-    <form action="../purchased" method="post">
+    <!-- WRAPPER -->
+    <div class="wrapper">
+        <!-- SERVICES -->
+        <section class="module">
+            <div class="container">
+                <!-- MODULE TITLE -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>決済情報を入力する</h3>
 
-    <?php echo $this->Form->error('User.nowall_name'); ?>
-        <div class="col-md-offset-1 col-md-10">
-            <div class="widget wlightblue">
-            <!-- Widget head -->
-                <div class="widget-head">
-                    <div class="pull-left">一般決済画面</div>
-                    <div class="clearfix"></div>
+                        <form action="../purchased" method="post">
+                        <table class="table table-bordered table-generated">
+                            <tbody>
+                                <tr>
+                                    <th class="col-md-2">担当者名</th>
+                                    <td class="col-md-11">
+                                      <input type="text" class="input-sm col-sm-5" id="nowall_name" placeholder="担当者" name="nowall_name" required="required">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2">お名前</th>
+                                    <td class="col-md-11">
+                                    <input type="text" class="input-sm col-sm-5" id="name" placeholder="お名前" name="name" required="required">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2">メールアドレス</th><td class="col-md-11">
+                                    <input type="email" class="input-sm col-sm-8" id="email" placeholder="メールアドレス" name="email" required="required">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2">決済金額</th><td class="col-md-11">
+                                    <?=h(number_format($items['Item']['amount'])) ?>円
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2">決済内容</th><td class="col-md-11"><?=h($items['Item']['name']) ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2">カード情報</th>
+                                    <td class="col-md-11">
+                                        <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_94I0ag7bXenugPP1HrcG175s" data-lang="ja" data-partial="true"></script>
+                                        (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
+                                        <?php if(isset($webpaytoken_error['0'])) echo "<br><span class=\"text-danger\">".$webpaytoken_error['0']."</span>";?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="checkbox" name="last_check" required> 上記決済内容を確認した上で支払いを行います。<br>
+
+                                        <input type="submit" value="決済を実行する" class="btn btn-success">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <input type="hidden" name="id" value=<?=h($items['Item']['id']);?> />
+                        <input type="hidden" name="cha_rec_id" value=<?=h($items['Item']['cha_rec_id']);?> />
+                        <input type="hidden" name="amount" value=<?=h($items['Item']['amount']);?> />
+                        <input type="hidden" name="description" value=<?=h($items['Item']['name']);?> />
+
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+                <!-- /MODULE TITLE -->
+            </div>
+        </section>
+        <!-- /SERVICES -->
+    </div>
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- CONTACT -->
+        <section class="module-small">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- CONTENT BOX -->
+                    <div class="col-xs-6">
+                        <div class="content-box">
+                            <div class="content-box-title font-inc">
+                                <p class="m-b-0">株式会社NOWALL</p>
+                            </div>
+                            <p>
+                                <a href="http://nowall.co.jp/" target="_blank">会社概要</a>
+                                <a href="http://nowall.co.jp/legal" target="_blank">特定商取引法に基づく表示</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /CONTENT BOX -->
+
+                    <!-- CONTENT BOX -->
+                    <div class="col-xs-6">
+                        <p class="m-b-0" style="font-size: 1.5em">アクセス</p>
+                        <p class="m-b-0" style="font-size: 1.5em">〒160-0023 東京都新宿区西新宿6丁目10番1号 セントラルパークタワー ラ・トゥール新宿 6階</p>
+                    </div>
+                    <!-- /CONTENT BOX -->
                 </div>
 
-          <div class="widget-content">
-            <div class="padd">
-<div class="row">
-    <div class="col-sm-offset-1 col-sm-2">NOWALL担当者</div>
-    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-      <input type="text" class="form-control input-sm" id="nowall_name" placeholder="NOWALL担当者" size="70" name="nowall_name" required="required">
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-offset-1 col-sm-2">お名前</div>
-    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-      <input type="text" class="form-control input-sm" id="name" placeholder="お名前" size="70" name="name" required="required">
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-offset-1 col-sm-2">メールアドレス</div>
-    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-      <input type="email" class="form-control input-sm" id="email" placeholder="メールアドレス" size="70" name="email" required="required">
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-offset-1 col-sm-2">決済金額</div>
-    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-    <strong><?=h(number_format($items['Item']['amount'])) ?>円</strong>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-offset-1 col-sm-2">決済内容</div>
-    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-    <strong><?=h($items['Item']['name']) ?></strong>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-offset-1 col-sm-2">カード情報</div>
-    <div class="col-sm-9 form-inline" style="margin-bottom:3px;">
-    <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_94I0ag7bXenugPP1HrcG175s" data-lang="ja" data-partial="true"></script>
-                (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
-    </div>
-</div>
-<div class="row" style="margin-top:30px;">
-    <div class="checkbox col-sm-offset-4"  >
-        <label style="margin-left:5px;">
-            <input type="checkbox" name="last_check" required>上記内容を確認した上で支払いを行います。
-        </label>
-    </div>
-    <div class="col-sm-offset-4 col-sm-4">
-    <input class="btn btn-success btn-block" type='submit' value='送信'>
-    </div>
-</div>
+            </div>
+
+        </section>
+        <!-- /CONTACT -->
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-12 text-center">
+                        <p class="copyright font-inc m-b-0">© 2015 <a href="http://nowall.co.jp/" target="_blank">NOWALL, Inc.</a> All Rights Reserved.</p>
+                    </div>
+
+                </div>
 
             </div>
-            </div>
-            <input type="hidden" name="id" value=<?=h($items['Item']['id']);?> />
-            <input type="hidden" name="cha_rec_id" value=<?=h($items['Item']['cha_rec_id']);?> />
-            <input type="hidden" name="amount" value=<?=h($items['Item']['amount']);?> />
-            <input type="hidden" name="description" value=<?=h($items['Item']['name']);?> />
-        <!-- <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_97c0q0acA0A2eaTgr1gwa4PK" data-lang="ja" data-partial="true"></script> -->
-<!--
-<script type="text/javascript">
- function callback(token) {
-   alert(token.id);
- }
-</script> -->
 
-
-        </form>
-
-        </div>
-    </div>
+        </footer>
+        <!-- /FOOTER -->
 
     </div>
-    </div>
+    <!-- /WRAPPER -->
 
-    <!-- Javascript files -->
-    <!-- jQuery -->
-    <?php // echo $this->Html->script('js/jquery.js', array('inline' => false))?>
-    <!-- <script src="js/jquery.js"></script> -->
-    <!-- Bootstrap JS -->
-    <?php //echo $this->Html->js('js/bootstrap.min.js')?>
-    <!-- <script src="js/bootstrap.min.js"></script> -->
-    <!-- jQuery UI -->
-    <?php //echo $this->Html->js('js/jquery-ui.min.js')?>
-    <!-- <script src="js/jquery-ui.min.js"></script> -->
-    <!-- jQuery Gritter -->
-    <!-- <script src="js/jquery.gritter.min.js"></script> -->
-    <!-- Respond JS for IE8 -->
-    <!-- <script src="js/respond.min.js"></script> -->
-    <!-- HTML5 Support for IE -->
-    <!-- <script src="js/html5shiv.js"></script> -->
-    <!-- Custom JS -->
-    <!-- <script src="js/custom.js"></script> -->
-  </body>
-</html>
+
+    <div class="clearfix"></div>
+    </div><!--/ Content ends -->
+

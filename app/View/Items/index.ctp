@@ -1,118 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<!-- Title here -->
-		<title>商材一覧画面</title>
-		<!-- Description, Keywords and Author -->
-		<meta name="description" content="Your description">
-		<meta name="keywords" content="Your,Keywords">
-		<meta name="author" content="ResponsiveWebInc">
+    <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+      <div class="container">
+        <!-- Menu button for smallar screens -->
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">ELITES PAYMENTS</a>
+        </div>
+      </div>
+    </div>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Main content starts -->
+    <div class="content">
 
-		<!-- Styles -->
-		<!-- Bootstrap CSS -->
-		<!-- <link href="theme/css/bootstrap.min.css" rel="stylesheet"> -->
-		<?php echo $this->Html->css('css/bootstrap.min')?>
-		<!-- jQuery UI -->
-		<!-- <link rel="stylesheet" href="theme/css/jquery-ui.css"> -->
-		<?php echo $this->Html->css('css/jquery-ui.css')?>
-		<!-- jQuery Gritter -->
-		<!-- <link rel="stylesheet" href="theme/css/jquery.gritter.css"> -->
-		<?php echo $this->Html->css('css/jquery.gritter.css')?>
-		<!-- Font awesome CSS -->
-		<!-- <link href="theme/css/font-awesome.min.css" rel="stylesheet"> -->
-		<?php echo $this->Html->css('css/font-awesome.min.css')?>
-		<!-- Custom CSS -->
-		<?php echo $this->Html->css('css/style.css')?>
-		<!-- <link href="theme/css/style.css" rel="stylesheet"> -->
-		<!-- Widgets stylesheet -->
-		<?php echo $this->Html->css('css/widgets.css')?>
-		<?php echo $this->Html->css('css/mainbar-margin-left0.css')?>
-		<!-- <link href="theme/css/widgets.css" rel="stylesheet"> -->
 
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="#">
-	</head>
+    <!-- WRAPPER -->
+    <div class="wrapper">
+        <!-- SERVICES -->
+        <section class="module">
+            <div class="container">
+                <!-- MODULE TITLE -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>ELITES商材一覧</h3>
 
-	<body>
+                          <?php foreach($items as $item) :?>
+                            <?=$this->Html->link('
+                            <table class="table-hover" style="border:solid 1px #000; margin-bottom:10px; width:100%;">'
+                            ,array('action'=>'id',$item['Item']['cha_rec_id'])
+                            ,array('escape' =>false)
+                            )?>
+                            <tr>
+                                <td class="col-sm-4"><?=h($item['Item']['name'])?>
+                                </td>
+                                <td  class="col-sm-8" style = "border-left:solid 1px #000;"><?=h($item['Item']['description'])?><br><?=h(number_format($item['Item']['amount']))?>円
+                                </td>
+                              </tr>
+                            </table>
+                            <!-- linkヘルパー終了用 -->
+                          </a>
+                          <?php endforeach ;?>
 
-		<div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
-			<div class="container">
-				<!-- Menu button for smallar screens -->
-				<div class="navbar-header">
-					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a href="index.html" class="navbar-brand"> <span class="bold">ELITES PAYMENTS</span></a>
-				</div>
-			</div>
-		</div>
+                          <!-- ページネーション機能 -->
+                          <div style = "text-align:center;">
+                          <?php
+                            if($p_limit <= $maxitem){
+                            echo $this->Paginator->prev('< 前へ ');
+                            echo $this->Paginator->numbers();
+                            echo $this->Paginator->next(' 次へ >');
+                            }
+                          ?>
+                          </div>
 
-		<!-- Main content starts -->
-		<div class="content">
-			<div class="mainbar">
-				<!-- Page heading -->
-				<div class="page-head">
-					<!-- Page heading -->
-					<h2 class="pull-left">商材一覧画面
-						<!-- page meta -->
-					</h2>
-					<!-- Breadcrumb -->
-					<div class="clearfix"></div>
-				</div>
 
-				<div class="container">
-					<div class="col-sm-12">
-            <div class="widget wlightblue">
-            <!-- Widget head -->
-                <div class="widget-head">
+                    </div>
+                </div>
+                <!-- /MODULE TITLE -->
+            </div>
+        </section>
+        <!-- /SERVICES -->
+    </div>
+    <!-- WRAPPER -->
+    <div class="wrapper">
 
-					<div class="pull-left">商材一覧</div>
-					<div class="clearfix"></div>
-						</div>
+        <!-- CONTACT -->
+        <section class="module-small">
 
-						</div>
-	          <div class="widget-content">
-            <div class="padd">
-				<!-- 商品一覧の作成 -->
+            <div class="container">
 
-						<!-- <div style = "width:800px;margin:0 auto; "> -->
-							<?php foreach($items as $item) :?>
-								<?=$this->Html->link('
-								<table class="table-hover" style="border:solid 1px #000; margin-bottom:10px; width:100%;">'
-								,array('action'=>'id',$item['Item']['cha_rec_id'])
-								,array('escape' =>false)
-								)?>
-								<tr>
-										<td class="col-sm-4"><?=h($item['Item']['name'])?>
-										</td>
-										<td  class="col-sm-8" style = "border-left:solid 1px #000;"><?=h($item['Item']['description'])?><br><?=h(number_format($item['Item']['amount']))?>円
-										</td>
-									</tr>
-								</table>
-								<!-- linkヘルパー終了用 -->
-							</a>
-							<?php endforeach ;?>
-							</div>
-						</div>
-					</div>
-					</div>
+                <div class="row">
 
-			<!-- ページネーション機能 -->
-			<div style = "text-align:center;">
-			<?php
-				if($p_limit <= $maxitem){
-				echo $this->Paginator->prev('< 前へ ');
-				echo $this->Paginator->numbers();
-				echo $this->Paginator->next(' 次へ >');
-				}
-			?>
-			</div>
+                    <!-- CONTENT BOX -->
+                    <div class="col-xs-6">
+                        <div class="content-box">
+                            <div class="content-box-title font-inc">
+                                <p class="m-b-0">株式会社NOWALL</p>
+                            </div>
+                            <p>
+                                <a href="http://nowall.co.jp/" target="_blank">会社概要</a>
+                                <a href="http://nowall.co.jp/legal" target="_blank">特定商取引法に基づく表示</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /CONTENT BOX -->
 
-	</body>
-</html>
+                    <!-- CONTENT BOX -->
+                    <div class="col-xs-6">
+                        <p class="m-b-0" style="font-size: 1.5em">アクセス</p>
+                        <p class="m-b-0" style="font-size: 1.5em">〒160-0023 東京都新宿区西新宿6丁目10番1号 セントラルパークタワー ラ・トゥール新宿 6階</p>
+                    </div>
+                    <!-- /CONTENT BOX -->
+                </div>
+
+            </div>
+
+        </section>
+        <!-- /CONTACT -->
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-12 text-center">
+                        <p class="copyright font-inc m-b-0">© 2015 <a href="http://nowall.co.jp/" target="_blank">NOWALL, Inc.</a> All Rights Reserved.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+        <!-- /FOOTER -->
+
+    </div>
+    <!-- /WRAPPER -->
+
+
+    <div class="clearfix"></div>
+    </div><!--/ Content ends -->
+

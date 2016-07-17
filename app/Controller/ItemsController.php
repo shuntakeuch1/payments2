@@ -20,7 +20,8 @@ class ItemsController extends AppController
     $this->set('maxitem',$this->Item->find('count','all'));
     $p_limit = 5;
     $this->set('p_limit',$p_limit);
-    $this->autoLayout = false;  // レイアウトをOFFにする
+    // $this->autoLayout = false;  // レイアウトをOFFにする
+    $this->layout = 'itemLayout';
     $this->Paginator->settings = array(
         'limit' => $p_limit,
         'order' => array('created' => 'desc'),
@@ -32,7 +33,8 @@ class ItemsController extends AppController
 
   public function id($cha_rec_id)
   {
-    $this->autoLayout = false;  // レイアウトをOFFにする
+    // $this->autoLayout = false;  // レイアウトをOFFにする
+    $this->layout = 'idLayout';
     $this->set('items',$this->Item->findByCha_rec_id($cha_rec_id));
   }
 
@@ -40,6 +42,7 @@ class ItemsController extends AppController
   {
     if($this->request->is('post'))
     {
+      $this->layout = 'purchasedLayout';
       // debug($this->User->set($this->request->data));
       // debug($this->request->data);
       $this->User->set($this->request->data);
@@ -194,7 +197,8 @@ class ItemsController extends AppController
       }
       else{
         // $this->render('id/'$this->request->data['cha_rec_id']);
-        // $this->Session->setFlash('hoge');
+        $this->set('validationErrors', $this->User->validationErrors);
+        // $this->Session->setFlash($this->User->validationErrors);
         $this->redirect($this->referer());
       }
     }

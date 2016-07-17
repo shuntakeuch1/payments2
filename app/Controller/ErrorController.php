@@ -44,8 +44,8 @@ class ErrorController extends AppController {
  * @param CakeResponse $response Response instance.
  */
   public function index(){
-    $this->autoLayout = false;  // レイアウトをOFFにする
-
+    // $this->autoLayout = false;  // レイアウトをOFFにする
+    $this->layout = 'errorLayout';
     $tmp = $this->Session->read('sendData');
     $this->set(array('error'=>$tmp["error"],'nowall_name'=>$tmp["nowallname"]));
     $this->Session->delete('sendData');

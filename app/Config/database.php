@@ -66,13 +66,23 @@
  */
 class DATABASE_CONFIG {
 
+  // public $default = array(
+  //   'datasource' => 'Database/Mysql',
+  //   'persistent' => false,
+  //   'host' => 'localhost',
+  //   'login' => 'm_shimada',
+  //   'password' => 'ubxh3js@',
+  //   'database' => 'm_shimada',
+  //   'prefix' => '',
+  //   'encoding' => 'utf8',
+  // );
   public $default = array(
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
-    'login' => 'm_shimada',
-    'password' => 'ubxh3js@',
-    'database' => 'm_shimada',
+    'login' => 'root',
+    'password' => '',
+    'database' => 'payments',
     'prefix' => '',
     'encoding' => 'utf8',
   );
