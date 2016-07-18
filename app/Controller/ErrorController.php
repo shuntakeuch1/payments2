@@ -47,6 +47,12 @@ class ErrorController extends AppController {
     // $this->autoLayout = false;  // レイアウトをOFFにする
     $this->layout = 'errorLayout';
     $tmp = $this->Session->read('sendData');
+
+    if(empty($tmp))
+    {
+        $this->redirect('http://elite.sc/');
+    }
+
     $this->set(array('error'=>$tmp["error"],'nowall_name'=>$tmp["nowallname"]));
     $this->Session->delete('sendData');
 

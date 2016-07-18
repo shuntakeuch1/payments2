@@ -10,6 +10,12 @@ class PurchasedController extends AppController
     // $this->autoLayout = false;  // レイアウトをOFFにする
     $this->layout = 'purchasedLayout';
     $tmp = $this->Session->read('sendData');
+
+    if(empty($tmp))
+    {
+        $this->redirect('http://elite.sc/');
+    }
+
     $email_addr = $tmp["email"];
     $name = $tmp["name"];
     $amount = $tmp["amount"];
