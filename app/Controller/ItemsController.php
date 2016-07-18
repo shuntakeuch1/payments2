@@ -31,11 +31,25 @@ class ItemsController extends AppController
     // $this->set('items',$this->Item->find('all'));
   }
 
-  public function id($cha_rec_id)
+  public function id($cha_rec_id = null)
   {
     // $this->autoLayout = false;  // レイアウトをOFFにする
     $this->layout = 'idLayout';
-    $this->set('items',$this->Item->findByCha_rec_id($cha_rec_id));
+
+    if(isset($cha_rec_id))
+    {
+      $items = $this->Item->findByCha_rec_id($cha_rec_id);
+    }
+
+    if(empty($items) or empty($cha_rec_id))
+    {
+      $this->redirect(array('controller'=>'items', 'action'=>'index'));
+    }
+    else
+    {
+      $this->set('items',$items);
+    }
+
   }
 
   public function purchased()
