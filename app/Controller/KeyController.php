@@ -129,7 +129,7 @@ class KeyController extends AppController {
                             'name' => $this->request->data['name']
                             );
 
-                        $this->User->save($user_savedata);
+                        $this->User->save($user_savedata, false);
 
                         $user_id = $this->User->id;
 
