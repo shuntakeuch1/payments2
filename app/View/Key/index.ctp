@@ -52,7 +52,7 @@
                                     <td colspan="2">
                                         <input type="checkbox" name="agree" value=""> 上記決済内容を確認した上で支払いを行います。<br>
                                         <?php if(isset($agree_error['0'])) echo "<span class=\"text-danger\">".$agree_error['0']."</span><br>";?>
-                                        <input type="submit" value="決済を実行する" class="btn btn-success">
+                                        <input type="submit" value="決済を実行する" class="btn btn-primary">
                                     </td>
                                 </tr>
                             </tbody>

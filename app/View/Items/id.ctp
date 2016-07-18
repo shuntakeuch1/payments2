@@ -2,7 +2,7 @@
       <div class="container">
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand"> <span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+          <a href="/payments/items" class="navbar-brand"> <span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
  ELITES PAYMENTS</span></a>
         </div>
       </div>
@@ -62,7 +62,7 @@
                                     <td colspan="2">
                                         <input type="checkbox" name="last_check" required> 上記決済内容を確認した上で支払いを行います。<br>
 
-                                        <input type="submit" value="決済を実行する" class="btn btn-success">
+                                        <input type="submit" value="決済を実行する" class="btn btn-primary">
                                     </td>
                                 </tr>
                             </tbody>

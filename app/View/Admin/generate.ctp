@@ -42,7 +42,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-12">
-                <div class="widget wgreen">
+                <div class="widget wblue">
                           <div class="widget-head">
                     <div class="pull-left">個別決済画面発行ページ</div>
                     <div class="clearfix"></div>

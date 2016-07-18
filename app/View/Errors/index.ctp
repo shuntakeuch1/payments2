@@ -33,7 +33,6 @@
                             <div class="alert alert-danger" role="alert"><?php echo $error ;?></div>
                             <h3>お手数ですが担当者までご連絡ください。</h3>
                             <h3 style="margin-bottom :60px;">担当 <?php echo $nowall_name ;?>   03-6279-0840</h3>
-                            <button onclick="location.href='http://nowall.co.jp'" class="btn btn-success btn-lg">画面を閉じる</button>
                             </div>
                           </div>
                           </div>

@@ -43,7 +43,7 @@
             <div class="row">
               <div class="col-md-12">
                 <!-- Table starts.  -->
-                <div class="widget worange">
+                <div class="widget wblue">
                   <div class="widget-head">
                     <div class="pull-left">以下の内容で決済画面を発行し、お客様へ送信しました</div>
                     <div class="clearfix"></div>

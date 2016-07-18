@@ -22,7 +22,7 @@
                     <div class="col-sm-12">
                         <h3>決済完了</h3>
 
-                          <div class="widget wgreen">
+                          <div class="widget wblue">
                           <div class="widget-head">
                             <div class="pull-left"></div>Thank You
                             <div class="clearfix"></div>
@@ -33,7 +33,6 @@
                             <h1>お申し込みありがとうございました！</h1>
                             <h2>別途決済に関するメールをお送りしておりますので</h2>
                             <h2 style="margin-bottom :60px;">ご確認ください。</h2>
-                            <button onclick="location.href='http://nowall.co.jp'" class="btn btn-warning btn-lg">画面を閉じる</button>
                             </div>
                           </div>
                           </div>
