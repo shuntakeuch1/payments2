@@ -18,31 +18,31 @@
             <div class="container">
                 <!-- MODULE TITLE -->
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-md-12">
                         <h3>決済情報を入力する</h3>
                         <form method="post" action="index">
                         <table class="table table-bordered table-generated">
                             <tbody>
                                 <tr>
-                                    <th class="col-md-2">担当者名</th><td class="col-md-11"><?=$nowallname;?></td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">担当者名</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$nowallname;?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">お名前</th><td class="col-md-11"><?=$name;?>様</td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">お名前</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$name;?>様</td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">メールアドレス</th><td class="col-md-11"><?=$email;?></td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">メールアドレス</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$email;?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">決済金額</th><td class="col-md-11"><?=number_format($amount)."円 ";
+                                    <th class="col-xs-4 col-sm-3 col-md-2">決済金額</th><td class="col-xs-8 col-sm-9 col-md-10"><?=number_format($amount)."円 ";
                                         if(!$period) echo "(今月のみ)";
                                         else echo "(月額)";?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">決済内容</th><td class="col-md-11"><?=$summary;?></td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">決済内容</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$summary;?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-2">カード情報</th>
-                                    <td class="col-md-11">
+                                    <th class="col-xs-4 col-sm-3 col-md-2">カード情報</th>
+                                    <td class="col-xs-8 col-sm-9 col-md-10">
                                         <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_94I0ag7bXenugPP1HrcG175s" data-lang="ja" data-partial="true"></script>
                                         (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
                                         <?php if(isset($webpaytoken_error['0'])) echo "<br><span class=\"text-danger\">".$webpaytoken_error['0']."</span>";?>
