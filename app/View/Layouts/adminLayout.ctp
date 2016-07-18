@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
 
     <title>
         個別決済画面発行ページ
@@ -16,9 +17,10 @@
         echo $this->Html->css('../theme/css/jquery-ui');
         echo $this->Html->css('../theme/css/jquery.gritter');
         echo $this->Html->css('../theme/css/font-awesome.min');
-        echo $this->Html->css('../theme/css/style');
+        // echo $this->Html->css('../theme/css/style');
         echo $this->Html->css('../theme/css/widgets');
 
+        echo $this->Html->css('Adminstyle');
         echo $this->Html->css('Admin');
 
         echo $this->fetch('meta');

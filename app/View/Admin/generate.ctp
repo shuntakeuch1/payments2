@@ -41,7 +41,7 @@
         <div class="matter">
           <div class="container">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 col-xs-12">
                 <div class="widget wblue">
                           <div class="widget-head">
                     <div class="pull-left">個別決済画面発行ページ</div>
@@ -158,7 +158,7 @@
                                     'type' => 'checkbox',
                                     'label' => false,
                                     'before' => '<label class="col-md-2 control-label">毎月課金</label><label class="col-md-1"></label>',
-                                    'between' => '<label class="control-label">※チェックしない場合は一時課金になります</label>',
+                                    'between' => '<label class="control-label checktext">※チェックしない場合は一時課金になります</label>',
                                     'checked' => false,
                                      )); ?>
 
