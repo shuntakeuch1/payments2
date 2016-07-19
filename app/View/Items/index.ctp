@@ -25,20 +25,16 @@
                         <h3>ELITES商材一覧</h3>
 
                           <?php foreach($items as $item) :?>
-                            <?=$this->Html->link('
-                            <table class="table-hover" style="border:solid 1px #000; margin-bottom:10px; width:100%;">'
-                            ,array('action'=>'id',$item['Item']['cha_rec_id'])
-                            ,array('escape' =>false)
-                            )?>
-                            <tr>
-                                <td class="col-sm-4"><?=h($item['Item']['name'])?>
-                                </td>
+                             <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
+                            <table class="table-hover" style="border:solid 1px #000; margin-bottom:10px; width:100%;">
+                              <tr>
+                                <td class="col-sm-4"><?=h($item['Item']['name'])?></td>
                                 <td  class="col-sm-8" style = "border-left:solid 1px #000;"><?=h($item['Item']['description'])?><br><?=h(number_format($item['Item']['amount']))?>円
                                 </td>
                               </tr>
                             </table>
-                            <!-- linkヘルパー終了用 -->
-                          </a>
+                            </a>
+
                           <?php endforeach ;?>
 
                           <!-- ページネーション機能 -->

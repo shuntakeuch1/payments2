@@ -45,7 +45,10 @@ class ErrorController extends AppController {
  */
   public function index(){
     // $this->autoLayout = false;  // レイアウトをOFFにする
-    $this->layout = 'errorLayout';
+    // $this->layout = 'errorLayout';
+    $this->layout = 'itemLayout';
+    $this->set('title_for_layout','申込失敗画面 | ELITES') ;
+
     $tmp = $this->Session->read('sendData');
     $this->set(array('error'=>$tmp["error"],'nowall_name'=>$tmp["nowallname"]));
     $this->Session->delete('sendData');

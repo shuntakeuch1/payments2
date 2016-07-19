@@ -8,7 +8,10 @@ class PurchasedController extends AppController
   public function index()
   {
     // $this->autoLayout = false;  // レイアウトをOFFにする
-    $this->layout = 'purchasedLayout';
+    // $this->layout = 'purchasedLayout';
+    $this->layout = 'itemLayout';
+     $this->set('title_for_layout','決済完了画面 | ELITES') ;
+
     $tmp = $this->Session->read('sendData');
     $email_addr = $tmp["email"];
     $name = $tmp["name"];

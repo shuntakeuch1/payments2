@@ -8,10 +8,11 @@
     <meta name="author" content="NOWALL, Inc.">
 
     <title>
-        商材一覧画面 | ELITES
+        <?php echo $title_for_layout ;?>
     </title>
 
     <link rel="shortcut icon" href="http://elite.sc/assets_front/images/favicon.ico">
+    <!-- <link rel="shortcut icon" href="/payments/app/webroot/elites/img/ELITES_LOGO2.png"> -->
 
     <?php
         echo $this->Html->meta('icon');
@@ -19,28 +20,31 @@
         echo $this->Html->css('../theme/css/bootstrap.min');
         echo $this->Html->css('../theme/css/jquery-ui');
         echo $this->Html->css('../theme/css/jquery.gritter');
-        echo $this->Html->css('../theme/css/font-awesome.min');
+
+        // echo $this->Html->css('../theme/css/font-awesome.min');
         echo $this->Html->css('../theme/css/style');
         echo $this->Html->css('../theme/css/widgets');
 
         echo $this->Html->css('../elites/css/simpletextrotator');
+
         echo $this->Html->css('../elites/css/font-awesome.min');
         echo $this->Html->css('../elites/css/et-line-font');
         echo $this->Html->css('../elites/css/magnific-popup');
         echo $this->Html->css('../elites/css/flexslider');
-        echo $this->Html->css('../elites/css/animate.min');
 
-        echo $this->Html->css('../elites/css/style');
+        // echo $this->Html->css('../elites/css/animate.min');
+        echo $this->Html->css('../elites/css/animate');
+        echo $this->Html->css('../elites/css/style-items');
 
         echo $this->Html->css('../elites/css/custom');
 
         echo $this->Html->css('Key');
 
         echo $this->Html->script('../elites/js/6116');
-        echo $this->Html->script('../elites/js/common');
+        // echo $this->Html->script('../elites/js/common');
         echo $this->Html->script('../elites/js/gtm');
-        echo $this->Html->script('../elites/js/stats');
-        echo $this->Html->script('../elites/js/util');
+        // echo $this->Html->script('../elites/js/stats');
+        // echo $this->Html->script('../elites/js/util');
 
         echo $this->fetch('meta');
         echo $this->fetch('css');
@@ -49,9 +53,9 @@
 
 
         <!-- jQuery UI -->
-        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="/payments/app/webroot/css/css/jquery-ui.css">
         <!-- jQuery Gritter -->
-        <link rel="stylesheet" href="css/jquery.gritter.css">
+        <link rel="stylesheet" href="/payments/app/webroot/css/css/jquery.gritter.css">
 
 </head>
 <body>

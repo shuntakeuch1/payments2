@@ -1,9 +1,9 @@
 <?php
 
-require VENDORS . 'autoload.php';
-use WebPay\WebPay;
-// require_once "webpay-php-full-2.2.2/autoload.php";
+// require VENDORS . 'autoload.php';
 // use WebPay\WebPay;
+require_once "webpay-php-full-2.2.2/autoload.php";
+use WebPay\WebPay;
 // require "/var/www/html/payments/vendors/autoload.php";
 // use WebPay\WebPay;
 
@@ -22,6 +22,7 @@ class ItemsController extends AppController
     $this->set('p_limit',$p_limit);
     // $this->autoLayout = false;  // レイアウトをOFFにする
     $this->layout = 'itemLayout';
+    $this->set('title_for_layout','商材一覧画面 | ELITES') ;
     $this->Paginator->settings = array(
         'limit' => $p_limit,
         'order' => array('created' => 'desc'),
@@ -34,7 +35,8 @@ class ItemsController extends AppController
   public function id($cha_rec_id)
   {
     // $this->autoLayout = false;  // レイアウトをOFFにする
-    $this->layout = 'idLayout';
+    $this->layout = 'itemLayout';
+     $this->set('title_for_layout','一般決済画面 | ELITES') ;
     $this->set('items',$this->Item->findByCha_rec_id($cha_rec_id));
   }
 
@@ -42,7 +44,8 @@ class ItemsController extends AppController
   {
     if($this->request->is('post'))
     {
-      $this->layout = 'purchasedLayout';
+      $this->layout = 'itemLayout';
+      $this->set('title_for_layout','決済完了画面 | ELITES') ;
       // debug($this->User->set($this->request->data));
       // debug($this->request->data);
       $this->User->set($this->request->data);
