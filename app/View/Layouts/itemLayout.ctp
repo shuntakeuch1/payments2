@@ -21,7 +21,7 @@
         echo $this->Html->css('../theme/css/jquery-ui');
         echo $this->Html->css('../theme/css/jquery.gritter');
 
-        // echo $this->Html->css('../theme/css/font-awesome.min');
+        echo $this->Html->css('../theme/css/font-awesome.min');
         echo $this->Html->css('../theme/css/style');
         echo $this->Html->css('../theme/css/widgets');
 
