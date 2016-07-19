@@ -28,13 +28,6 @@
         echo $this->fetch('script');
     ?>
 
-
-        <!-- jQuery UI -->
-        <link rel="stylesheet" href="css/jquery-ui.css">
-        <!-- jQuery Gritter -->
-        <link rel="stylesheet" href="css/jquery.gritter.css">
-
-
 </head>
 <body>
     <div id="container">
@@ -61,7 +54,7 @@
         <?php echo $this->Html->script('../theme/js/jquery.gritter.min');?>
         <?php echo $this->Html->script('../theme/js/respond.min');?>
         <?php echo $this->Html->script('../theme/js/html5shiv');?>
-        <?php echo $this->Html->script('../theme/js/admincustom');?>
+        <?php echo $this->Html->script('admincustom');?>
 
 </body>
 </html>
