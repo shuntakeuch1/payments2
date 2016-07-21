@@ -28,7 +28,7 @@
         echo $this->Html->css('../elites/css/et-line-font');
         echo $this->Html->css('../elites/css/magnific-popup');
         echo $this->Html->css('../elites/css/flexslider');
-        echo $this->Html->css('../elites/css/animate.min');
+        echo $this->Html->css('../elites/css/animate');
 
         echo $this->Html->css('../elites/css/style');
 
@@ -36,22 +36,10 @@
 
         echo $this->Html->css('Key');
 
-        echo $this->Html->script('../elites/js/6116');
-        echo $this->Html->script('../elites/js/common');
-        echo $this->Html->script('../elites/js/gtm');
-        echo $this->Html->script('../elites/js/stats');
-        echo $this->Html->script('../elites/js/util');
-
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
     ?>
-
-
-        <!-- jQuery UI -->
-        <link rel="stylesheet" href="css/jquery-ui.css">
-        <!-- jQuery Gritter -->
-        <link rel="stylesheet" href="css/jquery.gritter.css">
 
 </head>
 <body>

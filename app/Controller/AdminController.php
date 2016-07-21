@@ -40,6 +40,8 @@ class AdminController extends AppController {
                 $amount = $this->base64_urlsafe_encode($this->request->data['Admin']['amount']);
                 $period = $this->base64_urlsafe_encode($this->request->data['Admin']['period']);
 
+                $period = str_replace('.', '', $period);
+
                 // URL作成
                 $url = "https://elite.sc/payments/key/". $key. "?".
                             "nowall-name=". $nowallname.

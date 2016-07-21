@@ -33,5 +33,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     // public $components = array('DebugKit.Toolbar');
-
+    public function appError($error) {
+        $this->redirect('http://elite.sc/');
+}
 }
