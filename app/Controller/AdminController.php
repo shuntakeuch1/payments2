@@ -12,14 +12,14 @@ class AdminController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
 
-        switch (true) {
-            case !isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']):
-            case $_SERVER['PHP_AUTH_USER'] !== 'payments':
-            case $_SERVER['PHP_AUTH_PW']   !== 'admin':
-                header('WWW-Authenticate: Basic realm="Please enter your ID and password"');
-                header('HTTP/1.0 401 Unauthorized');
-                die("Invalid id / password combination.  Please try again");
-        }
+        // switch (true) {
+        //     case !isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']):
+        //     case $_SERVER['PHP_AUTH_USER'] !== 'payments':
+        //     case $_SERVER['PHP_AUTH_PW']   !== 'admin':
+        //         header('WWW-Authenticate: Basic realm="Please enter your ID and password"');
+        //         header('HTTP/1.0 401 Unauthorized');
+        //         die("Invalid id / password combination.  Please try again");
+        // }
     }
 
     public function generate() {
