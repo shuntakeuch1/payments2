@@ -1,34 +1,3 @@
-    <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
-      <div class="container">
-        <!-- Menu button for smallar screens -->
-        <div class="navbar-header">
-          <a href="/payments/admin/generate" class="navbar-brand"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ELITES PAYMENTS</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main content starts -->
-    <div class="content">
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <div class="sidebar-dropdown"><a href="#">Navigation</a></div>
-        <div class="sidebar-inner">
-          <!--- Sidebar navigation -->
-          <!-- If the main navigation has sub navigation, then add the class "has_submenu" to "li" of main navigation. -->
-          <ul class="navi">
-            <!-- Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color. You need to use this in <li> tag. -->
-
-            <li class="nred"><?=$this->Html->link('個別決済画面発行',
-                                                  array('controller'=>'admin',
-                                                        'action'=>'generate'));?></li>
-          </ul>
-          <!--/ Sidebar navigation -->
-
-
-        </div>
-      </div>
-      <!-- Sidebar ends -->
-
       <!-- Main bar -->
       <div class="mainbar">
         <!-- Page heading -->
@@ -179,6 +148,3 @@
           </div>
         </div><!--/ Matter ends -->
       </div><!--/ Mainbar ends -->
-      <div class="clearfix"></div>
-    </div><!--/ Content ends -->
-

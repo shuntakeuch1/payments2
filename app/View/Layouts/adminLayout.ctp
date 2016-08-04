@@ -33,12 +33,180 @@
     <div id="container">
         <div id="header">
 
+            <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+              <div class="container">
+                <!-- Menu button for smallar screens -->
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ELITES PAYMENTS</a>
+                </div>
+                <!-- Site name for smallar screens -->
+                <!-- Navigation starts -->
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <!-- Notifications -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Members button with number of latest members count -->
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-user"></i> ID名(管理者)
+                            </a>
+                        </li>
+
+                        <!-- Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color. You need to use this in <li> tag. -->
+                        <li class="has_submenu nlightblue open" id="slidemenu">
+                            <a href="#">
+                                <!-- Menu name with icon -->
+                                <i class="fa fa-credit-card"></i> 課金関連メニュー
+                                <!-- Icon for dropdown -->
+                                <span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                            </a>
+                            <ul class="button-dropdown-menu" style="display: block">
+                                <li><?=$this->Html->link('ダッシュボード',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'dashboard'));?>
+                                </li>
+                                <li><?=$this->Html->link('課金の履歴',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'charges'));?>
+                                </li>
+                                <li><?=$this->Html->link('顧客の一覧',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'customers'));?>
+                                </li>
+                                <li><?=$this->Html->link('定期課金の一覧',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'recursion'));?>
+                                </li>
+                                <li><?=$this->Html->link('イベントログ',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'events'));?>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="has_submenu norange open" id="slidemenu">
+                            <a href="#">
+                                <!-- Menu name with icon -->
+                                <i class="fa fa-users"></i> 管理者メニュー
+                                <!-- Icon for dropdown -->
+                                <span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                            </a>
+                            <ul class="button-dropdown-menu" style="display: block">
+                                <li><?=$this->Html->link('個別決済画面発行',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'generate'));?>
+                                </li>
+                                <li><?=$this->Html->link('ユーザー管理',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'#'));?>
+                                </li>
+                                <li><?=$this->Html->link('商材管理',
+                                                        array('controller'=>'admin',
+                                                        'action'=>'items'));?>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-sign-out"></i> ログアウト
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+              </div>
+            </div>
+
         </div>
         <div id="content">
+
+    <!-- Main content starts -->
+    <div class="content">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- <div class="sidebar-dropdown"><a href="#">Navigation</a></div> -->
+        <div class="sidebar-inner">
+          <!--- Sidebar navigation -->
+          <!-- If the main navigation has sub navigation, then add the class "has_submenu" to "li" of main navigation. -->
+          <ul class="navi">
+            <!-- Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color. You need to use this in <li> tag. -->
+            <li class="has_submenu nlightblue sidemargin open">
+                <a href="#">
+                    <!-- Menu name with icon -->
+                    <i class="fa fa-credit-card"></i> 課金関連メニュー
+                    <!-- Icon for dropdown -->
+                    <span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                </a>
+                <ul style="display: block">
+                    <li><?=$this->Html->link('ダッシュボード',
+                                            array('controller'=>'admin',
+                                            'action'=>'dashboard'));?>
+                    </li>
+                    <li><?=$this->Html->link('課金の履歴',
+                                            array('controller'=>'admin',
+                                            'action'=>'charges'));?>
+                    </li>
+                    <li><?=$this->Html->link('顧客の一覧',
+                                            array('controller'=>'admin',
+                                            'action'=>'customers'));?>
+                    </li>
+                    <li><?=$this->Html->link('定期課金の一覧',
+                                            array('controller'=>'admin',
+                                            'action'=>'recursion'));?>
+                    </li>
+                    <li><?=$this->Html->link('イベントログ',
+                                            array('controller'=>'admin',
+                                            'action'=>'events'));?>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="has_submenu norange open">
+                <a href="#">
+                    <!-- Menu name with icon -->
+                    <i class="fa fa-users"></i> 管理者メニュー
+                    <!-- Icon for dropdown -->
+                    <span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                </a>
+                <ul style="display: block">
+                    <li><?=$this->Html->link('個別決済画面発行',
+                                            array('controller'=>'admin',
+                                            'action'=>'generate'));?>
+                    </li>
+                    <li><?=$this->Html->link('ユーザー管理',
+                                            array('controller'=>'admin',
+                                            'action'=>'#'));?>
+                    </li>
+                    <li><?=$this->Html->link('商材管理',
+                                            array('controller'=>'admin',
+                                            'action'=>'items'));?>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+          <!--/ Sidebar navigation -->
+
+
+        </div>
+      </div>
+      <!-- Sidebar ends -->
 
             <?php echo $this->Flash->render(); ?>
 
             <?php echo $this->fetch('content'); ?>
+
+
+      <div class="clearfix"></div>
+    </div><!--/ Content ends -->
+
+
         </div>
         <div id="footer">
 

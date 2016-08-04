@@ -29,8 +29,8 @@ $(document).ready(function(){
       menu_li.removeClass("open")
     }
     else{
-      $(".navi > li > ul").slideUp(350);
-      $(".navi > li").removeClass("open");
+      // $(".navi > li > ul").slideUp(350);
+      // $(".navi > li").removeClass("open");
       menu_ul.slideDown(350);
       menu_li.addClass("open");
     }

@@ -2,3 +2,27 @@
     word-break: break-all;
     word-wrap: break-word;
 }
+
+/* Dropdown menu */
+.button-dropdown-menu {
+}
+
+.button-dropdown-menu li{
+    list-style:none;
+}
+
+.button-dropdown-menu li > a{
+    color: #fff;
+}
+
+.button-dropdown-menu li > a:hover{
+    filter:none;
+    color: #888;
+}
+
+.button-dropdown-menu a:hover,.button-dropdown-menu a:focus{
+    filter:none !important;
+}
+
+.button-dropdown-menu::after, .button-dropdown-menu::before{
+}
