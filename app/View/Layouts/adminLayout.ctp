@@ -67,23 +67,23 @@
                             </a>
                             <ul class="button-dropdown-menu" style="display: block">
                                 <li><?=$this->Html->link('ダッシュボード',
-                                                        array('controller'=>'admin',
+                                                        array('controller'=>'adminpayments',
                                                         'action'=>'dashboard'));?>
                                 </li>
                                 <li><?=$this->Html->link('課金の履歴',
-                                                        array('controller'=>'admin',
+                                                        array('controller'=>'adminpayments',
                                                         'action'=>'charges'));?>
                                 </li>
                                 <li><?=$this->Html->link('顧客の一覧',
-                                                        array('controller'=>'admin',
+                                                        array('controller'=>'adminpayments',
                                                         'action'=>'customers'));?>
                                 </li>
                                 <li><?=$this->Html->link('定期課金の一覧',
-                                                        array('controller'=>'admin',
+                                                        array('controller'=>'adminpayments',
                                                         'action'=>'recursion'));?>
                                 </li>
                                 <li><?=$this->Html->link('イベントログ',
-                                                        array('controller'=>'admin',
+                                                        array('controller'=>'adminpayments',
                                                         'action'=>'events'));?>
                                 </li>
 
@@ -103,12 +103,12 @@
                                                         'action'=>'generate'));?>
                                 </li>
                                 <li><?=$this->Html->link('ユーザー管理',
-                                                        array('controller'=>'admin',
+                                                        array('controller'=>'adminusers',
                                                         'action'=>'#'));?>
                                 </li>
                                 <li><?=$this->Html->link('商材管理',
-                                                        array('controller'=>'admin',
-                                                        'action'=>'items'));?>
+                                                        array('controller'=>'items',
+                                                        'action'=>'index'));?>
                                 </li>
                             </ul>
                         </li>
@@ -145,23 +145,23 @@
                 </a>
                 <ul style="display: block">
                     <li><?=$this->Html->link('ダッシュボード',
-                                            array('controller'=>'admin',
+                                            array('controller'=>'adminpayments',
                                             'action'=>'dashboard'));?>
                     </li>
                     <li><?=$this->Html->link('課金の履歴',
-                                            array('controller'=>'admin',
+                                            array('controller'=>'adminpayments',
                                             'action'=>'charges'));?>
                     </li>
                     <li><?=$this->Html->link('顧客の一覧',
-                                            array('controller'=>'admin',
+                                            array('controller'=>'adminpayments',
                                             'action'=>'customers'));?>
                     </li>
                     <li><?=$this->Html->link('定期課金の一覧',
-                                            array('controller'=>'admin',
+                                            array('controller'=>'adminpayments',
                                             'action'=>'recursion'));?>
                     </li>
                     <li><?=$this->Html->link('イベントログ',
-                                            array('controller'=>'admin',
+                                            array('controller'=>'adminpayments',
                                             'action'=>'events'));?>
                     </li>
 
@@ -181,12 +181,12 @@
                                             'action'=>'generate'));?>
                     </li>
                     <li><?=$this->Html->link('ユーザー管理',
-                                            array('controller'=>'admin',
+                                            array('controller'=>'adminusers',
                                             'action'=>'#'));?>
                     </li>
                     <li><?=$this->Html->link('商材管理',
-                                            array('controller'=>'admin',
-                                            'action'=>'items'));?>
+                                            array('controller'=>'items',
+                                            'action'=>'index'));?>
                     </li>
                 </ul>
             </li>
