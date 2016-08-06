@@ -8,29 +8,25 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="h3title">課金の履歴</h3>
-                        <?php if(empty($charges)): ?>
-                            <?="<h5>課金の履歴はありません。</h5>"; ?>
+                        <h3 class="h3title">顧客の一覧</h3>
+                        <?php if(empty($customers)): ?>
+                            <?="<h5>顧客のデータがありません。</h5>"; ?>
                         <?php else: ?>
                             <table class="table table-bordered table-generated table-hover">
                             <thead>
                                 <tr>
                                     <td>名前</td>
-                                    <td>金額</td>
-                                    <td>内容</td>
-                                    <td>課金日</td>
+                                    <td>メールアドレス</td>
+                                    <td>作成日</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($charges as $key => $charge): ?>
+                                <?php foreach($customers as $key => $customer): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/".$charge->id. "\">"; ?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h($names[$key]);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount))."円";?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h($charge->description);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/n/j ', $charge->created));?>
-                                                                               <div class="visible-xs-inline" style=""><br></div>
-                                                                               <?=h(date('h:i', $charge->created));?></td>
+                                    "<tr data-href=\"/payments/adminpayments/".$customer->id. "\">"; ?>
+                                        <td class="col-xs-4 col-sm-4 col-md-4"><?=h($names[$key]);?></td>
+                                        <td class="col-xs-4 col-sm-4 col-md-4"><?=h($customer->email);?></td>
+                                        <td class="col-xs-4 col-sm-4 col-md-4"><?=h(date('Y/n/j h:i', $customer->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
@@ -41,7 +37,7 @@
                             <?php if($page>1): ?>
                                 <?=$this->Html->link('<< 前へ',
                                                         array('controller'=>'adminpayments',
-                                                        'action'=>'charges',
+                                                        'action'=>'customers',
                                                         "?" => array("page" => $page-1)
                                                         )
                                                     );?>
@@ -50,7 +46,7 @@
                             <?php if($next_flg): ?>
                                 <?=$this->Html->link('次へ >>',
                                                         array('controller'=>'adminpayments',
-                                                        'action'=>'charges',
+                                                        'action'=>'customers',
                                                         "?" => array("page" => $page+1)
                                                         )
                                                     );?>
