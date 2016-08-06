@@ -26,3 +26,17 @@
 
 .button-dropdown-menu::after, .button-dropdown-menu::before{
 }
+
+/* 課金履歴 */
+.h3title {
+    padding-top: 10px;
+}
+
+thead tr td {
+    text-align: center;
+    vertical-align: top;
+}
+
+.pagiCenter {
+    text-align: center;
+}

@@ -140,7 +140,7 @@
                                     )); ?>
 
                     <?=$this->form->end();?>
-
+                    </div>
                   </div>
                 </div>
               </div>

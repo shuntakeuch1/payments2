@@ -83,7 +83,7 @@ class KeyController extends AppController {
             {
                 // ここからWEBPAY
                 try{
-                    $webpay = new WebPay('test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl');
+                    $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
                     $webpay->setAcceptLanguage('ja');
 
                     $token = $webpay->token->retrieve($this->request->data['webpay-token']);

@@ -24,26 +24,26 @@
                         <table class="table table-bordered table-generated">
                             <tbody>
                                 <tr>
-                                    <th class="col-xs-4 col-sm-3 col-md-2">担当者名</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$nowallname;?></td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">担当者名</th><td class="col-xs-8 col-sm-9 col-md-10"><?=h($nowallname);?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-xs-4 col-sm-3 col-md-2">お名前</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$name;?>様</td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">お名前</th><td class="col-xs-8 col-sm-9 col-md-10"><?=h($name);?>様</td>
                                 </tr>
                                 <tr>
-                                    <th class="col-xs-4 col-sm-3 col-md-2">メールアドレス</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$email;?></td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">メールアドレス</th><td class="col-xs-8 col-sm-9 col-md-10"><?=h($email);?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-xs-4 col-sm-3 col-md-2">決済金額</th><td class="col-xs-8 col-sm-9 col-md-10"><?=number_format($amount)."円 ";
+                                    <th class="col-xs-4 col-sm-3 col-md-2">決済金額</th><td class="col-xs-8 col-sm-9 col-md-10"><?=number_format(h($amount))."円 ";
                                         if(!$period) echo "(今月のみ)";
                                         else echo "(月額)";?></td>
                                 </tr>
                                 <tr>
-                                    <th class="col-xs-4 col-sm-3 col-md-2">決済内容</th><td class="col-xs-8 col-sm-9 col-md-10"><?=$summary;?></td>
+                                    <th class="col-xs-4 col-sm-3 col-md-2">決済内容</th><td class="col-xs-8 col-sm-9 col-md-10"><?=h($summary);?></td>
                                 </tr>
                                 <tr>
                                     <th class="col-xs-4 col-sm-3 col-md-2">カード情報</th>
                                     <td class="col-xs-8 col-sm-9 col-md-10">
-                                        <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_94I0ag7bXenugPP1HrcG175s" data-lang="ja" data-partial="true"></script>
+                                        <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_cKKcPY89vgl2ba03eD0zAgix" data-lang="ja" data-partial="true"></script>
                                         (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
                                         <?php if(isset($webpaytoken_error['0'])) echo "<br><span class=\"text-danger\">".$webpaytoken_error['0']."</span>";?>
                                     </td>
@@ -58,13 +58,13 @@
                             </tbody>
                         </table>
 
-                        <input type="hidden" name="nowallname" value=<?=$nowallname; ?>>
-                        <input type="hidden" name="name" value=<?=$name; ?>>
-                        <input type="hidden" name="email" value=<?=$email; ?>>
-                        <input type="hidden" name="summary" value=<?=$summary; ?>>
-                        <input type="hidden" name="amount" value=<?=$amount; ?>>
-                        <input type="hidden" name="period" value=<?=$period; ?>>
-                        <input type="hidden" name="key" value=<?=$key; ?>>
+                        <input type="hidden" name="nowallname" value=<?=h($nowallname); ?>>
+                        <input type="hidden" name="name" value=<?=h($name); ?>>
+                        <input type="hidden" name="email" value=<?=h($email); ?>>
+                        <input type="hidden" name="summary" value=<?=h($summary); ?>>
+                        <input type="hidden" name="amount" value=<?=h($amount); ?>>
+                        <input type="hidden" name="period" value=<?=h($period); ?>>
+                        <input type="hidden" name="key" value=<?=h($key); ?>>
                         </form>
                     </div>
                 </div>
