@@ -85,37 +85,67 @@ class AdminpaymentsController extends AppController {
     public function customers() {
         $this->layout = 'adminLayout';
 
-        if(empty($this->params['url']['page']))$page=1;
-        else $page = $this->params['url']['page'];
+        if(empty($this->params['pass'][0])) {
 
-        $this->set('page', $page);
+            if(empty($this->params['url']['page']))$page=1;
+            else $page = $this->params['url']['page'];
 
-        $count=10;
-        if(empty($page)) $offset=0;
-        else $offset=$count*($page-1);
+            $this->set('page', $page);
 
-        $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
-        $webpay->setAcceptLanguage('ja');
-        $customers = $webpay->customer->all(array("count"=>$count, "offset"=>$offset));
-        $this->set('customers', $customers->data);
+            $count=10;
+            if(empty($page)) $offset=0;
+            else $offset=$count*($page-1);
 
-        $customers_next = $webpay->customer->all(array("count"=>1, "offset"=>$offset+$count));
-        if(empty($customers_next->data[0])) $next_flg=0;
-        else $next_flg=1;
-        $this->set('next_flg', $next_flg);
+            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay->setAcceptLanguage('ja');
+            $customers = $webpay->customer->all(array("count"=>$count, "offset"=>$offset));
+            $this->set('customers', $customers->data);
 
-        // 顧客名をDB検索
-        $names = array();
-        foreach($customers->data as $customer){
+            $customers_next = $webpay->customer->all(array("count"=>1, "offset"=>$offset+$count));
+            if(empty($customers_next->data[0])) $next_flg=0;
+            else $next_flg=1;
+            $this->set('next_flg', $next_flg);
+
+            // 顧客名をDB検索
+            $names = array();
+            foreach($customers->data as $customer){
+                $params = array(
+                    'conditions' => array(
+                        'customer_id' => $customer->id
+                        )
+                    );
+                $customer = $this->User->find('first', $params);
+                array_push($names, $customer['User']['name']);
+            }
+            $this->set('names', $names);
+        }
+        else {
+            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay->setAcceptLanguage('ja');
+            $customers_detail = $webpay->customer->retrieve($this->params['pass'][0]);
+
+            $this->set('customers_detail', $customers_detail);
+
+            $customers_charges = $webpay->charge->all(array("customer"=>$this->params['pass'][0]));
+            $this->set('customers_charges', $customers_charges->data);
+
+            // 顧客名をDB検索
             $params = array(
                 'conditions' => array(
-                    'customer_id' => $customer->id
-                    )
-                );
+                    'customer_id' => $customers_detail->id
+                )
+            );
             $customer = $this->User->find('first', $params);
-            array_push($names, $customer['User']['name']);
+            $this->set('customer', $customer['User']);
+
+            // if($customers_detail->paid) $this->set('paid', "支払い済み");
+            // else $this->set('paid', "未払い");
+
+            // if($customers_detail->fees[0]->transactionType == 'payment') $this->set('transactionType', "支払い済み");
+            // else $this->set('transactionType', "未払い");
+
+            $this->render("customers_detail");
         }
-        $this->set('names', $names);
     }
 
     public function events() {

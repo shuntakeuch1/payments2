@@ -23,7 +23,7 @@
                             <thead>
                                 <tr>
                                     <td>イベント名</td>
-                                    <td>発生日</td>
+                                    <td>発生日時</td>
                                 </tr>
                             </thead>
                             <tbody>

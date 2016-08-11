@@ -17,7 +17,7 @@
                                 <tr>
                                     <td>名前</td>
                                     <td>メールアドレス</td>
-                                    <td>作成日</td>
+                                    <td>作成日時</td>
                                 </tr>
                             </thead>
                             <tbody>

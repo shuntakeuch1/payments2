@@ -37,7 +37,7 @@
                             <tr><td class="col-xs-3 col-sm-3 col-md-3">手数料</td>
                                 <td class="col-xs-9 col-sm-9 col-md-9"><?=h(number_format(h($charges_detail->fees[0]->amount)))."円 ";?> (<?=h($charges_detail->fees[0]->rate)."%+".h($charges_detail->fees[0]->transactionFee)."円";?>)</td></tr>
                             <tr><td>ステータス</td><td><?=h($transactionType);?></td></tr>
-                            <tr><td>支払い日時</td>
+                            <tr><td>支払日時</td>
                                 <td><?=h(date('Y/n/j h:i', $charges_detail->fees[0]->created));?></td></tr>
                         </table>
 
@@ -58,6 +58,7 @@
                                                     array('class'=>'btn btn-default',
                                                     'id'=>'btn-webhook')
                                                 );?>
+                            </div>
                         </div>
                     </div>
                 </div>
