@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0">
 
     <title>
-        個別決済画面発行ページ
+        ELITES PAYMENTS管理画面
     </title>
 
     <link rel="shortcut icon" href="http://elite.sc/assets_front/images/favicon.ico">

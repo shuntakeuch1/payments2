@@ -27,7 +27,7 @@
 .button-dropdown-menu::after, .button-dropdown-menu::before{
 }
 
-/* 課金履歴 */
+/* 履歴画面 */
 .h3title {
     padding-top: 10px;
 }
@@ -39,4 +39,10 @@ thead tr td {
 
 .pagiCenter {
     text-align: center;
+}
+
+#btn-webhook {
+    border-radius: 5px !important;
+    padding: 6px 10px !important;
+    font-size: 15px !important;
 }

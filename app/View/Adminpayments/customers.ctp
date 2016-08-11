@@ -23,7 +23,7 @@
                             <tbody>
                                 <?php foreach($customers as $key => $customer): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/".$customer->id. "\">"; ?>
+                                    "<tr data-href=\"/payments/adminpayments/customers/".$customer->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-4"><?=h($names[$key]);?></td>
                                         <td class="col-xs-4 col-sm-4 col-md-4"><?=h($customer->email);?></td>
                                         <td class="col-xs-4 col-sm-4 col-md-4"><?=h(date('Y/n/j h:i', $customer->created));?></td>
