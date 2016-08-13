@@ -16,6 +16,113 @@ class AdminpaymentsController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
 
+        $log_arr = array(
+            "charge.succeeded" => "課金に成功しました",
+            "charge.failed" => "課金に失敗しました",
+            "charge.refunded" => "課金が払い戻されました",
+            "charge.captured" => "課金の仮売上が実売上化されました",
+            "customer.created" => "顧客が作成されました",
+            "customer.updated" => "顧客が更新されました",
+            "customer.deleted" => "顧客が削除されました",
+            "recursion.created" => "定期課金が作成されました",
+            "recursion.succeeded" => "定期課金に成功しました",
+            "recursion.failed" => "定期課金が失敗しました",
+            "recursion.resumed" => "定期課金が再開されました",
+            "recursion.deleted" => "定期課金が削除されました",
+            "account.application.deauthorized" => "アプリケーションの認可を取り消しました",
+            "ping" => "テストのイベントを発行しました"
+        );
+
+        $this->set('log_arr', $log_arr);
+
+        $transactionType = array(
+            "payment" => "支払い",
+            "refund" => "払い戻し",
+        );
+
+        $this->set('transactionType', $transactionType);
+
+    }
+
+    public function dashboard() {
+        $this->layout = 'adminLayout';
+
+        $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+        $webpay->setAcceptLanguage('ja');
+
+
+        // 最近追加された課金
+        $charges = $webpay->charge->all(array("count"=>3));
+        $this->set('charges', $charges->data);
+        // 顧客名をDB検索
+        $charge_names = array();
+        foreach($charges->data as $charge){
+            $params = array(
+                'conditions' => array(
+                    'customer_id' => $charge->customer
+                    )
+                );
+            $customer = $this->User->find('first', $params);
+            array_push($charge_names, $customer['User']['name']);
+        }
+        $this->set('charge_names', $charge_names);
+
+
+        // 最近追加された顧客
+        $customers = $webpay->customer->all(array("count"=>3));
+        $this->set('customers', $customers->data);
+        // 顧客名をDB検索
+        $customer_names = array();
+        foreach($customers->data as $customer){
+            $params = array(
+                'conditions' => array(
+                    'customer_id' => $customer->id
+                    )
+                );
+            $customer = $this->User->find('first', $params);
+            array_push($customer_names, $customer['User']['name']);
+        }
+        $this->set('customer_names', $customer_names);
+
+
+        // 最近発生したイベント
+        $events = $webpay->event->all(array("count"=>3));
+        $this->set('events', $events->data);
+
+
+        // 今月の売上金額・今月のトランザクション数
+        $offset = 0;
+        $amount_count = 0;
+        $transaction_count = 0;
+        $first_day = strtotime( "first day of ". date("Y-m-01", time()));
+        while(1) {
+            // 払い戻しは90日前まで可能 90 + 1ヶ月31日 = 121日
+            $tmps = $webpay->charge->all(array("count"=>100, "offset"=>$offset, "created" => array("gte" => strtotime("-121 day"))));
+
+            if(empty($tmps->data[0])) break;
+
+            else {
+                $offset = $offset + 100;
+
+                foreach($tmps->data as $tmp){
+
+                    // 今月の売上金額:課金額の総和 - 払戻額の総和
+                    if($tmp->created >= $first_day) $amount_count = $amount_count + $tmp->amount - $tmp->amountRefunded;
+
+                    // トランザクション数:手数料の足し引きが発生した数で計算
+                    foreach($tmp->fees as $fee){
+                        if($fee->created >= $first_day) $transaction_count = $transaction_count + 1;
+                    }
+                }
+            }
+        }
+
+        $this->set('amount_count', $amount_count);
+        $this->set('transaction_count', $transaction_count);
+
+        // 現在の顧客数
+        $customer_count = $this->User->find('count');
+        $this->set('customer_count', $customer_count);
     }
 
     public function charges() {
@@ -72,11 +179,10 @@ class AdminpaymentsController extends AppController {
             $customer = $this->User->find('first', $params);
             $this->set('customer', $customer['User']);
 
-            if($charges_detail->paid) $this->set('paid', "支払い済み");
+            if($charges_detail->refunded) $this->set('paid', "払い戻し済み");
+            elseif($charges_detail->amountRefunded > 0) $this->set('paid', "一部払い戻し済み");
+            elseif($charges_detail->captured) $this->set('paid', "支払い済み");
             else $this->set('paid', "未払い");
-
-            if($charges_detail->fees[0]->transactionType == 'payment') $this->set('transactionType', "支払い済み");
-            else $this->set('transactionType', "未払い");
 
             $this->render("charges_detail");
         }
@@ -138,12 +244,6 @@ class AdminpaymentsController extends AppController {
             $customer = $this->User->find('first', $params);
             $this->set('customer', $customer['User']);
 
-            // if($customers_detail->paid) $this->set('paid', "支払い済み");
-            // else $this->set('paid', "未払い");
-
-            // if($customers_detail->fees[0]->transactionType == 'payment') $this->set('transactionType', "支払い済み");
-            // else $this->set('transactionType', "未払い");
-
             $this->render("customers_detail");
         }
     }
@@ -151,42 +251,64 @@ class AdminpaymentsController extends AppController {
     public function events() {
         $this->layout = 'adminLayout';
 
-        if(empty($this->params['url']['page']))$page=1;
-        else $page = $this->params['url']['page'];
+        if(empty($this->params['pass'][0])) {
 
-        $this->set('page', $page);
+            if(empty($this->params['url']['page']))$page=1;
+            else $page = $this->params['url']['page'];
 
-        $count=10;
-        if(empty($page)) $offset=0;
-        else $offset=$count*($page-1);
+            $this->set('page', $page);
 
-        $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
-        $webpay->setAcceptLanguage('ja');
-        $events = $webpay->event->all(array("count"=>$count, "offset"=>$offset));
-        $this->set('events', $events->data);
+            $count=10;
+            if(empty($page)) $offset=0;
+            else $offset=$count*($page-1);
 
-        $events_next = $webpay->event->all(array("count"=>1, "offset"=>$offset+$count));
-        if(empty($events_next->data[0])) $next_flg=0;
-        else $next_flg=1;
-        $this->set('next_flg', $next_flg);
+            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay->setAcceptLanguage('ja');
+            $events = $webpay->event->all(array("count"=>$count, "offset"=>$offset));
+            $this->set('events', $events->data);
 
-        $log_arr = array(
-            "charge.succeeded" => "課金に成功しました",
-            "charge.failed" => "課金に失敗しました",
-            "charge.refunded" => "課金が払い戻されました",
-            "charge.captured" => "課金の仮売上が実売上化されました",
-            "customer.created" => "顧客が作成されました",
-            "customer.updated" => "顧客が更新されました",
-            "customer.deleted" => "顧客が削除されました",
-            "recursion.created" => "定期課金が作成されました",
-            "recursion.succeeded" => "定期課金に成功しました",
-            "recursion.failed" => "定期課金が失敗しました",
-            "recursion.resumed" => "定期課金が再開されました",
-            "recursion.deleted" => "定期課金が削除されました",
-            "account.application.deauthorized" => "アプリケーションの認可を取り消しました",
-            "ping" => "テストのイベントを発行しました"
-        );
+            $events_next = $webpay->event->all(array("count"=>1, "offset"=>$offset+$count));
+            if(empty($events_next->data[0])) $next_flg=0;
+            else $next_flg=1;
+            $this->set('next_flg', $next_flg);
+        }
+        else {
+            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay->setAcceptLanguage('ja');
+            $events_detail = $webpay->event->retrieve($this->params['pass'][0]);
 
-        $this->set('log_arr', $log_arr);
+            $this->set('events_detail', $events_detail);
+
+            $types = array(
+                "charge.succeeded",
+                "charge.failed",
+                "charge.refunded",
+                "charge.captured",
+                "customer.created",
+                "customer.updated",
+                "recursion.created",
+                "recursion.succeeded",
+                "recursion.failed",
+                "recursion.resumed",
+                "recursion.deleted",
+            );
+
+            $type_flg = false;
+
+            foreach ($types as $type) {
+                if ($events_detail->type == $type) {
+                    $type_flg = true;
+                }
+            }
+
+            $this->set('type_flg', $type_flg);
+
+            if(stripos($events_detail->type, "charge") !== false) $this->set('type', "charge");
+            else if(stripos($events_detail->type, "customer") !== false) $this->set('type', "customer");
+            else if(stripos($events_detail->type, "recursion") !== false) $this->set('type', "recursion");
+            else $this->set('type', "others");
+
+            $this->render("events_detail");
+        }
     }
 }

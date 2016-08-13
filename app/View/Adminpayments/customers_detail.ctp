@@ -14,7 +14,7 @@
                             <tr><td class="col-xs-3 col-sm-3 col-md-3">ID</td>
                                 <td class="col-xs-9 col-sm-9 col-md-9"><?=h($customers_detail->id);?></td></tr>
                             <tr><td>作成日時</td>
-                                <td><?=h(date('Y/n/j h:i', $customers_detail->created));?></td></tr>
+                                <td><?=h(date('Y/m/d H:i', $customers_detail->created));?></td></tr>
                             <tr><td>お客様名</td><td><?=h($customer['name']);?></td></tr>
                             <tr><td>EMAIL</td><td><?=h($customer['email']);?></td></tr>
                         </table>
@@ -25,7 +25,7 @@
                                 <td class="col-xs-9 col-sm-9 col-md-9"><?=h($customers_detail->activeCard->name);?></td></tr>
                             <tr><td>カード番号</td><td>**** **** **** <?=h($customers_detail->activeCard->last4);?></td></tr>
                             <tr><td>識別ID</td><td><?=h($customers_detail->activeCard->fingerprint);?></td></tr>
-                            <tr><td>有効期限</td><td><?=h($customers_detail->activeCard->expMonth);?> / <?=h($customers_detail->activeCard->expYear);?></td></tr>
+                            <tr><td>有効期限</td><td><?=h(sprintf('%02d', $customers_detail->activeCard->expMonth));?> / <?=h($customers_detail->activeCard->expYear);?></td></tr>
                             <tr><td>タイプ</td><td><?=h($customers_detail->activeCard->type);?></td></tr>
                         </table>
 
@@ -45,11 +45,9 @@
                                 <?php foreach($customers_charges as $key => $charge): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount))."円";?></td>
-                                        <td class="col-xs-5 col-sm-5 col-md-5"><?=h($charge->description);?></td>
-                                        <td class="col-xs-4 col-sm-4 col-md-4"><?=h(date('Y/n/j ', $charge->created));?>
-                                                                               <div class="visible-xs-inline" style=""><br></div>
-                                                                               <?=h(date('h:i', $charge->created));?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?></td>
+                                        <td class="col-xs-6 col-sm-6 col-md-6"><?=h($charge->description);?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
@@ -74,10 +72,8 @@
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/recursions/".$recursion->id. "\">"; ?>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($recursion->amount))."円";?></td>
-                                        <td class="col-xs-5 col-sm-5 col-md-5"><?=h($recursion->description);?></td>
-                                        <td class="col-xs-4 col-sm-4 col-md-4"><?=h(date('Y/n/j ', $recursion->created));?>
-                                                                               <div class="visible-xs-inline" style=""><br></div>
-                                                                               <?=h(date('h:i', $recursion->created));?></td>
+                                        <td class="col-xs-6 col-sm-6 col-md-6"><?=h($recursion->description);?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $recursion->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

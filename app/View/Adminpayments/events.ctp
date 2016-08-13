@@ -30,8 +30,8 @@
                                 <?php foreach($events as $key => $event): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/events/".$event->id. "\">"; ?>
-                                        <td class="col-xs-8 col-sm-8 col-md-8"><?=h($log_arr[$event->type]);?></td>
-                                        <td class="col-xs-4 col-sm-4 col-md-4"><?=h(date('Y/n/j h:i', $event->created));?></td>
+                                        <td class="col-xs-8 col-sm-9 col-md-9"><?=h($log_arr[$event->type]);?></td>
+                                        <td class="col-xs-4 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $event->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

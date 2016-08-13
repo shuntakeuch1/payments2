@@ -46,3 +46,45 @@ thead tr td {
     padding: 6px 10px !important;
     font-size: 15px !important;
 }
+
+.h3dashboard {
+    margin-top: 30px;
+}
+
+.legend {
+    font-size: 14px;
+    color: #eee;
+    padding: 5px;
+    font-weight: bold;
+    background: #204b60;
+    -moz-border-radius: 8px 8px 0 0 !important;
+    -webkit-border-radius: 8px 8px 0 0 !important;
+    border-radius: 8px 8px 0 0 !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.result {
+    border-top: 1px solid #ddd;
+    color: #3f3f3f;
+    background: #fff;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    -moz-border-radius: 0 0 8px 8px !important;
+    -webkit-border-radius: 0 0 8px 8px !important;
+    border-radius: 0 0 8px 8px !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.td_log {
+    text-align: right;
+    color: #204b60;
+    background-color: transparent !important;
+}
