@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0">
 
     <title>
-        ELITES PAYMENTS管理画面
+        <?=$title_for_layout; ?>
     </title>
 
     <link rel="shortcut icon" href="http://elite.sc/assets_front/images/favicon.ico">
@@ -114,6 +114,12 @@
                         </li>
 
                         <li>
+                            <a href="#">
+                                <i class="fa fa-download"></i> 入金情報
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="/payments/adminusers/logout">
                                 <i class="fa fa-sign-out"></i> ログアウト
                             </a>
@@ -164,7 +170,6 @@
                                             array('controller'=>'adminpayments',
                                             'action'=>'events'));?>
                     </li>
-
                 </ul>
             </li>
 
@@ -182,7 +187,7 @@
                     </li>
                     <li><?=$this->Html->link('ユーザー管理',
                                             array('controller'=>'adminusers',
-                                            'action'=>'#'));?>
+                                            'action'=>'index'));?>
                     </li>
                     <li><?=$this->Html->link('商材管理',
                                             array('controller'=>'items',

@@ -4,6 +4,6 @@
 
     class Refund extends AppModel{
 
-          public $belongsTo = array('Charge');
+          public $belongsTo = array('User');
 
     }

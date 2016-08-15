@@ -147,7 +147,7 @@
                                                           'action'=>'charges'
                                                 ),
                                                     array('class'=>'btn btn-default pull-left',
-                                                    'id'=>'btn-webhook')
+                                                    'id'=>'btn-return')
                                                 );?>
                             <?php if(!$edit_flg && !$refund_flg): ?>
                                 <?=$this->Html->link('<i class="fa fa-minus-circle"></i> 課金を払い戻す',

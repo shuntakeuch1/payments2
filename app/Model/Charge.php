@@ -4,7 +4,7 @@
 
     class Charge extends AppModel{
 
-          public $hasMany = array('Item', 'Refund');
+          public $hasMany = array('Item');
 
           public $belongsTo = array('User');
 

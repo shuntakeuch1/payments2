@@ -124,14 +124,15 @@ CREATE TABLE `users` (
 DROP TABLE IF EXISTS `refunds`;
 
 CREATE TABLE `refunds` (
-  `charge_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `charge_id` varchar(255) NOT NULL DEFAULT '',
   `amount_refunded` int(255) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `charge_id` (`charge_id`),
-  CONSTRAINT `refunds_ibfk_1` FOREIGN KEY (`charge_id`) REFERENCES `charges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `refunds_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
