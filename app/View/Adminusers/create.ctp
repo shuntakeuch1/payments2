@@ -1,4 +1,13 @@
-
+<div class="mainbar">
+    <!-- WRAPPER -->
+    <div class="wrapper">
+        <!-- SERVICES -->
+        <section class="module">
+            <div class="container">
+                <!-- MODULE TITLE -->
+                <div class="row">
+                    <div class="col-md-12">
+                    <h3 class="h3title">管理者ユーザ作成</h3>
                       <?=$this->Form->create('Adminuser',array(
                                     'url' => array(
                                         'controller' => 'adminusers',
@@ -63,8 +72,6 @@
                                         )
                                     ),
                                     )); ?>
-
-
                     <?=$this->Form->input('password', array(
                                     'type' => 'password',
                                     'label' => array(
@@ -85,19 +92,21 @@
                     <?=$this->Form->input('password_confirm', array(
                                     'type' => 'password',
                                     'label' => array(
-                                        'text'=>'パスワード(確認)',
-                                        'calss' => 'col col-md-2 control-label',
+                                        'text' => 'パスワード(確認)',
+                                        'class' => 'col col-md-2 control-label',
                                         ),
                                     'between' => '<div class="col-md-8">',
                                     'after' => '</div>',
                                     'placeholder' => ' ',
+                                    'class' => 'form-control',
                                     'error' => array(
                                         'attributes' => array(
                                             'wrap' => 'div',
                                             'class' => 'col-md-offset-2 col-md-8 text-danger'
-                                            )
-                                        ),
+                                        )
+                                    ),
                                     )); ?>
+
                     <?=$this->Form->input('新規登録', array(
                                     'type' => 'submit',
                                     'label' => false,
@@ -107,3 +116,12 @@
                                     )); ?>
 
                     <?=$this->form->end();?>
+                    </div>
+                </div>
+                <!-- /MODULE TITLE -->
+            </div>
+        </section>
+      </div>
+        <!-- /SERVICES -->
+    </div>
+</div><!--/ Mainbar ends

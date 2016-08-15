@@ -13,10 +13,10 @@ class ItemsController extends AppController
   public $helpers = array('Paginator','Html','Form');
   public $components = array('Session','Paginator','Cookie');
 
-  // public function beforeFilter(){
-  //   parent::beforeFilter();
-  //   $this->Auth->allow('index','id','purchased');
-  // }
+  public function beforeFilter(){
+    parent::beforeFilter();
+    $this->Auth->allow('index','id','purchased');
+  }
   public function index()
   {
     $this->set('maxitem',$this->Item->find('count','all'));
@@ -221,5 +221,8 @@ class ItemsController extends AppController
       }
     }
   }
+  public function add(){
+    $this->layout = 'adminLayout';
 
+  }
 }

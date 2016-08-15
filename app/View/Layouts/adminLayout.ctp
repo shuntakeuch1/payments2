@@ -114,7 +114,7 @@
                         </li>
 
                         <li>
-                            <a href="#">
+                            <a href="/payments/adminusers/logout">
                                 <i class="fa fa-sign-out"></i> ログアウト
                             </a>
                         </li>

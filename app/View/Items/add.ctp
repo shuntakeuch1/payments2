@@ -7,12 +7,11 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-md-12">
-                    <h3 class="h3title">管理者ユーザ編集</h3>
-                    <a href="/payments/adminusers/changePassword">パスワード変更</a>
-                      <?=$this->Form->create('Adminuser',array(
+                    <h3 class="h3title">管理者ユーザ作成</h3>
+                      <?=$this->Form->create('Item',array(
                                     'url' => array(
-                                        'controller' => 'adminusers',
-                                        'action' => 'edit'),
+                                        'controller' => 'items',
+                                        'action' => 'add'),
                                     'inputDefaults' => array(
                                         'div' => 'form-group',
                                         'wrapInput' =>false
@@ -20,15 +19,15 @@
                                     'class' => 'form-horizontal',
                                     'novalidate' => true
                                     ));?>
-                    <?=$this->Form->input('staff_id', array(
+                    <?=$this->Form->input('cha_rec_id', array(
                                     'type' => 'text',
                                     'label' => array(
-                                        'text' => '社員番号',
+                                        'text' => '商品番号',
                                         'class' => 'col col-md-2 control-label',
                                         ),
                                     'between' => '<div class="col-md-8">',
                                     'after' => '</div>',
-                                    'placeholder' => '001',
+                                    'placeholder' => '',
                                     'class' => 'form-control',
                                     'error' => array(
                                         'attributes' => array(
@@ -40,12 +39,12 @@
                     <?=$this->Form->input('name', array(
                                     'type' => 'text',
                                     'label' => array(
-                                        'text' => '名前',
+                                        'text' => 'アイテム名',
                                         'class' => 'col col-md-2 control-label',
                                         ),
                                     'between' => '<div class="col-md-8">',
                                     'after' => '</div>',
-                                    'placeholder' => '柏木 祥太',
+                                    'placeholder' => 'ELITES',
                                     'class' => 'form-control',
                                     'error' => array(
                                         'attributes' => array(
@@ -56,15 +55,15 @@
                                     )); ?>
 
 
-                    <?=$this->Form->input('email', array(
+                    <?=$this->Form->input('amount', array(
                                     'type' => 'email',
                                     'label' => array(
-                                        'text' => 'メールアドレス',
+                                        'text' => '金額',
                                         'class' => 'col col-md-2 control-label',
                                         ),
                                     'between' => '<div class="col-md-8">',
                                     'after' => '</div>',
-                                    'placeholder' => 'hoge@hoge.jp',
+                                    'placeholder' => 'MONEY',
                                     'class' => 'form-control',
                                     'error' => array(
                                         'attributes' => array(
@@ -73,11 +72,10 @@
                                         )
                                     ),
                                     )); ?>
-                    <?=$this->Form->input('id')?>
-                    <?=$this->Form->input('password_current', array(
-                                    'type' => 'password',
+                    <?=$this->Form->input('description', array(
+                                    'type' => 'textarea',
                                     'label' => array(
-                                        'text' => 'パスワード',
+                                        'text' => '内容',
                                         'class' => 'col col-md-2 control-label',
                                         ),
                                     'between' => '<div class="col-md-8">',
@@ -91,7 +89,7 @@
                                         )
                                     ),
                                     )); ?>
-                    <?=$this->Form->input('編集', array(
+                    <?=$this->Form->input('商品登録', array(
                                     'type' => 'submit',
                                     'label' => false,
                                     'before' => '<div class="col-md-offset-2 col-md-4">',

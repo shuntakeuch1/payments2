@@ -5,14 +5,20 @@ class AdminusersController extends AppController {
   public $helpers = array('Paginator','Html','Form');
   public $components = array('Session','Paginator','Cookie');
 
+  public function beforeFilter(){
+    parent::beforeFilter();
+    $this->Auth->allow('create');
+  }
+
   public function index (){
+    $this->layout = 'adminLayout';
     $this->set('title_for_layout','管理者一覧画面 | ELITES') ;
-    $p_limit = 5;
+    $p_limit = 10;
     $this->set('p_limit',$p_limit);
     $this->set('maxitem',$this->Adminuser->find('count','all'));
     $this->Paginator->settings = array(
     'limit' => $p_limit,
-    'order' => array('created' => 'desc'),
+    // 'order' => array('created' => 'desc'),
     'recusive' =>3
     );
     $this->set('adminusers',$this->paginate());
@@ -20,10 +26,7 @@ class AdminusersController extends AppController {
 
   public function create (){
     //ログインの禁止
-    if($this->Auth->user()){
-      return $this->redirect($this->Auth->redirectUrl());
-    }
-
+    $this->layout = 'adminLayout';
     if($this->request->is('post')){
       $this->set('title_for_layout','管理者登録画面 | ELITES');
       // $this->Adminuser->set($this->request->data);
@@ -39,6 +42,7 @@ class AdminusersController extends AppController {
   }
 
   public function edit($id =null){
+    $this->layout = 'adminLayout';
     if($this->request->is(['post','put'])){
       if($this->Adminuser->save($this->request->data)){
         $this->Flash->success('会員情報を変更しました');
@@ -55,6 +59,7 @@ class AdminusersController extends AppController {
   }
 
   public function changePassword(){
+    $this->layout = 'adminLayout';
     if($this->request->is(['post','put'])){
       if($this->Adminuser->save($this->request->data)){
         $this->Flash->success('パスワードを更新しました');
