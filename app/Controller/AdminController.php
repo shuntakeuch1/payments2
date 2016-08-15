@@ -89,7 +89,8 @@ class AdminController extends AppController {
     }
 
     public function generated() {
-        $this->layout = 'adminLayout';$this->Session->write = array();
+        $this->layout = 'adminLayout';
+        $this->Session->write = array();
 
         if(!SessionComponent::check('sendData'))
         {

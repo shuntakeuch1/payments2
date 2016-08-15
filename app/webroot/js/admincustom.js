@@ -29,8 +29,8 @@ $(document).ready(function(){
       menu_li.removeClass("open")
     }
     else{
-      $(".navi > li > ul").slideUp(350);
-      $(".navi > li").removeClass("open");
+      // $(".navi > li > ul").slideUp(350);
+      // $(".navi > li").removeClass("open");
       menu_ul.slideDown(350);
       menu_li.addClass("open");
     }
@@ -224,4 +224,14 @@ $('.sminimize').click(function(e){
 	$wcontent.toggle(0);
 });
 
+$('tr[data-href]').addClass('clickable').click(function(e) {
+    if(!$(e.target).is('a')){
+      window.location = $(e.target).closest('tr').data('href');
+    };
+});
 
+$('.confirm_link').click(function() {
+  if (!confirm('払戻し処理は取り消すことが出来ません。よろしいですか？')) {
+    return false;
+  }
+});

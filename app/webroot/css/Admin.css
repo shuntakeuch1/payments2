@@ -2,3 +2,111 @@
     word-break: break-all;
     word-wrap: break-word;
 }
+
+/* Dropdown menu */
+.button-dropdown-menu {
+}
+
+.button-dropdown-menu li{
+    list-style:none;
+}
+
+.button-dropdown-menu li > a{
+    color: #fff;
+}
+
+.button-dropdown-menu li > a:hover{
+    filter:none;
+    color: #888;
+}
+
+.button-dropdown-menu a:hover,.button-dropdown-menu a:focus{
+    filter:none !important;
+}
+
+.button-dropdown-menu::after, .button-dropdown-menu::before{
+}
+
+/* 履歴画面 */
+.h3title {
+    padding-top: 10px;
+}
+
+thead tr td {
+    text-align: center;
+    vertical-align: top;
+}
+
+.pagiCenter {
+    text-align: center;
+}
+
+#btn-round {
+    border-radius: 5px !important;
+    padding: 6px 10px !important;
+    font-size: 15px !important;
+    font-weight:bold !important;
+}
+
+.h3dashboard {
+    margin-top: 30px;
+}
+
+.legend {
+    font-size: 14px;
+    color: #eee;
+    padding: 5px;
+    font-weight: bold;
+    background: #204b60;
+    -moz-border-radius: 8px 8px 0 0 !important;
+    -webkit-border-radius: 8px 8px 0 0 !important;
+    border-radius: 8px 8px 0 0 !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.result {
+    border-top: 1px solid #ddd;
+    color: #3f3f3f;
+    background: #fff;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    -moz-border-radius: 0 0 8px 8px !important;
+    -webkit-border-radius: 0 0 8px 8px !important;
+    border-radius: 0 0 8px 8px !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.td_log {
+    text-align: right;
+    color: #204b60;
+    background-color: transparent !important;
+}
+
+#refund_textbox {
+    font-size: 14px;
+    font-weight:bold;
+}
+
+.form_margin {
+    margin: auto;
+    line-height: 15px;
+}
+
+#refund_error {
+    color: #a94442;
+    padding: 10px 10px;
+    background-color: #f2dede;
+    border: 1px solid transparent;
+    border-color: #ebccd1;
+    margin: 10px 10px;
+    max-width: 400px;
+    border-radius: 10px !important;
+}
