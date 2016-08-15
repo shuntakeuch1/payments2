@@ -31,9 +31,39 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-
-    // public $components = array('DebugKit.Toolbar');
-    public function appError($error) {
-        //$this->redirect('http://elite.sc/');
-}
-}
+    // public function beforeFilter(){
+    //     $this->set('currentUser',$this->Auth->user());
+    // }
+    public $components = array(
+      // 'DebugKit.Toolbar',
+       'Flash',
+      // 'Auth' =>[
+      //   'loginAction' =>[
+      //     'controller' => 'adminusers',
+      //     'action' =>'login',
+      //     ],
+      //     'authenticate' =>[
+      //       'Form' =>[
+      //         'userModel' =>'Adminuser',
+      //         'fields' => [
+      //           'username' =>'email',
+      //           'password' => 'password',
+      //         ],
+      //         'passwordHasher' =>'Blowfish',
+      //       ]
+      //     ],
+      //     'loginRedirect' => [
+      //       'controller' => 'Adminusers',
+      //       'action' =>'index'
+      //     ],
+      //     'logoutRedirect' =>[
+      //       'controller' => 'items',
+      //       'action' =>'index'
+      //     ],
+      //     'authError' =>'ログインしてください',
+      //   ]
+     );
+//     public function appError($error) {
+//         //$this->redirect('http://elite.sc/');
+// }
+     }

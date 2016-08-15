@@ -13,6 +13,10 @@ class ItemsController extends AppController
   public $helpers = array('Paginator','Html','Form');
   public $components = array('Session','Paginator','Cookie');
 
+  // public function beforeFilter(){
+  //   parent::beforeFilter();
+  //   $this->Auth->allow('index','id','purchased');
+  // }
   public function index()
   {
     $this->set('maxitem',$this->Item->find('count','all'));
@@ -35,7 +39,7 @@ class ItemsController extends AppController
     // $this->autoLayout = false;  // レイアウトをOFFにする
 
     $this->layout = 'itemLayout';
-     $this->set('title_for_layout','一般決済画面 | ELITES') ;
+    $this->set('title_for_layout','一般決済画面 | ELITES') ;
     $this->set('items',$this->Item->findByCha_rec_id($cha_rec_id));
 
     if(isset($cha_rec_id))

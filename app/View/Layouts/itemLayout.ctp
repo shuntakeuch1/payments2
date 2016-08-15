@@ -37,6 +37,8 @@
         echo $this->Html->css('../elites/css/style-items');
 
         echo $this->Html->css('../elites/css/custom');
+        //flash message用
+        echo $this->Html->css("../css/message");
 
         echo $this->Html->css('Key');
 

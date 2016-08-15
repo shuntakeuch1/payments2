@@ -106,6 +106,7 @@ class AdminController extends AppController {
         }
     }
 
+
     private function emailcontent_url($name, $url) {
 
         $emailcontent = $name. "様\n\nお世話になっております。\nELITES事務局です。\n\nこちらから課金情報の登録をお願いします。\n\n". $url."\n\nこのURLはメール送信後24時間有効です。\n\nまた本メールは自動送信のため、返信しないようお願いします。";
