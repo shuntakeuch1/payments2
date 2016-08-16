@@ -45,8 +45,8 @@
                                 <?php foreach($customers_charges as $key => $charge): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?></td>
-                                        <td class="col-xs-6 col-sm-6 col-md-6"><?=h($charge->description);?></td>
+                                        <td class="col-xs-4 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=number_format(h($charge->amount - $charge->amountRefunded))."円";?></td>
+                                        <td class="col-xs-5 col-sm-6 col-md-6"><?=h($charge->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
@@ -71,8 +71,8 @@
                                 <?php foreach($customers_detail->recursions as $key => $recursion): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/recursions/".$recursion->id. "\">"; ?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($recursion->amount))."円";?></td>
-                                        <td class="col-xs-6 col-sm-6 col-md-6"><?=h($recursion->description);?></td>
+                                        <td class="col-xs-4 col-sm-3 col-md-3"><?=$awesome_arr["recursion"];?>&nbsp;<?=number_format(h($recursion->amount))."円";?></td>
+                                        <td class="col-xs-5 col-sm-6 col-md-6"><?=h($recursion->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $recursion->created));?></td>
                                     </tr>
                                 <?php endforeach;?>

@@ -118,6 +118,24 @@ CREATE TABLE `users` (
 
 
 
+# テーブルのダンプ refunds
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `refunds`;
+
+CREATE TABLE `refunds` (
+  `charge_id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `amount_refunded` int(255) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `charge_id` (`charge_id`),
+  CONSTRAINT `refunds_ibfk_1` FOREIGN KEY (`charge_id`) REFERENCES `charges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

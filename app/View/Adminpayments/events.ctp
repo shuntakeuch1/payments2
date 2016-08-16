@@ -9,13 +9,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h3 class="h3title">イベントログ
-                        <?=$this->Html->link('Webhookの送信履歴を見る',
+<!--                         <?=$this->Html->link('Webhookの送信履歴を見る',
                                                         array('controller'=>'adminpayments',
                                                         'action'=>'webhook_histories'
                                                         ),
                                                         array('class'=>'pull-right btn btn-default',
                                                         'id'=>'btn-webhook')
-                                                    );?></h3>
+                                                    );?> --></h3>
                         <?php if(empty($events)): ?>
                             <?="<h5>イベントリストはありません。</h5>"; ?>
                         <?php else: ?>
@@ -30,8 +30,8 @@
                                 <?php foreach($events as $key => $event): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/events/".$event->id. "\">"; ?>
-                                        <td class="col-xs-8 col-sm-9 col-md-9"><?=h($log_arr[$event->type]);?></td>
-                                        <td class="col-xs-4 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $event->created));?></td>
+                                        <td class="col-xs-7 col-sm-9 col-md-9"><?=$awesome_arr[substr($event->type, 0, strcspn($event->type,'.'))];?>&nbsp;<?=h($log_arr[$event->type]);?></td>
+                                        <td class="col-xs-5 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $event->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

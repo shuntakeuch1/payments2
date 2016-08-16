@@ -25,7 +25,7 @@
                                 <?php foreach($charges as $key => $charge): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h($names[$key]);?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($names[$key]);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h($charge->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>

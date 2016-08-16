@@ -41,10 +41,11 @@ thead tr td {
     text-align: center;
 }
 
-#btn-webhook {
+#btn-round {
     border-radius: 5px !important;
     padding: 6px 10px !important;
     font-size: 15px !important;
+    font-weight:bold !important;
 }
 
 .h3dashboard {
@@ -87,4 +88,25 @@ thead tr td {
     text-align: right;
     color: #204b60;
     background-color: transparent !important;
+}
+
+#refund_textbox {
+    font-size: 14px;
+    font-weight:bold;
+}
+
+.form_margin {
+    margin: auto;
+    line-height: 15px;
+}
+
+#refund_error {
+    color: #a94442;
+    padding: 10px 10px;
+    background-color: #f2dede;
+    border: 1px solid transparent;
+    border-color: #ebccd1;
+    margin: 10px 10px;
+    max-width: 400px;
+    border-radius: 10px !important;
 }

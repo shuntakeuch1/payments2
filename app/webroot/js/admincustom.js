@@ -229,3 +229,9 @@ $('tr[data-href]').addClass('clickable').click(function(e) {
       window.location = $(e.target).closest('tr').data('href');
     };
 });
+
+$('.confirm_link').click(function() {
+  if (!confirm('払戻し処理は取り消すことが出来ません。よろしいですか？')) {
+    return false;
+  }
+});

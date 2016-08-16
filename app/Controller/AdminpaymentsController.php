@@ -11,7 +11,7 @@ class AdminpaymentsController extends AppController {
 
     public $components = array('Paginator');
 
-    public $uses = array('User', 'CardHash', 'Charge', 'Recursion', 'Item');
+    public $uses = array('User', 'CardHash', 'Charge', 'Recursion', 'Item', 'Refund');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -32,14 +32,27 @@ class AdminpaymentsController extends AppController {
             "account.application.deauthorized" => "アプリケーションの認可を取り消しました",
             "ping" => "テストのイベントを発行しました"
         );
-
         $this->set('log_arr', $log_arr);
+
+        $awesome_arr = array(
+            "dashboard" => "<i class=\"fa fa-line-chart\"></i>",
+            "charge" => "<i class=\"fa fa-credit-card\"></i>",
+            "customer" => "<i class=\"fa fa-users\"></i>",
+            "recursion" => "<i class=\"fa fa-calendar\"></i>",
+            "event" => "<i class=\"fa fa-rss\"></i>",
+            "account" => "<i class=\"fa fa-user-plus\"></i>",
+            // "account.application.deauthorized" => "<i class=\"fa fa-未定\"></i>",
+            "ping" => "<i class=\"fa fa-cog\"></i>",
+            "pub_payment" => "<i class=\"fa fa-pencil-square-o\"></i>",
+            "item" => "<i class=\"fa fa-folder-open-o\"></i>",
+            "fee" => "<i class=\"fa fa-database\"></i>",
+        );
+        $this->set('awesome_arr', $awesome_arr);
 
         $transactionType = array(
             "payment" => "支払い",
             "refund" => "払い戻し",
         );
-
         $this->set('transactionType', $transactionType);
 
     }
@@ -166,9 +179,17 @@ class AdminpaymentsController extends AppController {
         else {
             $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
             $webpay->setAcceptLanguage('ja');
-            $charges_detail = $webpay->charge->retrieve($this->params['pass'][0]);
 
+            $charges_detail = $webpay->charge->retrieve($this->params['pass'][0]);
             $this->set('charges_detail', $charges_detail);
+
+            $customer_detail = $webpay->customer->retrieve($charges_detail->customer);
+            $this->set('customer_detail', $customer_detail);
+
+            if($charges_detail->recursion){
+                $recursion_detail = $webpay->recursion->retrieve($charges_detail->recursion);
+                $this->set('recursion_detail', $recursion_detail);
+            }
 
             // 顧客名をDB検索
             $params = array(
@@ -183,6 +204,53 @@ class AdminpaymentsController extends AppController {
             elseif($charges_detail->amountRefunded > 0) $this->set('paid', "一部払い戻し済み");
             elseif($charges_detail->captured) $this->set('paid', "支払い済み");
             else $this->set('paid', "未払い");
+
+            if(empty($this->params['pass'][1]) || $this->params['pass'][1]!="edit") $this->set('edit_flg', false);
+            else $this->set('edit_flg', true);
+
+
+            // 払い戻し処理
+            $this->set('amount_refunded_error', false);
+            if ($this->request->is('post') && $this->params['pass'][1]=="refund") {
+
+                // 払い戻し額が範囲内の時
+                if(ctype_digit($this->request->data['Refund']['amount_refunded']) && $this->request->data['Refund']['amount_refunded'] >0 && $this->request->data['Refund']['amount_refunded'] <= $charges_detail->amount - $charges_detail->amount_refunded) {
+
+                    $charges_detail = $webpay->charge->refund(array(
+                        'id' => $this->params['pass'][0],
+                        'amount' => $this->request->data['Refund']['amount_refunded']));
+
+                    // DB登録
+                    // Chargesテーブルから、idを取得
+                    $this->Charge->recursive = -1;
+
+                    $params = array(
+                        'conditions' => array('charge_id' => $this->params['pass'][0])
+                        );
+
+                    $charge_data = $this->Charge->find('first', $params);
+
+                    // Refundsテーブル
+                    $refund_savedata = array(
+                        'charge_id' => $charge_data['Charge']['id'],
+                        'amount_refunded' => $this->request->data['Refund']['amount_refunded']
+                    );
+
+                    $this->Refund->save($refund_savedata);
+
+                    $this->redirect(array('action' => 'charges',$charges_detail->id));
+                }
+                else {
+                    // 払い戻し額がおかしい時
+                    $amount_refunded_error = true;
+                    $this->set('amount_refunded_error', true);
+                }
+
+                $this->set('refund_flg', true);
+            }
+            else {
+                $this->set('refund_flg', false);
+            }
 
             $this->render("charges_detail");
         }
@@ -253,6 +321,21 @@ class AdminpaymentsController extends AppController {
 
         if(empty($this->params['pass'][0])) {
 
+            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay->setAcceptLanguage('ja');
+
+            // 全件数:負荷がかかりそうなので中止
+            // $count_offset = 0;
+            // $all_count = 0;
+            // while(1) {
+            //     $tmps = $webpay->event->all(array("count"=>100, "offset"=>$count_offset));
+
+            //     $all_count = $all_count + count($tmps->data);
+
+            //     if(empty($tmps->data[0])) break;
+            //     else $count_offset = $count_offset + 100;
+            // }
+
             if(empty($this->params['url']['page']))$page=1;
             else $page = $this->params['url']['page'];
 
@@ -262,8 +345,6 @@ class AdminpaymentsController extends AppController {
             if(empty($page)) $offset=0;
             else $offset=$count*($page-1);
 
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
-            $webpay->setAcceptLanguage('ja');
             $events = $webpay->event->all(array("count"=>$count, "offset"=>$offset));
             $this->set('events', $events->data);
 
