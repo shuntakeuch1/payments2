@@ -24,6 +24,7 @@ class AdminController extends AppController {
 
     public function generate() {
         $this->layout = 'adminLayout';
+        $this->set('title_for_layout','個別決済画面発行ページ | ELITES');
 
         if ($this->request->is('post'))
         {
@@ -90,6 +91,8 @@ class AdminController extends AppController {
 
     public function generated() {
         $this->layout = 'adminLayout';
+        $this->set('title_for_layout','個別決済画面発行完了 | ELITES');
+
         $this->Session->write = array();
 
         if(!SessionComponent::check('sendData'))

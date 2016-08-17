@@ -80,13 +80,13 @@
                             </table>
                         <?php endif; ?>
 
-                        <div class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5">
-                            <?=$this->Html->link('戻る',
+                        <div>
+                            <?=$this->Html->link('顧客の一覧画面へ',
                                                     array('controller'=>'adminpayments',
                                                           'action'=>'customers'
                                                 ),
-                                                    array('class'=>'btn btn-default',
-                                                    'id'=>'btn-webhook')
+                                                    array('class'=>'btn btn-default pull-left',
+                                                    'id'=>'btn-return')
                                                 );?>
                         </div>
                     </div>

@@ -45,18 +45,20 @@
 
                         <h4>データの詳細</h4>
                             <table class="table table-bordered table-generated">
-                                <tr><td class="col-xs-12 col-sm-12 col-md-12"><?php echo "<pre>";
-print_r($events_detail->data->object);
-                                                                                    echo "</pre>" ?></td></tr>
+                                <tr><td class="col-xs-12 col-sm-12 col-md-12">
+                                <?php echo "<pre>";
+                                            print_r($events_detail->data->object);
+                                      echo "</pre>" ?>
+                                </td></tr>
                             </table>
 
-                        <div class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5">
-                            <?=$this->Html->link('戻る',
+                        <div>
+                            <?=$this->Html->link('イベントの一覧画面へ',
                                                     array('controller'=>'adminpayments',
                                                           'action'=>'events'
                                                 ),
-                                                    array('class'=>'btn btn-default',
-                                                    'id'=>'btn-webhook')
+                                                    array('class'=>'btn btn-default pull-left',
+                                                    'id'=>'btn-return')
                                                 );?>
                         </div>
                     </div>

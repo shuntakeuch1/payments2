@@ -59,6 +59,7 @@ class AdminpaymentsController extends AppController {
 
     public function dashboard() {
         $this->layout = 'adminLayout';
+        $this->set('title_for_layout','ダッシュボード | ELITES');
 
         $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
         $webpay->setAcceptLanguage('ja');
@@ -165,6 +166,7 @@ class AdminpaymentsController extends AppController {
         $this->layout = 'adminLayout';
 
         if(empty($this->params['pass'][0])) {
+            $this->set('title_for_layout','課金の履歴 | ELITES');
 
             if(empty($this->params['url']['page']))$page=1;
             else $page = $this->params['url']['page'];
@@ -199,6 +201,8 @@ class AdminpaymentsController extends AppController {
             $this->set('names', $names);
         }
         else {
+            $this->set('title_for_layout','個別課金の詳細 | ELITES');
+
             $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
             $webpay->setAcceptLanguage('ja');
 
@@ -273,6 +277,7 @@ class AdminpaymentsController extends AppController {
         $this->layout = 'adminLayout';
 
         if(empty($this->params['pass'][0])) {
+            $this->set('title_for_layout','顧客の一覧 | ELITES');
 
             if(empty($this->params['url']['page']))$page=1;
             else $page = $this->params['url']['page'];
@@ -307,6 +312,8 @@ class AdminpaymentsController extends AppController {
             $this->set('names', $names);
         }
         else {
+            $this->set('title_for_layout','顧客の詳細 | ELITES');
+
             $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
             $webpay->setAcceptLanguage('ja');
             $customers_detail = $webpay->customer->retrieve($this->params['pass'][0]);
@@ -333,6 +340,7 @@ class AdminpaymentsController extends AppController {
         $this->layout = 'adminLayout';
 
         if(empty($this->params['pass'][0])) {
+            $this->set('title_for_layout','イベントログ | ELITES');
 
             $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
             $webpay->setAcceptLanguage('ja');
@@ -367,6 +375,8 @@ class AdminpaymentsController extends AppController {
             $this->set('next_flg', $next_flg);
         }
         else {
+            $this->set('title_for_layout','イベントの詳細 | ELITES');
+
             $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
             $webpay->setAcceptLanguage('ja');
             $events_detail = $webpay->event->retrieve($this->params['pass'][0]);
