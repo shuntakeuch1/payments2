@@ -107,9 +107,10 @@ class AdminpaymentsController extends AppController {
         $offset = 0;
         $amount_count = 0;
         $transaction_count = 0;
-        $first_day = strtotime( "first day of ". date("Y-m-01", time()));
+        $first_day = strtotime( "first day of ". date("Y-m-01", time())); // 月初め
         while(1) {
             // 払い戻しは90日前まで可能 90 + 1ヶ月31日 = 121日
+            // 一度に最大100件まで取得可能
             $tmps = $webpay->charge->all(array("count"=>100, "offset"=>$offset, "created" => array("gte" => strtotime("-121 day"))));
 
             if(empty($tmps->data[0])) break;
@@ -119,8 +120,8 @@ class AdminpaymentsController extends AppController {
 
                 foreach($tmps->data as $tmp){
 
-                    // 今月の売上金額:課金額の総和 - 払戻額の総和
-                    if($tmp->created >= $first_day) $amount_count = $amount_count + $tmp->amount - $tmp->amountRefunded;
+                    // 今月の課金額の総和
+                    if($tmp->created >= $first_day) $amount_count = $amount_count + $tmp->amount;
 
                     // トランザクション数:手数料の足し引きが発生した数で計算
                     foreach($tmp->fees as $fee){
@@ -130,6 +131,27 @@ class AdminpaymentsController extends AppController {
             }
         }
 
+        // 今月の払い戻し額の総和
+        $amountRefunded_count = 0;
+        $this->Refund->recursive = -1;
+        $params = array(
+            'conditions' => array(
+                'created >=' => date('Y-m-d H:i:s', $first_day)
+                )
+            );
+        $refund_database = $this->Refund->find('all', $params);
+
+        if(empty($refund_database)) {
+            die(データベースエラー);
+        }
+        else {
+            foreach($refund_database as $refund_data){
+                $amountRefunded_count = $amountRefunded_count + $refund_data['Refund']['amount_refunded'];
+            }
+        }
+
+        // 今月の売上金額:課金額の総和 - 払戻額の総和
+        $amount_count = $amount_count - $amountRefunded_count;
         $this->set('amount_count', $amount_count);
         $this->set('transaction_count', $transaction_count);
 
@@ -220,19 +242,10 @@ class AdminpaymentsController extends AppController {
                         'id' => $this->params['pass'][0],
                         'amount' => $this->request->data['Refund']['amount_refunded']));
 
-                    // DB登録
-                    // Chargesテーブルから、idを取得
-                    $this->Charge->recursive = -1;
-
-                    $params = array(
-                        'conditions' => array('charge_id' => $this->params['pass'][0])
-                        );
-
-                    $charge_data = $this->Charge->find('first', $params);
-
-                    // Refundsテーブル
+                    // RefundsテーブルへのDB登録
                     $refund_savedata = array(
-                        'charge_id' => $charge_data['Charge']['id'],
+                        'user_id' => $customer['User']['id'],
+                        'charge_id' => $this->params['pass'][0],
                         'amount_refunded' => $this->request->data['Refund']['amount_refunded']
                     );
 
