@@ -1,0 +1,2 @@
+var chart1 = new Chart(document.getElementById("chaege_canvas").getContext("2d")).Line(lineChartData_c, options_c);
+var chart2 = new Chart(document.getElementById("transaction_canvas").getContext("2d")).Line(lineChartData_t, options_t);

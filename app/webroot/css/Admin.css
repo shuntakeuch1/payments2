@@ -115,3 +115,14 @@ thead tr td {
     max-width: 400px;
     border-radius: 10px !important;
 }
+
+/* グラフ */
+canvas {
+  height: 100% !important;
+  max-height: 450px;
+  width: 100% !important;
+}
+
+.btn-dashboard {
+    margin: 10px;
+}
