@@ -1,4 +1,4 @@
-Main bar -->
+<!-- Main bar -->
 <div class="mainbar">
     <!-- WRAPPER -->
     <div class="wrapper">
@@ -27,19 +27,6 @@ Main bar -->
                         <div class="btn btn-default pull-left btn-dashboard" id="btn-round">売上金額</div>
                         <div class="btn btn-default pull-left btn-dashboard" id="btn-round">トランザクション数</div>
 
-
-
-     <!--                      <?=$this->Html->link('<i class="fa fa-minus-circle"></i> 課金を払い戻す',
-                                                        array('controller'=>'adminpayments',
-                                                              'action'=>'charges',
-                                                              $charges_detail->id,
-                                                              'edit'
-                                                    ),
-                                                        array('class'=>'btn btn-danger pull-right',
-                                                        'id'=>'btn-round',
-                                                        'escape' => false
-                                                        )
-                                                    );?> -->
 
                             <canvas id="chaege_canvas" height="450" width="600" style="height:450px width:600px"></canvas>
                             <br>
@@ -125,4 +112,4 @@ Main bar -->
         </section>
         <!-- /SERVICES -->
     </div>
-</div><!--/ Mainbar ends
+</div><!--/ Mainbar ends -->

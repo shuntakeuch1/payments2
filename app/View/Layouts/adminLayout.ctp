@@ -257,7 +257,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#" class="navbar-brand"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ELITES PAYMENTS</a>
+                    <a class="navbar-brand"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ELITES PAYMENTS</a>
                 </div>
                 <!-- Site name for smallar screens -->
                 <!-- Navigation starts -->
@@ -266,8 +266,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Members button with number of latest members count -->
                         <li>
-                            <a href="#">
-                                <i class="fa fa-user"></i> ID名(管理者)
+                            <a>
+                                <i class="fa fa-user"></i> <?=$currentUser['name'];?>
                             </a>
                         </li>
 
