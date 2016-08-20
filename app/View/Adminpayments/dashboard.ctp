@@ -24,13 +24,10 @@
                             </div>
                         </div>
 
-                        <div class="btn btn-default pull-left btn-dashboard" id="btn-round">売上金額</div>
-                        <div class="btn btn-default pull-left btn-dashboard" id="btn-round">トランザクション数</div>
+                        <div class="btn btn-default pull-left btn-chart_valid" id="btn-charge">売上金額</div>
+                        <div class="btn btn-default pull-left btn-chart_invalid" id="btn-transaction">トランザクション数</div>
 
-
-                            <canvas id="chaege_canvas" height="450" width="600" style="height:450px width:600px"></canvas>
-                            <br>
-                            <canvas id="transaction_canvas" height="450" width="600" style="height:450px width:600px"></canvas>
+                        <canvas id="canvas" height="450" width="600" style="height:450px width:600px"></canvas>
 
                         <h3><i class="fa fa-credit-card h3dashboard"></i> 最近追加された課金</h3>
                         <table class="table table-bordered table-generated table-hover">

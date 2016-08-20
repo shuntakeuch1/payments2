@@ -54,7 +54,7 @@ thead tr td {
 }
 
 .h3dashboard {
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 
 .legend {
@@ -119,10 +119,24 @@ thead tr td {
 /* グラフ */
 canvas {
   height: 100% !important;
-  max-height: 450px;
+  max-height: 450px !important;
   width: 100% !important;
 }
 
-.btn-dashboard {
-    margin: 10px;
+#btn-charge, #btn-transaction {
+    border-radius: 5px !important;
+    padding: 10px 15px !important;
+    margin: 15px 10px 5px 15px;
+    font-size: 15px !important;
+    font-weight:bold !important;
+}
+
+.btn-chart_valid {
+    background-color: #325d72 !important;
+    color: #fff !important;
+}
+
+.btn-chart_invalid {
+    background-color: #fff !important;
+    color: #325d72 !important;
 }
