@@ -32,6 +32,27 @@
     padding-top: 10px;
 }
 
+span .badge {
+    color: #fff;
+    font-weight: normal;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px !important;
+}
+
 thead tr td {
     text-align: center;
     vertical-align: top;

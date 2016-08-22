@@ -30,7 +30,7 @@
         var scaleSteps_t = <?=$scaleSteps_t; ?>;
         var scaleStepWidth_t = <?=$scaleStepWidth_t; ?>;
         var scaleStartValue_t = <?=$scaleStartValue_t; ?>;
-        var scaleLabel_t = "<%=new Intl.NumberFormat().format(value) %>";
+        var scaleLabel_t = "<%=new Intl.NumberFormat().format(value) %> 件";
 
         <?=$this->Html->scriptEnd(); ?>
     <?php endif; ?>

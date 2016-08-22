@@ -44,7 +44,15 @@
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($charge_names[$key]);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
+
+                                        <div class="visible-xs-inline" style=""><br></div>
+                                        <?php if($charge->refunded) echo " <span class=\"badge badge-info\">払戻済</span>";
+                                              elseif($charge->amount_refunded > 0) echo " <span class=\"badge badge-warning\">一部払戻済</span>";
+                                              elseif($charge->captured) echo " <!--<span class=\"badge badge-success\">支払済</span>-->";
+                                              else echo " <span class=\"badge badge-important\">未払い</span>"; ?>
+
+                                        </td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h($charge->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>
                                     </tr>

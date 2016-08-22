@@ -19,6 +19,9 @@
                                 <div id="refund_error">・払い戻し金額は1円以上<?=number_format(h($charges_detail->amount - $charges_detail->amount_refunded)); ?>円以内で指定してください</div>
                             <?php endif; ?>
 
+                            <?php if(isset($webpay_error)): ?>
+                                <div id="refund_error">・<?="すでに全額返金済み、もしくは課金から90日以上経過しているため返金できません"; ?></div>
+                            <?php endif; ?>
 
                             <div class="col-md-12">
                                 払い戻す金額は、1円以上<?=number_format(h($charges_detail->amount - $charges_detail->amount_refunded)); ?>円以内で指定してください。
@@ -63,7 +66,7 @@
                             <?php if($charges_detail->amountRefunded>0): ?>
                                 <tr><td>払戻金額</td><td><?=h(number_format(h($charges_detail->amountRefunded)))."円 ";?></td></tr>
                             <?php endif; ?>
-                            <tr><td>ステータス</td><td><?=h($paid);?></td></tr>
+                            <tr><td>ステータス</td><td><?=$paid;?></td></tr>
                         </table>
 
                         <h4>カード情報</h4>
@@ -91,7 +94,9 @@
                                 <tr>
                                     <td class="col-xs-6 col-sm-5 col-md-5"><?=$awesome_arr["fee"];?>&nbsp;<?=h(number_format(h($fee->amount)))."円 ";?> (<?=h($fee->rate)."%+".h($fee->transactionFee)."円";?>)</td>
                                     <td class="col-xs-3 col-sm-3 col-md-3"><?=h($transactionType[$fee->transactionType]);?></td>
-                                    <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d H:i', $fee->created));?></td>
+                                    <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $fee->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $fee->created));?></td></td>
                                 </tr>
                             <?php endforeach;?>
                         </tbody>
@@ -112,7 +117,9 @@
                                 <?php echo
                                 "<tr data-href=\"/payments/adminpayments/customers/".$charges_detail->customer. "\">"; ?>
                                         <td class="col-xs-9 col-sm-8 col-md-8"><?=$awesome_arr["customer"];?>&nbsp;<?=h($customer_detail->email);?></td>
-                                        <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d H:i', $customer_detail->created));?></td>
+                                        <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $customer_detail->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $customer_detail->created));?></td>
                                 </tr>
                             </tbody>
                             </table>
@@ -133,7 +140,9 @@
                                     "<tr data-href=\"/payments/adminpayments/recursions/".$recursion_detail->id. "\">"; ?>
                                         <td class="col-xs-6 col-sm-5 col-md-5"><?=$awesome_arr["recursion"];?>&nbsp;<?=h($recursion_detail->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h($recursion_detail->status);?></td>
-                                        <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d H:i', $recursion_detail->created));?></td>
+                                        <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $recursion_detail->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $recursion_detail->created));?></td>
                                     </tr>
                             </tbody>
                             </table>

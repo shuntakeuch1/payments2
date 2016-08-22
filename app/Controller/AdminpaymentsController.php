@@ -298,10 +298,10 @@ class AdminpaymentsController extends AppController {
             $customer = $this->User->find('first', $params);
             $this->set('customer', $customer['User']);
 
-            if($charges_detail->refunded) $this->set('paid', "払い戻し済み");
-            elseif($charges_detail->amountRefunded > 0) $this->set('paid', "一部払い戻し済み");
-            elseif($charges_detail->captured) $this->set('paid', "支払い済み");
-            else $this->set('paid', "未払い");
+            if($charges_detail->refunded) $this->set('paid', "<span class=\"badge badge-info\">払戻済</span>");
+            elseif($charges_detail->amountRefunded > 0) $this->set('paid', "<span class=\"badge badge-warning\">一部払戻済</span>");
+            elseif($charges_detail->captured) $this->set('paid', "<span class=\"badge badge-success\">支払済</span>");
+            else $this->set('paid', "<span class=\"badge badge-important\">未払い</span>");
 
             if(empty($this->params['pass'][1]) || $this->params['pass'][1]!="edit") $this->set('edit_flg', false);
             else $this->set('edit_flg', true);
@@ -314,20 +314,25 @@ class AdminpaymentsController extends AppController {
                 // 払い戻し額が範囲内の時
                 if(ctype_digit($this->request->data['Refund']['amount_refunded']) && $this->request->data['Refund']['amount_refunded'] >0 && $this->request->data['Refund']['amount_refunded'] <= $charges_detail->amount - $charges_detail->amount_refunded) {
 
-                    $charges_detail = $webpay->charge->refund(array(
-                        'id' => $this->params['pass'][0],
-                        'amount' => $this->request->data['Refund']['amount_refunded']));
+                    try {
+                        $charges_detail = $webpay->charge->refund(array(
+                            'id' => $this->params['pass'][0],
+                            'amount' => $this->request->data['Refund']['amount_refunded']));
 
-                    // RefundsテーブルへのDB登録
-                    $refund_savedata = array(
-                        'user_id' => $customer['User']['id'],
-                        'charge_id' => $this->params['pass'][0],
-                        'amount_refunded' => $this->request->data['Refund']['amount_refunded']
-                    );
+                        // RefundsテーブルへのDB登録
+                        $refund_savedata = array(
+                            'user_id' => $customer['User']['id'],
+                            'charge_id' => $this->params['pass'][0],
+                            'amount_refunded' => $this->request->data['Refund']['amount_refunded']
+                        );
 
-                    $this->Refund->save($refund_savedata);
+                        $this->Refund->save($refund_savedata);
 
-                    $this->redirect(array('action' => 'charges',$charges_detail->id));
+                        $this->redirect(array('action' => 'charges',$charges_detail->id));
+                    }
+                    catch (\WebPay\ErrorResponse\InvalidRequestException $e) {
+                        $this->set('webpay_error', $e);
+                    }
                 }
                 else {
                     // 払い戻し額がおかしい時

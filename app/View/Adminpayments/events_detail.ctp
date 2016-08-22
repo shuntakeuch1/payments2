@@ -12,36 +12,59 @@
                         <h3><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=h($log_arr[$events_detail->type]);?></h3>
                         <h4>イベントの概要</h4>
                         <table class="table table-bordered table-generated">
-                            <tr><td class="col-xs-4 col-sm-3 col-md-3">ID</td>
-                                <td class="col-xs-8 col-sm-9 col-md-9"><?=h($events_detail->id);?></td></tr>
+                            <tr><td class="col-xs-4 col-sm-4 col-md-3">ID</td>
+                                <td class="col-xs-8 col-sm-8 col-md-9"><?=h($events_detail->id);?></td></tr>
                             <tr><td>日時</td>
                                 <td><?=h(date('Y/m/d H:i', $events_detail->created));?></td></tr>
                             <tr><td>タイプ</td><td><?=h($events_detail->type);?></td></tr>
                         </table>
 
+
                         <?php if(($type_flg) and ($type==="charge")): ?>
                             <h4>このイベントに関連するオブジェクト</h4>
                             <table class="table table-bordered table-generated table-hover">
                                 <tr data-href="/payments/adminpayments/charges/<?=$events_detail->data->object->id;?>">
-                                    <td class="col-xs-4 col-sm-3 col-md-3"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=number_format(h($events_detail->data->object->amount - $events_detail->data->object->amountRefunded))."円";?></td>
-                                    <td class="col-xs-5 col-sm-6 col-md-6"><?=h($events_detail->data->object->description);?></td>
-                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $events_detail->created));?></td></tr>
+                                    <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=number_format(h($events_detail->data->object->amount - $events_detail->data->object->amountRefunded))."円";?>
+
+                                    <div class="visible-xs-inline" style=""><br></div>
+                                    <?php if(($events_detail->type=="charge.refunded") && ($events_detail->data->object->refunded))
+                                            echo " <span class=\"badge badge-info\">払戻済</span>";
+                                          elseif(($events_detail->type=="charge.refunded") && ($events_detail->data->object->amount_refunded > 0))
+                                            echo " <span class=\"badge badge-warning\">一部払戻済</span>";
+                                          elseif($events_detail->data->object->captured)
+                                            echo " <!--<span class=\"badge badge-success\">支払済</span>-->";
+                                          else echo " <span class=\"badge badge-important\">未払い</span>"; ?>
+                                    </td>
+                                    <td class="col-xs-5 col-sm-5 col-md-6"><?=h($events_detail->data->object->description);?></td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $events_detail->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $events_detail->created));?></td>
+                                </tr>
                             </table>
+
                         <?php elseif(($type_flg) and ($type==="customer")): ?>
                             <table class="table table-bordered table-generated table-hover">
                                 <tr data-href="/payments/adminpayments/customers/<?=$events_detail->data->object->id;?>">
                                     <td class="col-xs-9 col-sm-9 col-md-9"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=h($events_detail->data->object->email);?></td>
-                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $events_detail->created));?></td></tr>
+                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $events_detail->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $events_detail->created));?></td>
+                                </tr>
                             </table>
+
                         <?php elseif(($type_flg) and ($type==="recursion")): ?>
                             <h4>このイベントに関連するオブジェクト</h4>
                             <table class="table table-bordered table-generated table-hover">
                                 <tr data-href="/payments/adminpayments/recursion/<?=$events_detail->data->object->id;?>">
-                                    <td class="col-xs-4 col-sm-3 col-md-3"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=number_format(h($events_detail->data->object->amount))."円";?></td>
-                                    <td class="col-xs-5 col-sm-6 col-md-6"><?=h($events_detail->data->object->description);?></td>
-                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $events_detail->created));?></td></tr>
+                                    <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=number_format(h($events_detail->data->object->amount))."円";?></td>
+                                    <td class="col-xs-5 col-sm-5 col-md-6"><?=h($events_detail->data->object->description);?></td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $events_detail->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $events_detail->created));?></td>
+                                </tr>
                             </table>
                         <?php endif; ?>
+
 
                         <h4>データの詳細</h4>
                             <table class="table table-bordered table-generated">
