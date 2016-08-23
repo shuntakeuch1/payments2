@@ -1,9 +1,9 @@
 <?php
 
-require VENDORS . 'autoload.php';
-use WebPay\WebPay;
-// require_once "webpay-php-full-2.2.2/autoload.php";
+// require VENDORS . 'autoload.php';
 // use WebPay\WebPay;
+require_once "webpay-php-full-2.2.2/autoload.php";
+use WebPay\WebPay;
 
 // App::item('AppController','Controller');
 class ItemsController extends AppController
@@ -223,6 +223,45 @@ class ItemsController extends AppController
   }
   public function add(){
     $this->layout = 'adminLayout';
-
+    if($this->request->is('post')){
+      $this->Item->create();
+      if($this->Item->save($this->request->data)){
+        $this->Flash->success('アイテムを登録しました');
+        return $this-> redirect(['action' => 'index']);
+      }
+    }
   }
+
+  public function edit($id = null){
+    $this->layout = 'adminLayout';
+      if (!$this->Item->exists($id)) {
+            throw new NotFoundException('アイテムがみつかりません');
+        }
+        if ($this->request->is(['post', 'put'])) {
+            if ($this->Item->save($this->request->data)) {
+                $this->Flash->success('アイテムを更新しました');
+                return $this->redirect(['action' => 'index']);
+            }
+        } else {
+            $this->request->data = $this->Item->findById($id);
+        }
+  }
+
+    public function delete($id = null) {
+        if (!$this->Item->exists($id)) {
+            throw new NotFoundException('アイテムがみつかりません');
+        }
+
+        $this->request->allowMethod('post', 'delete');
+        if ($this->Item->delete($id)) {
+            $this->Flash->success('アイテムを削除しました');
+        } else {
+            $this->Flash->error('アイテムを削除できませんでした');
+        }
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+
+
 }

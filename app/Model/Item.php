@@ -1,22 +1,71 @@
 <?php
 
- // App::items('AppModel','Model');
+App::uses('AppModel','Model');
  class Item extends AppModel
  {
-    // public $validate = array(
-    //   'name'=>array(
-    //     'rule'=>array('notBlank')
-    //     ),
-    //   'customer_id'=>array(
-    //     'rule'=>array('notBlank')
-    //     ),
-    //   'email' => array(
-    //     'rule' => array('notBlank')
-    //     )
-    //   // ,'url' => array(
-      //  'rule' => array('url'),
-      //  'message' => '形式が正しくありません'
-      //  )
-    // );
+    // public $actsAs = [
+    //     //UploadプラグインのUploadBehavior
+    //     'Upload.Upload' => [
+    //         //photoというカラムにUploadビヘイビアを使ってファイル名を登録する
+    //         'photo' => [
+    //             //デフォルトのカラム名dirをphoto_dirに変更
+    //             'fields' => ['dir' => 'photo_dir'],
+    //             'deleteOnUpdate' => true,
+    //         ]
+    //     ]
+    // ];
+    public $actsAs = [
+        // UploadプラグインのUploadBehaviorという意味
+        'Upload.Upload' => [
+            // photoというカラムに Uploadビヘイビアを使ってファイル名を登録する
+            'photo' => [
+                // デフォルトのカラム名 dir を photo_dir に変更
+                'fields' => ['dir' => 'photo_dir'],
+                'deleteOnUpdate' => true,
+            ]
+        ]
+    ];
+
+
+    public $validate = array(
+      'name'=>array(
+        'rule'=>array('notBlank')
+        ),
+      'cha_rec_id'=>array(
+        'rule'=>array('notBlank')
+        ),
+      'amount' => array(
+        'rule' => array('notBlank')
+        ),
+      'amount' => array(
+        'rule' => array('notBlank')
+        ),
+      'description' => array(
+        'rule' => array('notBlank')
+        ),
+      'photo' => [
+        'UnderPhpSizeLimit' => [
+            'allowEmpty' => true,
+            'rule' => 'isUnderPhpSizeLimit',
+            'message' => 'アップロード可能なファイルサイズを超えています'
+        ],
+        'BelowMaxSize' => [
+            'rule' => ['isBelowMaxSize',5242880],
+            'message' => 'アップロード可能なファイルサイズを超えています'
+        ],
+        'CompleteUpload' => [
+            'rule' => 'isCompletedUpload',
+            'message' => 'ファイルが正常にアップロードされませんでした'
+        ],
+        'ValidMimeType' => [
+            'rule' => ['isValidMimeType',['image/jpeg','image/png'],false],
+            'message' => 'ファイルの拡張子がJPEGでもPNGでもありません'
+        ],
+        'ValidExtension' => [
+            'rule' => ['isValidExtension',['jpeg','jpg','png'],false],
+            'message' => 'ファイルの拡張子がJPEGでもPNGでもありません'
+        ]
+      ]
+    );
 
  }

@@ -2,6 +2,9 @@
 #################################################
 #/app/Config/database.php
 /app/tmp
+#画像をGit管理しない
+/app/webroot/files/
+
 /app/Config/routes.php
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins

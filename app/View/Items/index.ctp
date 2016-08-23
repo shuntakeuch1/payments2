@@ -22,16 +22,50 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-sm-12">
+
                         <h3>ELITES商材一覧</h3>
 
+                        <div style="text-align:right">
+                          <?=$this->Html->link('新規登録',['action' => 'add']);?>
+                        </div>
+
                           <?php foreach($items as $item) :?>
-                             <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
-                            <table class="table-hover" style="border:solid 1px #000; margin-bottom:10px; width:100%;">
+                           <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
+                            <table class="table-bordered" style="margin-bottom:10px; width:100%; display:block;">
+
                               <tr>
-                                <td class="col-sm-4"><?=h($item['Item']['name'])?></td>
-                                <td  class="col-sm-8" style = "border-left:solid 1px #000;"><?=h($item['Item']['description'])?><br><?=h(number_format($item['Item']['amount']))?>円
+                                <td rowspan="2" class="col-sm-1">
+                                  <?=$this->Html->link(
+                                      $this->Item->photoImage($item, ['style' => 'width: 100%']),
+                                      ['action' => 'view', $item['Item']['id']],
+                                      ['escape' => false]);?>
+                                </td>
+                               <td class="col-sm-9"><?=h($item['Item']['name'])?></td>
+                               <?php if ($currentUser) : ?>
+                                   <td rowspan="2" class="col-sm-1">
+                                    <?=$this->Html->link('編集',[
+                                      'action' => 'edit',
+                                      $item['Item']['id']],[
+                                      'class' => 'btn btn-primary','role' => 'button'
+                                    ]) ;?></td>
+                                   <td rowspan="2" class="col-sm-1">
+                                      <div>
+                                        <?=$this->Form->postLink('削除',
+                                        ['action' => 'delete',$item['Item']['id']],
+                                        // ['confirm' =>'本当に削除してよろしいですか?'],
+                                        ['class' => 'btn btn-primary','role' => 'button']
+                                        ) ;?>
+                                      </div>
+                                    </td>
+                              <?php endif;?>
+                              </tr>
+                              <tr>
+                                <td class="col-sm-9">
+                                  <?=h($item['Item']['description'])?>
+                                  <br><?=h(number_format($item['Item']['amount']))?>円
                                 </td>
                               </tr>
+
                             </table>
                             </a>
 
