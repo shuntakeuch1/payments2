@@ -28,6 +28,7 @@
                         <div class="btn btn-default pull-left btn-chart_invalid" id="btn-transaction">トランザクション数</div>
 
                         <canvas id="canvas" height="450" width="600" style="height:450px width:600px"></canvas>
+                        <div id="chartjs-tooltip"></div>
 
                         <h3><i class="fa fa-credit-card h3dashboard"></i> 最近追加された課金</h3>
                         <table class="table table-bordered table-generated table-hover">

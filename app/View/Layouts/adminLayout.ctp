@@ -254,7 +254,7 @@
         <?php echo $this->Html->script('../theme/js/respond.min');?>
         <?php echo $this->Html->script('../theme/js/html5shiv');?>
         <?php echo $this->Html->script('admincustom');?>
-        <?php echo $this->Html->script('Chart.min');?>
+        <?php echo $this->Html->script('Chart');?>
         <?php echo $this->Html->script('Chart.option');?>
 </body>
 </html>

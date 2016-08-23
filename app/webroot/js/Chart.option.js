@@ -56,7 +56,7 @@
                 scaleShowLabels : true,
                 // ラベルの表示フォーマット ( Y 軸の値 )
                 scaleLabel: scaleLabel_c,
-                multiTooltipTemplate: scaleLabel_c,
+                multiTooltipTemplate: "<%= datasetLabel %>: " + scaleLabel_c,
                 // X, Y 軸値のフォント
                 scaleFontFamily : "'Arial'",
                 // X, Y 軸値のフォントサイズ
@@ -102,7 +102,41 @@
                 // animation: false の時にも実行されるようです
                 // e.g. onAnimationComplete : function() {alert('complete');}
                 onAnimationComplete : null,
+                // レスポンシブ対応
                 responsive:true,
+
+                // ツールチップの設定
+                customTooltips: function (tooltip) {
+                    var tooltipEl = $('#chartjs-tooltip');
+
+                    if (!tooltip) {
+                        tooltipEl.css({
+                            opacity: 0
+                        });
+                        return;
+                    }
+
+                    tooltipEl.removeClass('above below');
+                    tooltipEl.addClass(tooltip.yAlign);
+                    var parts = tooltip;
+                    console.log(parts);
+                    var innerHtml = '<b>' + parts.title + '日</b><br><span>' + parts.labels[0] + '<br>' + parts.labels[1] + '</span>'; //ココに日とか入れる
+                    tooltipEl.html(innerHtml);
+
+                    tooltipEl.css({
+                        opacity: 1,
+                        left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+                        top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+                        fontFamily: tooltip.fontFamily,
+                        fontSize: tooltip.fontSize,
+                        fontStyle: tooltip.fontStyle,
+                    });
+                },
+
+                // X軸のデータを間引く
+                labelsFilter: function (value, index) {
+                    return (index + 1) % 5 !== 0;  // ここで間引く数を調整
+                }
             }
 
 
@@ -164,7 +198,7 @@
                 scaleShowLabels : true,
                 // ラベルの表示フォーマット ( Y 軸の値 )
                 scaleLabel: scaleLabel_t,
-                multiTooltipTemplate: scaleLabel_t,
+                multiTooltipTemplate: "<%= datasetLabel %>: " + scaleLabel_t,
                 // X, Y 軸値のフォント
                 scaleFontFamily : "'Arial'",
                 // X, Y 軸値のフォントサイズ
@@ -210,7 +244,41 @@
                 // animation: false の時にも実行されるようです
                 // e.g. onAnimationComplete : function() {alert('complete');}
                 onAnimationComplete : null,
+                // レスポンシブ対応
                 responsive:true,
+
+                // ツールチップの設定
+                customTooltips: function (tooltip) {
+                    var tooltipEl = $('#chartjs-tooltip');
+
+                    if (!tooltip) {
+                        tooltipEl.css({
+                            opacity: 0
+                        });
+                        return;
+                    }
+
+                    tooltipEl.removeClass('above below');
+                    tooltipEl.addClass(tooltip.yAlign);
+                    var parts = tooltip;
+                    console.log(parts);
+                    var innerHtml = '<b>' + parts.title + '日</b><br><span>' + parts.labels[0] + '<br>' + parts.labels[1] + '</span>'; //ココに日とか入れる
+                    tooltipEl.html(innerHtml);
+
+                    tooltipEl.css({
+                        opacity: 1,
+                        left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+                        top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+                        fontFamily: tooltip.fontFamily,
+                        fontSize: tooltip.fontSize,
+                        fontStyle: tooltip.fontStyle,
+                    });
+                },
+
+                // X軸のデータを間引く
+                labelsFilter: function (value, index) {
+                    return (index + 1) % 5 !== 0;  // ここで間引く数を調整
+                }
             }
 
             var chart1 = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData_c, options_c);
