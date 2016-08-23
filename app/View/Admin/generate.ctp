@@ -38,6 +38,7 @@
                                         'text' => 'NOWALL担当者',
                                         'class' => 'col col-md-2 control-label',
                                         ),
+                                    'value' => $currentUser['name'],
                                     'between' => '<div class="col-md-8">',
                                     'after' => '</div>',
                                     'placeholder' => '柏木 祥太',

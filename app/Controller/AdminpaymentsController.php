@@ -61,9 +61,8 @@ class AdminpaymentsController extends AppController {
         $this->layout = 'adminLayout';
         $this->set('title_for_layout','ダッシュボード | ELITES');
 
-        $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+        $webpay = new WebPay($this->secret_key);
         $webpay->setAcceptLanguage('ja');
-
 
         // 最近追加された課金
         $charges = $webpay->charge->all(array("count"=>3));
@@ -104,11 +103,16 @@ class AdminpaymentsController extends AppController {
         $this->set('events', $events->data);
 
 
-        // 今月の売上金額・今月のトランザクション数
+        // 今月の売上金額・今月のトランザクション数・グラフ表示用データ
         $offset = 0;
         $amount_count = 0;
         $transaction_count = 0;
-        $first_day = strtotime( "first day of ". date("Y-m-01", time())); // 月初め
+        $first_day = strtotime( "first day of ". date("Y-m-01", time())); // 今月の月初め
+        $last_month_day = strtotime( "first day of - 1 month". date("Y-m-01", time())); // 先月の月初め
+        $amount_t_arr = array_pad($amount_t_arr = array(), 31, 0); // 今月の売上金額
+        $amount_l_arr = array_pad($amount_l_arr = array(), 31, 0); // 先月の売上金額
+        $transaction_t_arr = array_pad($transaction_t_arr = array(), 31, 0); // 今月のトランザクション数
+        $transaction_l_arr = array_pad($transaction_l_arr = array(), 31, 0); // 先月のトランザクション数
         while(1) {
             // 払い戻しは90日前まで可能 90 + 1ヶ月31日 = 121日
             // 一度に最大100件まで取得可能
@@ -121,12 +125,29 @@ class AdminpaymentsController extends AppController {
 
                 foreach($tmps->data as $tmp){
 
-                    // 今月の課金額の総和
-                    if($tmp->created >= $first_day) $amount_count = $amount_count + $tmp->amount;
+                    // 今月の課金額
+                    if($tmp->created >= $first_day) {
+                        $amount_count = $amount_count + $tmp->amount;
+
+                        $amount_t_arr[date("j", $tmp->created)-1] = $amount_t_arr[date("j", $tmp->created)-1] + $tmp->amount;
+                    }
+                    // 先月の課金額
+                    elseif($tmp->created >= $last_month_day) {
+                        $amount_l_arr[date("j", $tmp->created)-1] = $amount_l_arr[date("j", $tmp->created)-1] + $tmp->amount;
+                    }
 
                     // トランザクション数:手数料の足し引きが発生した数で計算
                     foreach($tmp->fees as $fee){
-                        if($fee->created >= $first_day) $transaction_count = $transaction_count + 1;
+                        // 今月のトランザクション数
+                        if($fee->created >= $first_day) {
+                            $transaction_count = $transaction_count + 1;
+
+                            $transaction_t_arr[date("j", $fee->created)-1] = $transaction_t_arr[date("j", $fee->created)-1] + 1;
+                        }
+                        // 先月のトランザクション数
+                        elseif($fee->created >= $last_month_day) {
+                            $transaction_l_arr[date("j", $fee->created)-1] = $transaction_l_arr[date("j", $fee->created)-1] + 1;
+                        }
                     }
                 }
             }
@@ -137,7 +158,7 @@ class AdminpaymentsController extends AppController {
         $this->Refund->recursive = -1;
         $params = array(
             'conditions' => array(
-                'created >=' => date('Y-m-d H:i:s', $first_day)
+                'created >=' => date('Y-m-d H:i:s', $last_month_day)
                 )
             );
         $refund_database = $this->Refund->find('all', $params);
@@ -147,9 +168,59 @@ class AdminpaymentsController extends AppController {
         }
         else {
             foreach($refund_database as $refund_data){
-                $amountRefunded_count = $amountRefunded_count + $refund_data['Refund']['amount_refunded'];
+                // 今月の払い戻し額
+                if(strtotime($refund_data['Refund']['created']) >= $first_day) {
+                    $amountRefunded_count = $amountRefunded_count + $refund_data['Refund']['amount_refunded'];
+                    $amount_t_arr[date("j", strtotime($refund_data['Refund']['created']))-1] = $amount_t_arr[date("j", strtotime($refund_data['Refund']['created']))-1] - $refund_data['Refund']['amount_refunded'];
+                }
+                // 先月の払い戻し額
+                elseif(strtotime($refund_data['Refund']['created']) >= $last_month_day) {
+                    $amount_l_arr[date("j", strtotime($refund_data['Refund']['created']))-1] = $amount_l_arr[date("j", strtotime($refund_data['Refund']['created']))-1] - $refund_data['Refund']['amount_refunded'];
+                }
+
             }
         }
+
+        $this->set('amount_t_arr', $amount_t_arr);
+        $this->set('amount_l_arr', $amount_l_arr);
+        $this->set('transaction_t_arr', $transaction_t_arr);
+        $this->set('transaction_l_arr', $transaction_l_arr);
+
+
+        // グラフオプション用
+        // 課金額
+        $amount_max = max(max($amount_t_arr), max($amount_l_arr), 0); // 課金額の最大値
+        $amount_min = min(min($amount_t_arr), min($amount_l_arr), 0); // 課金額の最小値
+        $amount_strlen = max(strlen($amount_max), strlen($amount_min)); // 桁数の最大値
+        $amount_max_round = round($amount_max + 5*pow(10, ($amount_strlen-2)), -($amount_strlen-1)); // 目盛りの最大値
+
+        // 目盛りの最小値
+        if($amount_min>=0) $amount_min_round = 0;
+        else $amount_min_round = round($amount_min - 5*pow(10, ($amount_strlen-2)), -($amount_strlen-1));
+
+        $scaleSteps_c = (abs($amount_max_round) + abs($amount_min_round)) / pow(10, strlen(abs($amount_max_round) + abs($amount_min_round))-1);
+        $scaleStepWidth_c = ($amount_max_round - $amount_min_round) / $scaleSteps_c;
+        $scaleStartValue_c = $amount_min_round;
+
+        $this->set('scaleSteps_c', $scaleSteps_c);
+        $this->set('scaleStepWidth_c', $scaleStepWidth_c);
+        $this->set('scaleStartValue_c', $scaleStartValue_c);
+
+        // トランザクション数
+        $transaction_max = max(max($transaction_t_arr), max($transaction_l_arr), 0); // トランザクション数の最大値
+        $transaction_min = min(min($transaction_t_arr), min($transaction_l_arr), 0); // トランザクション数の最小値
+        $transaction_strlen = max(strlen($transaction_max), strlen($transaction_min)); // 桁数の最大値
+        $transaction_max_round = round($transaction_max + 5*pow(10, ($transaction_strlen-2)), -($transaction_strlen-1)); // 目盛りの最大値
+        $transaction_min_round = 0; // 目盛りの最小値
+
+        $scaleSteps_t = (abs($transaction_max_round) + abs($transaction_min_round)) / pow(10, strlen(abs($transaction_max_round) + abs($transaction_min_round))-1);
+        $scaleStepWidth_t = ($transaction_max_round - $transaction_min_round) / $scaleSteps_t;
+        $scaleStartValue_t = $transaction_min_round;
+
+        $this->set('scaleSteps_t', $scaleSteps_t);
+        $this->set('scaleStepWidth_t', $scaleStepWidth_t);
+        $this->set('scaleStartValue_t', $scaleStartValue_t);
+
 
         // 今月の売上金額:課金額の総和 - 払戻額の総和
         $amount_count = $amount_count - $amountRefunded_count;
@@ -177,7 +248,7 @@ class AdminpaymentsController extends AppController {
             if(empty($page)) $offset=0;
             else $offset=$count*($page-1);
 
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay = new WebPay($this->secret_key);
             $webpay->setAcceptLanguage('ja');
             $charges = $webpay->charge->all(array("count"=>$count, "offset"=>$offset));
             $this->set('charges', $charges->data);
@@ -203,7 +274,7 @@ class AdminpaymentsController extends AppController {
         else {
             $this->set('title_for_layout','個別課金の詳細 | ELITES');
 
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay = new WebPay($this->secret_key);
             $webpay->setAcceptLanguage('ja');
 
             $charges_detail = $webpay->charge->retrieve($this->params['pass'][0]);
@@ -226,10 +297,10 @@ class AdminpaymentsController extends AppController {
             $customer = $this->User->find('first', $params);
             $this->set('customer', $customer['User']);
 
-            if($charges_detail->refunded) $this->set('paid', "払い戻し済み");
-            elseif($charges_detail->amountRefunded > 0) $this->set('paid', "一部払い戻し済み");
-            elseif($charges_detail->captured) $this->set('paid', "支払い済み");
-            else $this->set('paid', "未払い");
+            if($charges_detail->refunded) $this->set('paid', "<span class=\"badge badge-info\">払戻済</span>");
+            elseif($charges_detail->amountRefunded > 0) $this->set('paid', "<span class=\"badge badge-warning\">一部払戻済</span>");
+            elseif($charges_detail->captured) $this->set('paid', "<span class=\"badge badge-success\">支払済</span>");
+            else $this->set('paid', "<span class=\"badge badge-important\">未払い</span>");
 
             if(empty($this->params['pass'][1]) || $this->params['pass'][1]!="edit") $this->set('edit_flg', false);
             else $this->set('edit_flg', true);
@@ -242,20 +313,25 @@ class AdminpaymentsController extends AppController {
                 // 払い戻し額が範囲内の時
                 if(ctype_digit($this->request->data['Refund']['amount_refunded']) && $this->request->data['Refund']['amount_refunded'] >0 && $this->request->data['Refund']['amount_refunded'] <= $charges_detail->amount - $charges_detail->amount_refunded) {
 
-                    $charges_detail = $webpay->charge->refund(array(
-                        'id' => $this->params['pass'][0],
-                        'amount' => $this->request->data['Refund']['amount_refunded']));
+                    try {
+                        $charges_detail = $webpay->charge->refund(array(
+                            'id' => $this->params['pass'][0],
+                            'amount' => $this->request->data['Refund']['amount_refunded']));
 
-                    // RefundsテーブルへのDB登録
-                    $refund_savedata = array(
-                        'user_id' => $customer['User']['id'],
-                        'charge_id' => $this->params['pass'][0],
-                        'amount_refunded' => $this->request->data['Refund']['amount_refunded']
-                    );
+                        // RefundsテーブルへのDB登録
+                        $refund_savedata = array(
+                            'user_id' => $customer['User']['id'],
+                            'charge_id' => $this->params['pass'][0],
+                            'amount_refunded' => $this->request->data['Refund']['amount_refunded']
+                        );
 
-                    $this->Refund->save($refund_savedata);
+                        $this->Refund->save($refund_savedata);
 
-                    $this->redirect(array('action' => 'charges',$charges_detail->id));
+                        $this->redirect(array('action' => 'charges',$charges_detail->id));
+                    }
+                    catch (\WebPay\ErrorResponse\InvalidRequestException $e) {
+                        $this->set('webpay_error', $e);
+                    }
                 }
                 else {
                     // 払い戻し額がおかしい時
@@ -288,7 +364,7 @@ class AdminpaymentsController extends AppController {
             if(empty($page)) $offset=0;
             else $offset=$count*($page-1);
 
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay = new WebPay($this->secret_key);
             $webpay->setAcceptLanguage('ja');
             $customers = $webpay->customer->all(array("count"=>$count, "offset"=>$offset));
             $this->set('customers', $customers->data);
@@ -314,7 +390,7 @@ class AdminpaymentsController extends AppController {
         else {
             $this->set('title_for_layout','顧客の詳細 | ELITES');
 
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay = new WebPay($this->secret_key);
             $webpay->setAcceptLanguage('ja');
             $customers_detail = $webpay->customer->retrieve($this->params['pass'][0]);
 
@@ -342,7 +418,7 @@ class AdminpaymentsController extends AppController {
         if(empty($this->params['pass'][0])) {
             $this->set('title_for_layout','イベントログ | ELITES');
 
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay = new WebPay($this->secret_key);
             $webpay->setAcceptLanguage('ja');
 
             // 全件数:負荷がかかりそうなので中止
@@ -377,7 +453,7 @@ class AdminpaymentsController extends AppController {
         else {
             $this->set('title_for_layout','イベントの詳細 | ELITES');
 
-            $webpay = new WebPay('test_secret_2NKghr1KT4pPccIahLfvd4Sk');
+            $webpay = new WebPay($this->secret_key);
             $webpay->setAcceptLanguage('ja');
             $events_detail = $webpay->event->retrieve($this->params['pass'][0]);
 
@@ -408,8 +484,8 @@ class AdminpaymentsController extends AppController {
             $this->set('type_flg', $type_flg);
 
             if(stripos($events_detail->type, "charge") !== false) $this->set('type', "charge");
-            else if(stripos($events_detail->type, "customer") !== false) $this->set('type', "customer");
-            else if(stripos($events_detail->type, "recursion") !== false) $this->set('type', "recursion");
+            elseif(stripos($events_detail->type, "customer") !== false) $this->set('type', "customer");
+            elseif(stripos($events_detail->type, "recursion") !== false) $this->set('type', "recursion");
             else $this->set('type', "others");
 
             $this->render("events_detail");

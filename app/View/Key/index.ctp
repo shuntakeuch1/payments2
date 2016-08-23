@@ -43,7 +43,7 @@
                                 <tr>
                                     <th class="col-xs-4 col-sm-3 col-md-2">カード情報</th>
                                     <td class="col-xs-8 col-sm-9 col-md-10">
-                                        <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="test_public_cKKcPY89vgl2ba03eD0zAgix" data-lang="ja" data-partial="true"></script>
+                                        <script src="https://checkout.webpay.jp/v3/" class="webpay-button" data-key="<?=$public_key ?>" data-lang="ja" data-partial="true"></script>
                                         (※入力されたカード情報は、WebPayのシステムを通じて安全に送信されます)
                                         <?php if(isset($webpaytoken_error['0'])) echo "<br><span class=\"text-danger\">".$webpaytoken_error['0']."</span>";?>
                                     </td>

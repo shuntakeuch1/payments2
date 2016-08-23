@@ -26,7 +26,9 @@
                                     "<tr data-href=\"/payments/adminpayments/customers/".$customer->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-4"><?=$awesome_arr["customer"];?>&nbsp;<?=h($names[$key]);?></td>
                                         <td class="col-xs-5 col-sm-5 col-md-5"><?=h($customer->email);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $customer->created));?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $customer->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $customer->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

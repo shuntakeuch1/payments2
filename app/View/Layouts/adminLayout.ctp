@@ -10,6 +10,32 @@
 
     <link rel="shortcut icon" href="http://elite.sc/assets_front/images/favicon.ico">
 
+
+    <!-- グラフ表示用 -->
+    <?php if(($this->name == 'Adminpayments') && ($this->action == 'dashboard')): ?>
+        <?=$this->Html->scriptStart(array('inline'=>false)); ?>
+
+        var amount_t_arr = <?php echo json_encode($amount_t_arr, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+        var amount_l_arr = <?php echo json_encode($amount_l_arr, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+
+        var scaleSteps_c = <?=$scaleSteps_c; ?>;
+        var scaleStepWidth_c = <?=$scaleStepWidth_c; ?>;
+        var scaleStartValue_c = <?=$scaleStartValue_c; ?>;
+        var scaleLabel_c = "<%=new Intl.NumberFormat().format(value) %> 円";
+
+
+        var transaction_t_arr = <?php echo json_encode($transaction_t_arr, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+        var transaction_l_arr = <?php echo json_encode($transaction_l_arr, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+
+        var scaleSteps_t = <?=$scaleSteps_t; ?>;
+        var scaleStepWidth_t = <?=$scaleStepWidth_t; ?>;
+        var scaleStartValue_t = <?=$scaleStartValue_t; ?>;
+        var scaleLabel_t = "<%=new Intl.NumberFormat().format(value) %> 件";
+
+        <?=$this->Html->scriptEnd(); ?>
+    <?php endif; ?>
+
+
     <?php
         echo $this->Html->meta('icon');
 
@@ -43,7 +69,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#" class="navbar-brand"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ELITES PAYMENTS</a>
+                    <a class="navbar-brand"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ELITES PAYMENTS</a>
                 </div>
                 <!-- Site name for smallar screens -->
                 <!-- Navigation starts -->
@@ -52,8 +78,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Members button with number of latest members count -->
                         <li>
-                            <a href="#">
-                                <i class="fa fa-user"></i> ID名(管理者)
+                            <a>
+                                <i class="fa fa-user"></i> <?=$currentUser['name'];?>
                             </a>
                         </li>
 
@@ -228,6 +254,7 @@
         <?php echo $this->Html->script('../theme/js/respond.min');?>
         <?php echo $this->Html->script('../theme/js/html5shiv');?>
         <?php echo $this->Html->script('admincustom');?>
-
+        <?php echo $this->Html->script('Chart');?>
+        <?php echo $this->Html->script('Chart.option');?>
 </body>
 </html>

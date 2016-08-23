@@ -45,9 +45,19 @@
                                 <?php foreach($customers_charges as $key => $charge): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
-                                        <td class="col-xs-4 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=number_format(h($charge->amount - $charge->amountRefunded))."円";?></td>
-                                        <td class="col-xs-5 col-sm-6 col-md-6"><?=h($charge->description);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>
+                                        <td class="col-xs-4 col-sm-4 col-md-3">
+                                            <?=$awesome_arr["charge"];?>&nbsp;<?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
+
+                                            <div class="visible-xs-inline" style=""><br></div>
+                                            <?php if($charge->refunded) echo " <span class=\"badge badge-info\">払戻済</span>";
+                                                  elseif($charge->amount_refunded > 0) echo " <span class=\"badge badge-warning\">一部払戻済</span>";
+                                                  elseif($charge->captured) echo " <!--<span class=\"badge badge-success\">支払済</span>-->";
+                                                  else echo " <span class=\"badge badge-important\">未払い</span>"; ?>
+                                        </td>
+                                        <td class="col-xs-5 col-sm-5 col-md-6"><?=h($charge->description);?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $charge->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $charge->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
@@ -71,9 +81,11 @@
                                 <?php foreach($customers_detail->recursions as $key => $recursion): ?>
                                     <?php echo
                                     "<tr data-href=\"/payments/adminpayments/recursions/".$recursion->id. "\">"; ?>
-                                        <td class="col-xs-4 col-sm-3 col-md-3"><?=$awesome_arr["recursion"];?>&nbsp;<?=number_format(h($recursion->amount))."円";?></td>
-                                        <td class="col-xs-5 col-sm-6 col-md-6"><?=h($recursion->description);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $recursion->created));?></td>
+                                        <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr["recursion"];?>&nbsp;<?=number_format(h($recursion->amount))."円";?></td>
+                                        <td class="col-xs-5 col-sm-5 col-md-6"><?=h($recursion->description);?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $recursion->created));?>
+                                                                               <div class="visible-xs-inline" style=""><br></div>
+                                                                               <?=h(date('H:i', $recursion->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
