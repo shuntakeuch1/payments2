@@ -32,8 +32,8 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    protected $public_key = 'test_public_cKKcPY89vgl2ba03eD0zAgix';
-    protected $secret_key = 'test_secret_2NKghr1KT4pPccIahLfvd4Sk';
+    protected $public_key = 'test_public_94I0ag7bXenugPP1HrcG175s';
+    protected $secret_key = 'test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl';
 
     public function beforeFilter(){
         $this->set('currentUser',$this->Auth->user());
