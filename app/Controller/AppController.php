@@ -31,9 +31,16 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+    protected $public_key = 'test_public_cKKcPY89vgl2ba03eD0zAgix';
+    protected $secret_key = 'test_secret_2NKghr1KT4pPccIahLfvd4Sk';
+
     public function beforeFilter(){
         $this->set('currentUser',$this->Auth->user());
+
+        $this->set('public_key', $this->public_key);
     }
+
     public $components = array(
       // 'DebugKit.Toolbar',
        'Flash',
