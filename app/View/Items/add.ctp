@@ -21,7 +21,8 @@
                                     'novalidate' => true
                                     ));?>
 
-                    <?=$this->Form->input('cha_rec_id', array(
+
+                    <?=$this->Form->input('cha_rec_num', array(
                                     'type' => 'text',
                                     'label' => array(
                                         'text' => '商品番号',
@@ -110,6 +111,14 @@
                                         ]
                                     ]);?>
                     <?=$this->Form->input('photo_dir',['type' => 'hidden']);?>
+                    <?=$this->Form->input('period', array(
+                                    'type' => 'checkbox',
+                                    'label' => false,
+                                    'before' => '<label class="col-md-2 control-label">定期課金</label><label class="col-md-1"></label>',
+                                    'between' => '<label class="control-label checktext">※チェックしない場合は一時課金になります</label>',
+                                    'checked' => false,
+                                     )); ?>
+
                     <?=$this->Form->input('商品登録', array(
                                     'type' => 'submit',
                                     'label' => false,

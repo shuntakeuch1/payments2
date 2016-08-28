@@ -9,10 +9,11 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <h3 class="h3title">管理者ユーザ一覧</h3>
+                        <h3 class="h3title">管理者ユーザ一覧
+                        <?=$this->Html->link('新規登録','create',
+                          array('class'=>'btn btn-default pull-right',
+                                  'id'=>'btn-return'))?></h3>
                         <?=$this->Html->css("../css/successmessage");?>
-                        <?=$this->Html->link('新規登録','create')?>
-                        <?=$this->Html->link('ログアウト','logout')?>
                         <?=$this->Session->flash(); ?>
 
                           <?php foreach($adminusers as $user) :?>

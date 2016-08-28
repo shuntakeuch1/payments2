@@ -29,19 +29,20 @@ App::uses('AppModel','Model');
 
     public $validate = array(
       'name'=>array(
-        'rule'=>array('notBlank')
+        'rule'=>array('notBlank'),
+        'message' => '商品名を入力して下さい',
         ),
-      'cha_rec_id'=>array(
-        'rule'=>array('notBlank')
+      'cha_rec_num'=>array(
+        'rule'=>array('notBlank'),
+        'message' => '商品番号を入力して下さい',
         ),
       'amount' => array(
-        'rule' => array('notBlank')
-        ),
-      'amount' => array(
-        'rule' => array('notBlank')
+        'rule' => array('notBlank'),
+        'message' => '金額を入力して下さい',
         ),
       'description' => array(
-        'rule' => array('notBlank')
+        'rule' => array('notBlank'),
+        'message' => '内容を入力して下さい',
         ),
       'photo' => [
         'UnderPhpSizeLimit' => [

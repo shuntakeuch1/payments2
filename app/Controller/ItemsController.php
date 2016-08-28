@@ -1,9 +1,9 @@
 <?php
 
-// require VENDORS . 'autoload.php';
-// use WebPay\WebPay;
-require_once "webpay-php-full-2.2.2/autoload.php";
+require VENDORS . 'autoload.php';
 use WebPay\WebPay;
+// require_once "webpay-php-full-2.2.2/autoload.php";
+// use WebPay\WebPay;
 
 // App::item('AppController','Controller');
 class ItemsController extends AppController
@@ -23,7 +23,7 @@ class ItemsController extends AppController
     $p_limit = 5;
     $this->set('p_limit',$p_limit);
     // $this->autoLayout = false;  // レイアウトをOFFにする
-    $this->layout = 'itemLayout';
+     $this->layout = 'itemLayout';
     $this->set('title_for_layout','商材一覧画面 | ELITES') ;
     $this->Paginator->settings = array(
         'limit' => $p_limit,
@@ -71,7 +71,7 @@ class ItemsController extends AppController
       if($this->User->validates()){
     // API リクエスト
     try {
-          $webpay = new WebPay($this->secret_key);
+          $webpay = new WebPay('test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl');
           //エラー日本語化
           $webpay->setAcceptLanguage('ja');
           //取得したdataの定義
@@ -225,9 +225,20 @@ class ItemsController extends AppController
     $this->layout = 'adminLayout';
     if($this->request->is('post')){
       $this->Item->create();
-      if($this->Item->save($this->request->data)){
-        $this->Flash->success('アイテムを登録しました');
-        return $this-> redirect(['action' => 'index']);
+      if($this->Item->validates()){
+          $this->request->data['Item']['cha_rec_id'] = "" ;
+          if($this->request->data['Item']['period']=="1"){
+            $this->request->data['Item']['cha_rec_id'] = "rec_".$this->request->data['Item']['cha_rec_num'];
+            $data = $this->request->data;
+          }else{
+            $this->request->data['Item']['cha_rec_id'] = "cha_".$this->request->data['Item']['cha_rec_num'];
+            $data = $this->request->data;
+          }
+
+          if($this->Item->save($data)){
+            $this->Flash->success('アイテムを登録しました');
+            return $this-> redirect(['action' => 'index']);
+          }
       }
     }
   }

@@ -3,10 +3,35 @@
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
           <!-- <a href="#" class="navbar-brand">ELITES PAYMENTS</a> -->
-                    <a href="index.html" class="navbar-brand"> <span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
- ELITES PAYMENTS</span></a>
-
+                    <a href="index.html" class="navbar-brand"><span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                      ELITES PAYMENTS</span></a>
         </div>
+        <?php if ($currentUser) : ?>
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <!-- Notifications -->
+
+                    <!-- Notifications -->
+                    <ul class="nav navbar-nav navbar-right" style="height:50px;">
+                        <li>
+                            <a>
+                                <i class="fa fa-user"></i> <?=$currentUser['name'];?>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-download"></i> 入金情報
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/payments/adminusers/logout">
+                                <i class="fa fa-sign-out"></i> ログアウト
+                            </a>
+                        </li>
+
+                      </ul>
+                    </nav>
+          <?php endif ;?>
       </div>
     </div>
 
@@ -23,24 +48,27 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <h3>ELITES商材一覧</h3>
-
-                        <div style="text-align:right">
-                          <?=$this->Html->link('新規登録',['action' => 'add']);?>
-                        </div>
-
+                        <h3>ELITES商材一覧
+                        <?php if ($currentUser) : ?>
+                          <?=$this->Html->link('新規登録',['action' => 'add'],
+                                          array('class'=>'btn btn-default pull-right',
+                                                  'style' =>'border-radius:5px',
+                                                'id'=>'btn-return'))?>
+                        <?php endif;?>
+                        </h3>
+                          <br>
+                          <div clas="col-md-12">
                           <?php foreach($items as $item) :?>
                            <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
-                            <table class="table-bordered" style="margin-bottom:10px; width:100%; display:block;">
-
+                            <table class="table-bordered " style="margin-bottom:10px;">
                               <tr>
                                 <td rowspan="2" class="col-sm-1">
                                   <?=$this->Html->link(
-                                      $this->Item->photoImage($item, ['style' => 'width: 100%']),
+                                      $this->Item->photoImage($item, ['style' => 'width: 100%; height:auto;']),
                                       ['action' => 'view', $item['Item']['id']],
                                       ['escape' => false]);?>
                                 </td>
-                               <td class="col-sm-9"><?=h($item['Item']['name'])?></td>
+                               <td class="col-sm-offset-1 col-sm-9"><?=h($item['Item']['name'])?></td>
                                <?php if ($currentUser) : ?>
                                    <td rowspan="2" class="col-sm-1">
                                     <?=$this->Html->link('編集',[
@@ -52,8 +80,10 @@
                                       <div>
                                         <?=$this->Form->postLink('削除',
                                         ['action' => 'delete',$item['Item']['id']],
-                                        // ['confirm' =>'本当に削除してよろしいですか?'],
-                                        ['class' => 'btn btn-primary','role' => 'button']
+                                        ['escape' => false,
+                                        'class' => 'btn btn-primary',
+                                        'role' => 'button',
+                                        'confirm' =>'本当に削除してよろしいですか?']
                                         ) ;?>
                                       </div>
                                     </td>
@@ -81,7 +111,7 @@
                             }
                           ?>
                           </div>
-
+                        </div>
 
                     </div>
                 </div>

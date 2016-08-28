@@ -106,7 +106,7 @@
                                 </li>
                                 <li><?=$this->Html->link('定期課金の一覧',
                                                         array('controller'=>'adminpayments',
-                                                        'action'=>'recursion'));?>
+                                                        'action'=>'recursions'));?>
                                 </li>
                                 <li><?=$this->Html->link('イベントログ',
                                                         array('controller'=>'adminpayments',
@@ -190,7 +190,7 @@
                     </li>
                     <li><?=$this->Html->link('定期課金の一覧',
                                             array('controller'=>'adminpayments',
-                                            'action'=>'recursion'));?>
+                                            'action'=>'recursions'));?>
                     </li>
                     <li><?=$this->Html->link('イベントログ',
                                             array('controller'=>'adminpayments',

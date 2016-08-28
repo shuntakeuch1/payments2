@@ -123,7 +123,6 @@
                                         )
                                     ),
                                     )); ?>
-
                     <?=$this->Form->input('period', array(
                                     'type' => 'checkbox',
                                     'label' => false,
@@ -131,6 +130,7 @@
                                     'between' => '<label class="control-label checktext">※チェックしない場合は一時課金になります</label>',
                                     'checked' => false,
                                      )); ?>
+
 
                     <?=$this->Form->input('発行する', array(
                                     'type' => 'submit',
