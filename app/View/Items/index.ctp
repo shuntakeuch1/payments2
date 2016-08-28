@@ -54,6 +54,7 @@
                                           array('class'=>'btn btn-default pull-right',
                                                   'style' =>'border-radius:5px',
                                                 'id'=>'btn-return'))?>
+
                         <?php endif;?>
                         </h3>
                           <br>
@@ -62,7 +63,7 @@
                            <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
                             <table class="table-bordered " style="margin-bottom:10px;">
                               <tr>
-                                <td rowspan="2" class="col-sm-1">
+                                <td rowspan="2" class="col-sm-1" style="width:10%">
                                   <?=$this->Html->link(
                                       $this->Item->photoImage($item, ['style' => 'width: 100%; height:auto;']),
                                       ['action' => 'view', $item['Item']['id']],
@@ -70,18 +71,18 @@
                                 </td>
                                <td class="col-sm-offset-1 col-sm-9"><?=h($item['Item']['name'])?></td>
                                <?php if ($currentUser) : ?>
-                                   <td rowspan="2" class="col-sm-1">
+                                   <td rowspan="2" class="col-sm-1 sample" style="width:5%;">
                                     <?=$this->Html->link('編集',[
                                       'action' => 'edit',
                                       $item['Item']['id']],[
-                                      'class' => 'btn btn-primary','role' => 'button'
+                                      'class' => 'btn btn-primary btn-sm','role' => 'button'
                                     ]) ;?></td>
-                                   <td rowspan="2" class="col-sm-1">
+                                   <td rowspan="2" class="col-sm-1" style="width:5%;">
                                       <div>
                                         <?=$this->Form->postLink('削除',
                                         ['action' => 'delete',$item['Item']['id']],
                                         ['escape' => false,
-                                        'class' => 'btn btn-primary',
+                                        'class' => 'btn btn-primary btn-sm',
                                         'role' => 'button',
                                         'confirm' =>'本当に削除してよろしいですか?']
                                         ) ;?>

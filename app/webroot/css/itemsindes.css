@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+@media only screen and (max-width:400px){
+    tr{
+        display: block;
+        margin-bottom: 1.5em;
+        //background: red;
+        width: 100%;
+    }
+
+    td {
+        display: block;
+    }
+    td:nth-child(1) {
+        box-sizing: table-row-group;
+        width: 100%;
+        float: left;
+    }
+    td:nth-child(2){
+        box-sizing: border-box;
+        width:100%;
+    }
+    td:nth-child(3),td:nth-child(4){
+        display: none;
+        box-sizing: border-box;
+        width: 50%;
+    }
+
+}
+
+//<?=$this->Html->css("itemsindes");?>
