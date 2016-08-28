@@ -32,8 +32,8 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    protected $public_key = 'test_public_94I0ag7bXenugPP1HrcG175s';
-    protected $secret_key = 'test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl';
+    protected $public_key = 'test_public_6bB6LMdbj0A46CM5BGgsDbWL';
+    protected $secret_key = 'test_secret_8oG8NObBg1u9c9u0nXcBRgz7';
 
     public function beforeFilter(){
         $this->set('currentUser',$this->Auth->user());
@@ -70,7 +70,7 @@ class AppController extends Controller {
           'authError' =>'ログインしてください',
         ]
      );
-//     public function appError($error) {
-//         //$this->redirect('http://elite.sc/');
-// }
-     }
+    public function appError($error) {
+        $this->redirect('http://elite.sc/');
+    }
+}
