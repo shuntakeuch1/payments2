@@ -3,17 +3,6 @@
 App::uses('AppModel','Model');
  class Item extends AppModel
  {
-    // public $actsAs = [
-    //     //UploadプラグインのUploadBehavior
-    //     'Upload.Upload' => [
-    //         //photoというカラムにUploadビヘイビアを使ってファイル名を登録する
-    //         'photo' => [
-    //             //デフォルトのカラム名dirをphoto_dirに変更
-    //             'fields' => ['dir' => 'photo_dir'],
-    //             'deleteOnUpdate' => true,
-    //         ]
-    //     ]
-    // ];
     public $actsAs = [
         // UploadプラグインのUploadBehaviorという意味
         'Upload.Upload' => [
@@ -21,7 +10,7 @@ App::uses('AppModel','Model');
             'photo' => [
                 // デフォルトのカラム名 dir を photo_dir に変更
                 'fields' => ['dir' => 'photo_dir'],
-                'deleteOnUpdate' => true,
+                'deleteOnUpdate' => false,
             ]
         ]
     ];

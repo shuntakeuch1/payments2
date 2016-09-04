@@ -146,10 +146,10 @@
                         </li>
  -->
                         <li>
-                            <i class="fa fa-sign-out"></i>
-                            <?=$this->Html->link('ログアウト',
+                            <?=$this->Html->link('<i class="fa fa-sign-out"></i> ログアウト',
                                                 ['controller' => 'adminusers',
-                                                'action' => 'logout']);?>
+                                                'action' => 'logout'],
+                                                ['escape' => false]);?>
                         </li>
                     </ul>
                 </nav>
