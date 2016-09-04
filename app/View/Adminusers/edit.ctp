@@ -7,8 +7,12 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-md-12">
-                    <h3 class="h3title">管理者ユーザ編集</h3>
-                    <a href="/payments/adminusers/changePassword">パスワード変更</a>
+                    <h3 class="h3title">管理者ユーザ編集
+                        <?=$this->Html->link('パスワード変更',
+                            ['action' => 'changePassword',$id ],
+                                array('class'=>'btn btn-default pull-right',
+                                  'id'=>'btn-return'))?>
+                    </h3>
                       <?=$this->Form->create('Adminuser',array(
                                     'url' => array(
                                         'controller' => 'adminusers',

@@ -43,6 +43,7 @@ class AdminusersController extends AppController {
 
   public function edit($id =null){
     $this->layout = 'adminLayout';
+    $this->set('id',$id);
     if($this->request->is(['post','put'])){
       if($this->Adminuser->save($this->request->data)){
         $this->Flash->success('会員情報を変更しました');
@@ -58,7 +59,7 @@ class AdminusersController extends AppController {
     }
   }
 
-  public function changePassword(){
+  public function changePassword($id =null){
     $this->layout = 'adminLayout';
     if($this->request->is(['post','put'])){
       if($this->Adminuser->save($this->request->data)){

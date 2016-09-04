@@ -102,35 +102,8 @@ ELITES PAYMENTS</span></a>
 
 
     <!-- CONTACT -->
-    <section class="module-small">
+    <section class="module-small" style="margin-bottom:10%">
 
-        <div class="container">
-
-            <div class="row">
-
-                <!-- CONTENT BOX -->
-                <div class="col-xs-6">
-                    <div class="content-box">
-                        <div class="content-box-title font-inc">
-                            <p class="m-b-0">株式会社NOWALL</p>
-                        </div>
-                        <p>
-                            <a href="http://nowall.co.jp/" target="_blank">会社概要</a>
-                            <a href="http://nowall.co.jp/legal" target="_blank">特定商取引法に基づく表示</a>
-                        </p>
-                    </div>
-                </div>
-                <!-- /CONTENT BOX -->
-
-                <!-- CONTENT BOX -->
-                <div class="col-xs-6">
-                    <p class="m-b-0" style="font-size: 1.5em">アクセス</p>
-                    <p class="m-b-0" style="font-size: 1.5em">〒160-0023 東京都新宿区西新宿6丁目10番1号 セントラルパークタワー ラ・トゥール新宿 6階</p>
-                </div>
-                <!-- /CONTENT BOX -->
-            </div>
-
-        </div>
 
     </section>
     <!-- /CONTACT -->

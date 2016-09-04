@@ -60,17 +60,17 @@ class AppController extends Controller {
             ]
           ],
           'loginRedirect' => [
-            'controller' => 'Adminusers',
-            'action' =>'index'
+            'controller' => 'Adminpayments',
+            'action' =>'dashboard'
           ],
           'logoutRedirect' =>[
-            'controller' => 'items',
-            'action' =>'index'
+            'controller' => 'Adminusers',
+            'action' =>'login'
           ],
           'authError' =>'ログインしてください',
         ]
      );
-    public function appError($error) {
-        $this->redirect('http://elite.sc/');
-    }
+    // public function appError($error) {
+    //     $this->redirect('http://elite.sc/');
+    // }
 }

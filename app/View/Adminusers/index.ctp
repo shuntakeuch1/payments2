@@ -17,13 +17,16 @@
                         <?=$this->Session->flash(); ?>
 
                           <?php foreach($adminusers as $user) :?>
-                            <table style="border:solid 1px #000; margin-bottom:10px; width:100%;">
+                            <table class="table table-bordered" style="margin-bottom:10px; width:100%;">
                               <tr>
                                 <td class="col-sm-2"><?=h($user['Adminuser']['staff_id'])?></td>
-                                <td  class="col-sm-3" style = "border-left:solid 1px #000;"><?=h($user['Adminuser']['name'])?></td>
-                                <td class="col-sm-4" style = "border-left:solid 1px #000;"><?=h($user['Adminuser']['email'])?></td>
-                                <td class="col-sm-1" style = "border-left:solid 1px #000; align:center;"><a style="height:100%; width:100%; display:block" href="/payments/adminusers/edit/<?=$user['Adminuser']['id'] ?>">編集</a></td>
-                                <td class="col-sm-1" style = "border-left:solid 1px #000; text-align:center;">
+                                <td  class="col-sm-3"><?=h($user['Adminuser']['name'])?></td>
+                                <td class="col-sm-4" ><?=h($user['Adminuser']['email'])?></td>
+                                <td class="col-sm-1" style = "text-align:center;">
+                                <?=$this->Html->link('編集',['action' => 'edit',$user['Adminuser']['id']]
+                                );?>
+                                </td>
+                                <td class="col-sm-1" style = "text-align:center;">
                                   <?=$this->Form->postLink('削除',
                                   ['action' => 'delete',$user['Adminuser']['id']],
                                   ['confirm' => '本当に削除してよろしいですか?']
