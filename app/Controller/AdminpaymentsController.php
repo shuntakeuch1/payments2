@@ -4,6 +4,8 @@ App::uses('CakeEmail', 'Network/Email');
 
 require VENDORS . 'autoload.php';
 use WebPay\WebPay;
+// require_once "webpay-php-full-2.2.2/autoload.php";
+// use WebPay\WebPay;
 
 class AdminpaymentsController extends AppController {
 
@@ -609,36 +611,12 @@ class AdminpaymentsController extends AppController {
             $recursions = $webpay->recursion->all(array("count"=>$count, "offset"=>$offset));
             $this->set('recursions', $recursions->data);
             $recursions_next = $webpay->recursion->all(array("count"=>1, "offset"=>$offset+$count));
+
             if(empty($recursions_next->data[0])) $next_flg=0;
             else $next_flg=1;
+
             $this->set('next_flg', $next_flg);
 
-            // //定期課金をDB検索
-            // $names = array();
-            // foreach($recursions->data as $recursion){
-            //     $status = "無効";
-            //     if($recursion->status=="active"){
-            //         $status = "有効";
-            //     }
-            //
-            //     // $params = array(
-            //     //     'conditions' => array(
-            //     //         'recursion_id' => $recursion->id
-            //     //         )
-            //     //     );
-            //     // $recursion = $this->Recursion->find('first', $params);
-            //     // array_push($names,array(
-            //     //     $recursion['Recursion']['summary'],
-            //     //     $status,
-            //     //     $recursion['Recursion']['modified']
-            //     //     ));
-            //     array_push($names,array(
-            //         $recursion->description,
-            //         $status,
-            //         date("Y/m/d H:i T",$recursion->lastExecuted)
-            //         ));
-            // }
-            // $this->set('names', $names);
         }
         else {
             $this->set('title_for_layout','定期課金の詳細 | ELITES');

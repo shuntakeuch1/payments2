@@ -101,12 +101,15 @@
                           <!-- ページネーション機能 -->
                           <div style = "text-align:center;">
                           <?php
+                          //5件以上の時にページネーション表示
                             if($p_limit <= $maxitem){
                             echo $this->Paginator->prev('< 前へ ');
                             echo $this->Paginator->numbers();
                             echo $this->Paginator->next(' 次へ >');
                             }
                           ?>
+                          <br>
+                          <?php echo $this->paginator->counter(array('format' => '%start%~%end%件目 (全%count%件)'));?>
                           </div>
                         </div>
 
