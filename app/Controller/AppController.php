@@ -64,7 +64,8 @@ class AppController extends Controller {
             'action' =>'dashboard'
           ],
           'logoutRedirect' =>[
-            'controller' => 'Adminusers',
+
+            'controller' => 'adminusers',
             'action' =>'login'
           ],
           'authError' =>'ログインしてください',
