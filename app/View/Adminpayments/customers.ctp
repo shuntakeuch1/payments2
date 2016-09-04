@@ -22,11 +22,12 @@
                             </thead>
                             <tbody>
                                 <?php foreach($customers as $key => $customer): ?>
-                                    <?php echo
-                                    "<tr data-href=\"customers/".$customer->id. "\">"; ?>
+
                                         <?php if(empty($names[$key])) :?>
+                                        <tr class="cursor_pointer_n">
                                             <td class="col-xs-4 col-sm-4 col-md-4" style="color:red"><?=$awesome_arr["customer"];?>&nbsp;ID:<?=h($customer->id);?>がDB上に見つかりません</td>
                                         <?php else :?>
+                                        <?php echo "<tr class=\"cursor_pointer\" data-href=\"customers/".$customer->id. "\">"; ?>
                                             <td class="col-xs-4 col-sm-4 col-md-4"><?=$awesome_arr["customer"];?>&nbsp;<?=h($names[$key]);?></td>
                                         <?php endif;?>
                                         <td class="col-xs-5 col-sm-5 col-md-5"><?=h($customer->email);?></td>
@@ -39,23 +40,51 @@
                             </table>
                         <?php endif; ?>
 
-                        <div class="pagiWrapper pagiCenter">
+                        <div class="pagiWrapper pagiColor">
                             <?php if($page>1): ?>
-                                <?=$this->Html->link('<< 前へ',
+                                <?=$this->Html->link('<<',
                                                         array('controller'=>'adminpayments',
                                                         'action'=>'customers',
                                                         "?" => array("page" => $page-1)
                                                         )
                                                     );?>
-                                &nbsp;&nbsp;&nbsp;
+                                &nbsp;
                             <?php endif; ?>
+
+                            <?php foreach($page_counts as $page_count): ?>
+                                <?php if($page_count==$page): ?>
+                                    <?=$this->Html->link($page_count,
+                                                            array('controller'=>'adminpayments',
+                                                            'action'=>'customers',
+                                                            "?" => array("page" => $page_count)
+                                                            ),
+                                                            array('class' => 'page_strong')
+                                                        );?>
+                                <?php else: ?>
+                                    <?=$this->Html->link($page_count,
+                                                            array('controller'=>'adminpayments',
+                                                            'action'=>'customers',
+                                                            "?" => array("page" => $page_count)
+                                                            )
+                                                        );?>
+                                <?php endif; ?>
+                                &nbsp;
+                            <?php endforeach;?>
+
                             <?php if($next_flg): ?>
-                                <?=$this->Html->link('次へ >>',
+                                <?=$this->Html->link('>>',
                                                         array('controller'=>'adminpayments',
                                                         'action'=>'customers',
                                                         "?" => array("page" => $page+1)
                                                         )
                                                     );?>
+                            <?php endif; ?>
+
+                            <br>
+                            <?php if($page*$count > $number): ?>
+                                <?=($page-1)*$count+1;?> ~ <?=$number;?>件目 (全<?=$number;?>件)
+                            <?php else: ?>
+                                <?=($page-1)*$count+1;?> ~ <?=($page)*$count;?>件目 (全<?=$number;?>件)
                             <?php endif; ?>
                         </div>
 

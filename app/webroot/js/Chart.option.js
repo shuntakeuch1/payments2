@@ -64,7 +64,7 @@
                 // X, Y 軸値のフォントスタイル, normal, italic など
                 scaleFontStyle : "italic",
                 // X, Y 軸値の文字色
-                scaleFontColor : "#666",
+                scaleFontColor : "#000",
                 // グリッドライン ( Y 軸の横ライン ) の表示
                 scaleShowGridLines : true,
                 // グリッドラインの色
@@ -206,7 +206,7 @@
                 // X, Y 軸値のフォントスタイル, normal, italic など
                 scaleFontStyle : "italic",
                 // X, Y 軸値の文字色
-                scaleFontColor : "#666",
+                scaleFontColor : "#000",
                 // グリッドライン ( Y 軸の横ライン ) の表示
                 scaleShowGridLines : true,
                 // グリッドラインの色

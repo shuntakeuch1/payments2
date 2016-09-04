@@ -60,6 +60,17 @@ thead tr td {
 
 .pagiCenter {
     text-align: center;
+    color: #000 !important;
+}
+
+.pagiColor {
+    /* text-align: center; */
+    color: #000 !important;
+}
+
+.page_strong {
+    font-size: 15.5px !important;
+    font-weight:bold !important;
 }
 
 #btn-round {
@@ -67,6 +78,7 @@ thead tr td {
     padding: 6px 10px !important;
     font-size: 15px !important;
     font-weight:bold !important;
+    color: #fff !important;
 }
 
 #btn-return {
@@ -175,3 +187,13 @@ canvas {
      -webkit-transform: translate(-50%, 0);
      transform: translate(-50%, 0);
  }
+
+/* hover */
+.cursor_pointer{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.cursor_pointer_n{
+    cursor: no-drop;
+}

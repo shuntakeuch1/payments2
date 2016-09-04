@@ -251,6 +251,7 @@ class AdminpaymentsController extends AppController {
             $this->set('page', $page);
 
             $count=10;
+            $this->set('count', $count);
             if(empty($page)) $offset=0;
             else $offset=$count*($page-1);
 
@@ -279,6 +280,36 @@ class AdminpaymentsController extends AppController {
                 else array_push($names, $customer['User']['name']);
             }
             $this->set('names', $names);
+
+            // ページネーション
+            $count_c=100;
+            $offset_c=500;
+            while(1) {
+                $charges_c = $webpay->charge->all(array("count"=>$count_c, "offset"=>$offset_c));
+
+                if((count($charges_c->data)>0) or ($offset_c==0)) {
+                    $number = $offset_c + count($charges_c->data);
+                    break;
+                }
+                else
+                    $offset_c -= 100;
+            }
+            $this->set('number', $number);
+
+            $page_counts = array();
+            $page_range = 4;
+
+            if($number % $count == 0) $page_max = $number / $count;
+            else $page_max = $number / $count + 1;
+
+            for($i=-$page_range; $i<$page_range+1; $i++) {
+                $page_count_tmp = $page + $i;
+
+               if(($page_count_tmp >0) && ($page_count_tmp <= $page_max))
+                    array_push($page_counts, $page_count_tmp);
+            }
+
+            $this->set('page_counts', $page_counts);
         }
         else {
             $this->set('title_for_layout','個別課金の詳細 | ELITES');
@@ -305,7 +336,7 @@ class AdminpaymentsController extends AppController {
             );
             $customer = $this->User->find('first', $params);
 
-            if(empty($customer['User'])) $this->set('customer', "");
+            if(empty($customer['User'])) $this->redirect(array('action' => 'charges'));
             else $this->set('customer', $customer['User']);
 
             if($charges_detail->refunded) $this->set('paid', "<span class=\"badge badge-info\">払戻済</span>");
@@ -372,6 +403,7 @@ class AdminpaymentsController extends AppController {
             $this->set('page', $page);
 
             $count=10;
+            $this->set('count', $count);
             if(empty($page)) $offset=0;
             else $offset=$count*($page-1);
 
@@ -400,6 +432,36 @@ class AdminpaymentsController extends AppController {
                 else array_push($names, $customer['User']['name']);
             }
             $this->set('names', $names);
+
+            // データの総数
+            $count_c=100;
+            $offset_c=500;
+            while(1) {
+                $customer_c = $webpay->customer->all(array("count"=>$count_c, "offset"=>$offset_c));
+
+                if((count($customer_c->data)>0) or ($offset_c==0)) {
+                    $number = $offset_c + count($customer_c->data);
+                    break;
+                }
+                else
+                    $offset_c -= 100;
+            }
+            $this->set('number', $number);
+
+            $page_counts = array();
+            $page_range = 4;
+
+            if($number % $count == 0) $page_max = $number / $count;
+            else $page_max = $number / $count + 1;
+
+            for($i=-$page_range; $i<$page_range+1; $i++) {
+                $page_count_tmp = $page + $i;
+
+               if(($page_count_tmp >0) && ($page_count_tmp <= $page_max))
+                    array_push($page_counts, $page_count_tmp);
+            }
+
+            $this->set('page_counts', $page_counts);
         }
         else {
             $this->set('title_for_layout','顧客の詳細 | ELITES');
@@ -422,7 +484,7 @@ class AdminpaymentsController extends AppController {
 
             $customer = $this->User->find('first', $params);
 
-            if(empty($customer['User'])) $this->set('customer', "");
+            if(empty($customer['User'])) $this->redirect(array('action' => 'customers'));
             else $this->set('customer', $customer['User']);
 
             $this->render("customers_detail");
@@ -438,24 +500,13 @@ class AdminpaymentsController extends AppController {
             $webpay = new WebPay($this->secret_key);
             $webpay->setAcceptLanguage('ja');
 
-            // 全件数:負荷がかかりそうなので中止
-            // $count_offset = 0;
-            // $all_count = 0;
-            // while(1) {
-            //     $tmps = $webpay->event->all(array("count"=>100, "offset"=>$count_offset));
-
-            //     $all_count = $all_count + count($tmps->data);
-
-            //     if(empty($tmps->data[0])) break;
-            //     else $count_offset = $count_offset + 100;
-            // }
-
             if(empty($this->params['url']['page']))$page=1;
             else $page = $this->params['url']['page'];
 
             $this->set('page', $page);
 
             $count=10;
+            $this->set('count', $count);
             if(empty($page)) $offset=0;
             else $offset=$count*($page-1);
 
@@ -466,6 +517,36 @@ class AdminpaymentsController extends AppController {
             if(empty($events_next->data[0])) $next_flg=0;
             else $next_flg=1;
             $this->set('next_flg', $next_flg);
+
+            // データの総数
+            $count_c=100;
+            $offset_c=500;
+            while(1) {
+                $event_c = $webpay->event->all(array("count"=>$count_c, "offset"=>$offset_c));
+
+                if((count($event_c->data)>0) or ($offset_c==0)) {
+                    $number = $offset_c + count($event_c->data);
+                    break;
+                }
+                else
+                    $offset_c -= 100;
+            }
+            $this->set('number', $number);
+
+            $page_counts = array();
+            $page_range = 4;
+
+            if($number % $count == 0) $page_max = $number / $count;
+            else $page_max = $number / $count + 1;
+
+            for($i=-$page_range; $i<$page_range+1; $i++) {
+                $page_count_tmp = $page + $i;
+
+               if(($page_count_tmp >0) && ($page_count_tmp <= $page_max))
+                    array_push($page_counts, $page_count_tmp);
+            }
+
+            $this->set('page_counts', $page_counts);
         }
         else {
             $this->set('title_for_layout','イベントの詳細 | ELITES');
@@ -508,6 +589,7 @@ class AdminpaymentsController extends AppController {
             $this->render("events_detail");
         }
     }
+
     public function recursions (){
         $this->layout = 'adminLayout';
        if(empty($this->params['pass'][0])) {
@@ -594,5 +676,4 @@ class AdminpaymentsController extends AppController {
 
         return $this->redirect(['action' => 'recursions']);
     }
-
 }

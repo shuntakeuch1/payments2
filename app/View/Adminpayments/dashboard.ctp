@@ -42,27 +42,30 @@
                             </thead>
                             <tbody>
                                 <?php foreach($charges as $key => $charge): ?>
-                                    <?php echo
-                                    "<tr data-href=\"charges/".$charge->id. "\">"; ?>
-                                        <?php if(empty($charge_names[$key])) :?>
-                                            <td class="col-xs-3 col-sm-3 col-md-3" style="color:red"><?=$awesome_arr["charge"];?>&nbsp;ID:<?=h($charge->id);?>がDB上に見つかりません</td>
-                                        <?php else :?>
-                                            <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($charge_names[$key]);?></td>
-                                        <?php endif;?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
 
-                                        <div class="visible-xs-inline" style=""><br></div>
-                                        <?php if($charge->refunded) echo " <span class=\"badge badge-info\">払戻済</span>";
-                                              elseif($charge->amount_refunded > 0) echo " <span class=\"badge badge-warning\">一部払戻済</span>";
-                                              elseif($charge->captured) echo " <!--<span class=\"badge badge-success\">支払済</span>-->";
-                                              else echo " <span class=\"badge badge-important\">未払い</span>"; ?>
+                                    <?php if(empty($charge_names[$key])) :?>
+                                        <tr class="cursor_pointer_n">
+                                        <td class="col-xs-3 col-sm-3 col-md-3" style="color:red"><?=$awesome_arr["charge"];?>&nbsp;ID:<?=h($charge->id);?>がDB上に見つかりません</td>
+                                    <?php else :?>
+                                        <?php echo "<tr class=\"cursor_pointer\" data-href=\"charges/".$charge->id. "\">"; ?>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($charge_names[$key]);?></td>
+                                    <?php endif;?>
 
-                                        </td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h($charge->description);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
+
+                                    <div class="visible-xs-inline" style=""><br></div>
+                                    <?php if($charge->refunded) echo " <span class=\"badge badge-info\">払戻済</span>";
+                                          elseif($charge->amount_refunded > 0) echo " <span class=\"badge badge-warning\">一部払戻済</span>";
+                                          elseif($charge->captured) echo " <!--<span class=\"badge badge-success\">支払済</span>-->";
+                                          else echo " <span class=\"badge badge-important\">未払い</span>"; ?>
+                                    </td>
+
+                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h($charge->description);?></td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>
+
                                     </tr>
                                 <?php endforeach;?>
-                                <tr data-href="charges"><td class="td_log" colspan="4">課金の履歴を見る</td></tr>
+                                <tr class="cursor_pointer" data-href="charges"><td class="td_log" colspan="4">課金の履歴を見る</td></tr>
                             </tbody>
                         </table>
 
@@ -80,18 +83,18 @@
                             </thead>
                             <tbody>
                                 <?php foreach($customers as $key => $customer): ?>
-                                    <?php echo
-                                    "<tr data-href=\"customers/".$customer->id. "\">"; ?>
                                         <?php if(empty($customer_names[$key])) :?>
+                                        <tr class="cursor_pointer_n">
                                             <td class="col-xs-4 col-sm-4 col-md-4" style="color:red"><?=$awesome_arr["customer"];?>&nbsp;ID:<?=h($customer->id);?>がDB上に見つかりません</td>
                                         <?php else :?>
+                                        <?php echo "<tr class=\"cursor_pointer\" data-href=\"customers/".$customer->id. "\">"; ?>
                                             <td class="col-xs-4 col-sm-4 col-md-4"><?=$awesome_arr["customer"];?>&nbsp;<?=h($customer_names[$key]);?></td>
                                         <?php endif;?>
                                         <td class="col-xs-5 col-sm-5 col-md-5"><?=h($customer->email);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $customer->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
-                                <tr data-href="customers"><td class="td_log" colspan="4">顧客の一覧を見る</td></tr>
+                                <tr class="cursor_pointer" data-href="customers"><td class="td_log" colspan="4">顧客の一覧を見る</td></tr>
                             </tbody>
                             </table>
                         <?php endif; ?>
@@ -110,12 +113,12 @@
                             <tbody>
                                 <?php foreach($events as $key => $event): ?>
                                     <?php echo
-                                    "<tr data-href=\"events/".$event->id. "\">"; ?>
+                                    "<tr class=\"cursor_pointer\" data-href=\"events/".$event->id. "\">"; ?>
                                         <td class="col-xs-9 col-sm-9 col-md-9"><?=$awesome_arr[substr($event->type, 0, strcspn($event->type,'.'))];?>&nbsp;<?=h($log_arr[$event->type]);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $event->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
-                                <tr data-href="events"><td class="td_log" colspan="4">イベントログを見る</td></tr>
+                                <tr class="cursor_pointer" data-href="events"><td class="td_log" colspan="4">イベントログを見る</td></tr>
                             </tbody>
                             </table>
                         <?php endif; ?>

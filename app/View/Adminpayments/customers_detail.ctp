@@ -51,7 +51,7 @@
                             <tbody>
                                 <?php foreach($customers_charges as $key => $charge): ?>
                                     <?php echo
-                                    "<tr data-href=\"../charges/".$charge->id. "\">"; ?>
+                                    "<tr class=\"cursor_pointer\" data-href=\"../charges/".$charge->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-3">
                                             <?=$awesome_arr["charge"];?>&nbsp;<?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
 
@@ -87,7 +87,7 @@
                             <tbody>
                                 <?php foreach($customers_detail->recursions as $key => $recursion): ?>
                                     <?php echo
-                                    "<tr data-href=\"../recursions/".$recursion->id. "\">"; ?>
+                                    "<tr class=\"cursor_pointer\" data-href=\"../recursions/".$recursion->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr["recursion"];?>&nbsp;<?=number_format(h($recursion->amount))."円";?></td>
                                         <td class="col-xs-5 col-sm-5 col-md-6"><?=h($recursion->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $recursion->created));?>
