@@ -64,7 +64,6 @@ class AppController extends Controller {
             'action' =>'dashboard'
           ],
           'logoutRedirect' =>[
-
             'controller' => 'adminusers',
             'action' =>'login'
           ],

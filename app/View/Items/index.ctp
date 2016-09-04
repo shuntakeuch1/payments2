@@ -17,16 +17,12 @@
                                 <i class="fa fa-user"></i> <?=$currentUser['name'];?>
                             </a>
                         </li>
-<!--                         <li>
-                            <a href="#">
-                                <i class="fa fa-download"></i> 入金情報
-                            </a>
-                        </li>
- -->
                         <li>
-                            <a href="/payments/adminusers/logout">
-                                <i class="fa fa-sign-out"></i> ログアウト
-                            </a>
+                            <!-- <i class="fa fa-sign-out"></i> -->
+                            <?=$this->Html->link('<i class="fa fa-sign-out"></i> ログアウト',
+                                                ['controller' => 'adminusers',
+                                                'action' => 'logout'],
+                                                ['escape' => false ]);?>
                         </li>
 
                       </ul>

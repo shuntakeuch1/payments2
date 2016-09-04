@@ -146,9 +146,10 @@
                         </li>
  -->
                         <li>
-                            <a href="/payments/adminusers/logout">
-                                <i class="fa fa-sign-out"></i> ログアウト
-                            </a>
+                            <i class="fa fa-sign-out"></i>
+                            <?=$this->Html->link('ログアウト',
+                                                ['controller' => 'adminusers',
+                                                'action' => 'logout']);?>
                         </li>
                     </ul>
                 </nav>
