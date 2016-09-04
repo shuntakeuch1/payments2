@@ -17,12 +17,12 @@
                                 <i class="fa fa-user"></i> <?=$currentUser['name'];?>
                             </a>
                         </li>
-                        <li>
+<!--                         <li>
                             <a href="#">
                                 <i class="fa fa-download"></i> 入金情報
                             </a>
                         </li>
-
+ -->
                         <li>
                             <a href="/payments/adminusers/logout">
                                 <i class="fa fa-sign-out"></i> ログアウト
