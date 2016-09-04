@@ -60,7 +60,7 @@ class AppController extends Controller {
             ]
           ],
           'loginRedirect' => [
-            'controller' => 'Adminpayments',
+            'controller' => 'adminpayments',
             'action' =>'dashboard'
           ],
           'logoutRedirect' =>[
