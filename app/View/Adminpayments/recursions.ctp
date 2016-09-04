@@ -24,7 +24,8 @@
                             </thead>
                             <tbody>
                             <?php foreach($recursions as $recursion):?>
-                                <?php echo"<tr data-href=\"recursions/".$recursion->id. "\">"; ?>
+                                <a>
+                                <?php echo"<tr data-href=\"recursions/".$recursion->id. "\" style=\"cursor:pointer;\" >"; ?>
                                 <td><?=$awesome_arr["recursion"];?>&nbsp;<?=$recursion->description;?></td>
                                 <td><?php if ($recursion->status=="active"){
                                     echo "<span class=\"badge badge-success\">有効</span>" ;
@@ -63,5 +64,6 @@
             </div>
         </section>
         <!-- /SERVICES -->
+    </div>
     </div>
 </div><!--/ Mainbar ends

@@ -2,11 +2,8 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 
-// require VENDORS . 'autoload.php';
-// use WebPay\WebPay;
-require_once "webpay-php-full-2.2.2/autoload.php";
+require VENDORS . 'autoload.php';
 use WebPay\WebPay;
-
 
 class AdminpaymentsController extends AppController {
 
