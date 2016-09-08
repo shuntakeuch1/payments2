@@ -43,7 +43,7 @@
                             <tbody>
                                 <?php foreach($charges as $key => $charge): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
+                                    "<tr data-href=\"charges/".$charge->id. "\">"; ?>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($charge_names[$key]);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
 
@@ -58,7 +58,7 @@
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $charge->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
-                                <tr data-href="/payments/adminpayments/charges"><td class="td_log" colspan="4">課金の履歴を見る</td></tr>
+                                <tr data-href="charges"><td class="td_log" colspan="4">課金の履歴を見る</td></tr>
                             </tbody>
                         </table>
 
@@ -77,13 +77,13 @@
                             <tbody>
                                 <?php foreach($customers as $key => $customer): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/customers/".$customer->id. "\">"; ?>
+                                    "<tr data-href=\"customers/".$customer->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-4"><?=$awesome_arr["customer"];?>&nbsp;<?=h($customer_names[$key]);?></td>
                                         <td class="col-xs-5 col-sm-5 col-md-5"><?=h($customer->email);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $customer->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
-                                <tr data-href="/payments/adminpayments/customers"><td class="td_log" colspan="4">顧客の一覧を見る</td></tr>
+                                <tr data-href="customers"><td class="td_log" colspan="4">顧客の一覧を見る</td></tr>
                             </tbody>
                             </table>
                         <?php endif; ?>
@@ -102,12 +102,12 @@
                             <tbody>
                                 <?php foreach($events as $key => $event): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/events/".$event->id. "\">"; ?>
+                                    "<tr data-href=\"events/".$event->id. "\">"; ?>
                                         <td class="col-xs-9 col-sm-9 col-md-9"><?=$awesome_arr[substr($event->type, 0, strcspn($event->type,'.'))];?>&nbsp;<?=h($log_arr[$event->type]);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $event->created));?></td>
                                     </tr>
                                 <?php endforeach;?>
-                                <tr data-href="/payments/adminpayments/events"><td class="td_log" colspan="4">イベントログを見る</td></tr>
+                                <tr data-href="events"><td class="td_log" colspan="4">イベントログを見る</td></tr>
                             </tbody>
                             </table>
                         <?php endif; ?>
