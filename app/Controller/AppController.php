@@ -64,8 +64,8 @@ class AppController extends Controller {
             'action' =>'index'
           ],
           'logoutRedirect' =>[
-            'controller' => 'items',
-            'action' =>'index'
+            'controller' => 'adminusers',
+            'action' =>'login'
           ],
           'authError' =>'ログインしてください',
         ]
