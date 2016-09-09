@@ -71,7 +71,7 @@ class AppController extends Controller {
           'authError' =>'ログインしてください',
         ]
      );
-    // public function appError($error) {
-    //     $this->redirect('http://elite.sc/');
-    // }
+    public function appError($error) {
+        $this->redirect('http://elite.sc/');
+    }
 }

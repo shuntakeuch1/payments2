@@ -15,8 +15,15 @@
                                 <td class="col-xs-9 col-sm-9 col-md-9"><?=h($customers_detail->id);?></td></tr>
                             <tr><td>作成日時</td>
                                 <td><?=h(date('Y/m/d H:i', $customers_detail->created));?></td></tr>
-                            <tr><td>お客様名</td><td><?=h($customer['name']);?></td></tr>
-                            <tr><td>EMAIL</td><td><?=h($customer['email']);?></td></tr>
+
+                            <?php if(empty($customer)) :?>
+                                <tr><td>お客様名</td><td style="color:red">ID:<?=h($this->params['pass'][0]);?>がDB上に見つかりません</td></tr>
+                                <tr><td>EMAIL</td><td style="color:red">ID:<?=h($this->params['pass'][0]);?>がDB上に見つかりません</td></tr>
+                            <?php else :?>
+                                <tr><td>お客様名</td><td><?=h($customer['name']);?></td></tr>
+                                <tr><td>EMAIL</td><td><?=h($customer['email']);?></td></tr>
+                            <?php endif;?>
+
                         </table>
 
                         <h4>クレジットカード情報</h4>
@@ -44,7 +51,7 @@
                             <tbody>
                                 <?php foreach($customers_charges as $key => $charge): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
+                                    "<tr data-href=\"../charges/".$charge->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-3">
                                             <?=$awesome_arr["charge"];?>&nbsp;<?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
 
@@ -80,7 +87,7 @@
                             <tbody>
                                 <?php foreach($customers_detail->recursions as $key => $recursion): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/recursions/".$recursion->id. "\">"; ?>
+                                    "<tr data-href=\"../recursions/".$recursion->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr["recursion"];?>&nbsp;<?=number_format(h($recursion->amount))."円";?></td>
                                         <td class="col-xs-5 col-sm-5 col-md-6"><?=h($recursion->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $recursion->created));?>

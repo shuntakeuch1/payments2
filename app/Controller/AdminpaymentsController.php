@@ -75,8 +75,11 @@ class AdminpaymentsController extends AppController {
                     'customer_id' => $charge->customer
                     )
                 );
+
             $customer = $this->User->find('first', $params);
-            array_push($charge_names, $customer['User']['name']);
+
+            if(empty($customer['User']['name'])) array_push($charge_names, "");
+            else array_push($charge_names, $customer['User']['name']);
         }
         $this->set('charge_names', $charge_names);
 
@@ -92,8 +95,11 @@ class AdminpaymentsController extends AppController {
                     'customer_id' => $customer->id
                     )
                 );
+
             $customer = $this->User->find('first', $params);
-            array_push($customer_names, $customer['User']['name']);
+
+            if(empty($customer['User']['name'])) array_push($customer_names, "");
+            else array_push($customer_names, $customer['User']['name']);
         }
         $this->set('customer_names', $customer_names);
 
@@ -164,7 +170,7 @@ class AdminpaymentsController extends AppController {
         $refund_database = $this->Refund->find('all', $params);
 
         if(empty($refund_database)) {
-            die(データベースエラー);
+            // die(データベースエラー);
         }
         else {
             foreach($refund_database as $refund_data){
@@ -266,8 +272,11 @@ class AdminpaymentsController extends AppController {
                         'customer_id' => $charge->customer
                         )
                     );
+
                 $customer = $this->User->find('first', $params);
-                array_push($names, $customer['User']['name']);
+
+                if(empty($customer['User']['name'])) array_push($names, "");
+                else array_push($names, $customer['User']['name']);
             }
             $this->set('names', $names);
         }
@@ -295,7 +304,9 @@ class AdminpaymentsController extends AppController {
                 )
             );
             $customer = $this->User->find('first', $params);
-            $this->set('customer', $customer['User']);
+
+            if(empty($customer['User'])) $this->set('customer', "");
+            else $this->set('customer', $customer['User']);
 
             if($charges_detail->refunded) $this->set('paid', "<span class=\"badge badge-info\">払戻済</span>");
             elseif($charges_detail->amountRefunded > 0) $this->set('paid', "<span class=\"badge badge-warning\">一部払戻済</span>");
@@ -382,8 +393,11 @@ class AdminpaymentsController extends AppController {
                         'customer_id' => $customer->id
                         )
                     );
+
                 $customer = $this->User->find('first', $params);
-                array_push($names, $customer['User']['name']);
+
+                if(empty($customer['User']['name'])) array_push($names, "");
+                else array_push($names, $customer['User']['name']);
             }
             $this->set('names', $names);
         }
@@ -405,8 +419,11 @@ class AdminpaymentsController extends AppController {
                     'customer_id' => $customers_detail->id
                 )
             );
+
             $customer = $this->User->find('first', $params);
-            $this->set('customer', $customer['User']);
+
+            if(empty($customer['User'])) $this->set('customer', "");
+            else $this->set('customer', $customer['User']);
 
             $this->render("customers_detail");
         }

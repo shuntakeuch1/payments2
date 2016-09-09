@@ -29,7 +29,7 @@
                             <tbody>
                                 <?php foreach($events as $key => $event): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/events/".$event->id. "\">"; ?>
+                                    "<tr data-href=\"events/".$event->id. "\">"; ?>
                                         <td class="col-xs-7 col-sm-9 col-md-9"><?=$awesome_arr[substr($event->type, 0, strcspn($event->type,'.'))];?>&nbsp;<?=h($log_arr[$event->type]);?></td>
                                         <td class="col-xs-5 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $event->created));?></td>
                                     </tr>

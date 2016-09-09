@@ -24,8 +24,12 @@
                             <tbody>
                                 <?php foreach($charges as $key => $charge): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($names[$key]);?></td>
+                                    "<tr data-href=\"charges/".$charge->id. "\">"; ?>
+                                        <?php if(empty($names[$key])) :?>
+                                            <td class="col-xs-3 col-sm-3 col-md-3" style="color:red"><?=$awesome_arr["charge"];?>&nbsp;ID:<?=h($charge->id);?>がDB上に見つかりません</td>
+                                        <?php else :?>
+                                            <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($names[$key]);?></td>
+                                        <?php endif;?>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
                                         <div class="visible-xs-inline" style=""><br></div>
                                         <?php if($charge->refunded) echo " <span class=\"badge badge-info\">払戻済</span>";

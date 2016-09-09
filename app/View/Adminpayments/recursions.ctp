@@ -24,7 +24,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($recursions as $recursion):?>
-                                <?php echo"<tr data-href=\"/payments/adminpayments/recursions/".$recursion->id. "\">"; ?>
+                                <?php echo"<tr data-href=\"recursions/".$recursion->id. "\">"; ?>
                                 <td><?=$awesome_arr["recursion"];?>&nbsp;<?=$recursion->description;?></td>
                                 <td><?php if ($recursion->status=="active"){
                                     echo "<span class=\"badge badge-success\">有効</span>" ;

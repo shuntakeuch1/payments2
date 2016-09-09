@@ -8,7 +8,7 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="h3title"></h3>
+                        <h3 class="h3title">ダッシュボード</h3>
                         <div>
                             <div class="col-md-4">
                                 <div class="legend">今月の売上金額</div>
@@ -44,7 +44,11 @@
                                 <?php foreach($charges as $key => $charge): ?>
                                     <?php echo
                                     "<tr data-href=\"charges/".$charge->id. "\">"; ?>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($charge_names[$key]);?></td>
+                                        <?php if(empty($charge_names[$key])) :?>
+                                            <td class="col-xs-3 col-sm-3 col-md-3" style="color:red"><?=$awesome_arr["charge"];?>&nbsp;ID:<?=h($charge->id);?>がDB上に見つかりません</td>
+                                        <?php else :?>
+                                            <td class="col-xs-3 col-sm-3 col-md-3"><?=$awesome_arr["charge"];?>&nbsp;<?=h($charge_names[$key]);?></td>
+                                        <?php endif;?>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
 
                                         <div class="visible-xs-inline" style=""><br></div>
@@ -78,7 +82,11 @@
                                 <?php foreach($customers as $key => $customer): ?>
                                     <?php echo
                                     "<tr data-href=\"customers/".$customer->id. "\">"; ?>
-                                        <td class="col-xs-4 col-sm-4 col-md-4"><?=$awesome_arr["customer"];?>&nbsp;<?=h($customer_names[$key]);?></td>
+                                        <?php if(empty($customer_names[$key])) :?>
+                                            <td class="col-xs-4 col-sm-4 col-md-4" style="color:red"><?=$awesome_arr["customer"];?>&nbsp;ID:<?=h($customer->id);?>がDB上に見つかりません</td>
+                                        <?php else :?>
+                                            <td class="col-xs-4 col-sm-4 col-md-4"><?=$awesome_arr["customer"];?>&nbsp;<?=h($customer_names[$key]);?></td>
+                                        <?php endif;?>
                                         <td class="col-xs-5 col-sm-5 col-md-5"><?=h($customer->email);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $customer->created));?></td>
                                     </tr>

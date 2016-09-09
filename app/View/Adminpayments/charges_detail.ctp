@@ -59,8 +59,15 @@
                                 <td class="col-xs-9 col-sm-9 col-md-9"><?=h($charges_detail->id);?></td></tr>
                             <tr><td>課金日時</td>
                                 <td><?=h(date('Y/m/d H:i', $charges_detail->created));?></td></tr>
-                            <tr><td>お客様名</td><td><?=h($customer['name']);?></td></tr>
-                            <tr><td>EMAIL</td><td><?=h($customer['email']);?></td></tr>
+
+                                <?php if(empty($customer)) :?>
+                                    <tr><td>お客様名</td><td style="color:red">ID:<?=h($this->params['pass'][0]);?>がDB上に見つかりません</td></tr>
+                                    <tr><td>EMAIL</td><td style="color:red">ID:<?=h($this->params['pass'][0]);?>がDB上に見つかりません</td></tr>
+                                <?php else :?>
+                                    <tr><td>お客様名</td><td><?=h($customer['name']);?></td></tr>
+                                    <tr><td>EMAIL</td><td><?=h($customer['email']);?></td></tr>
+                                <?php endif;?>
+
                             <tr><td>決済内容</td><td><?=h($charges_detail->description);?></td></tr>
                             <tr><td>課金額</td><td><?=h(number_format(h($charges_detail->amount)))."円 ";?></td></tr>
                             <?php if($charges_detail->amountRefunded>0): ?>
@@ -115,7 +122,7 @@
                             </thead>
                             <tbody>
                                 <?php echo
-                                "<tr data-href=\"/payments/adminpayments/customers/".$charges_detail->customer. "\">"; ?>
+                                "<tr data-href=\"../customers/".$charges_detail->customer. "\">"; ?>
                                         <td class="col-xs-9 col-sm-8 col-md-8"><?=$awesome_arr["customer"];?>&nbsp;<?=h($customer_detail->email);?></td>
                                         <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $customer_detail->created));?>
                                                                                <div class="visible-xs-inline" style=""><br></div>
@@ -137,7 +144,7 @@
                             </thead>
                             <tbody>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/recursions/".$recursion_detail->id. "\">"; ?>
+                                    "<tr data-href=\"../recursions/".$recursion_detail->id. "\">"; ?>
                                         <td class="col-xs-6 col-sm-5 col-md-5"><?=$awesome_arr["recursion"];?>&nbsp;<?=h($recursion_detail->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h($recursion_detail->status);?></td>
                                         <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $recursion_detail->created));?>

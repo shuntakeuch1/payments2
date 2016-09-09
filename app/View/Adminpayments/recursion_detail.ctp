@@ -65,7 +65,7 @@
                             <tbody>
                                 <?php foreach($customers_charges as $key => $charge): ?>
                                     <?php echo
-                                    "<tr data-href=\"/payments/adminpayments/charges/".$charge->id. "\">"; ?>
+                                    "<tr data-href=\"../charges/".$charge->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-3">
                                             <?=$awesome_arr["charge"];?>&nbsp;<?=number_format(h($charge->amount - $charge->amountRefunded))."円";?>
 

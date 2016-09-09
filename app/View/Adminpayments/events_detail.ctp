@@ -23,7 +23,7 @@
                         <?php if(($type_flg) and ($type==="charge")): ?>
                             <h4>このイベントに関連するオブジェクト</h4>
                             <table class="table table-bordered table-generated table-hover">
-                                <tr data-href="/payments/adminpayments/charges/<?=$events_detail->data->object->id;?>">
+                                <tr data-href="../charges/<?=$events_detail->data->object->id;?>">
                                     <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=number_format(h($events_detail->data->object->amount - $events_detail->data->object->amountRefunded))."円";?>
 
                                     <div class="visible-xs-inline" style=""><br></div>
@@ -44,7 +44,7 @@
 
                         <?php elseif(($type_flg) and ($type==="customer")): ?>
                             <table class="table table-bordered table-generated table-hover">
-                                <tr data-href="/payments/adminpayments/customers/<?=$events_detail->data->object->id;?>">
+                                <tr data-href="../customers/<?=$events_detail->data->object->id;?>">
                                     <td class="col-xs-9 col-sm-9 col-md-9"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=h($events_detail->data->object->email);?></td>
                                     <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $events_detail->created));?>
                                                                                <div class="visible-xs-inline" style=""><br></div>
@@ -55,7 +55,7 @@
                         <?php elseif(($type_flg) and ($type==="recursion")): ?>
                             <h4>このイベントに関連するオブジェクト</h4>
                             <table class="table table-bordered table-generated table-hover">
-                                <tr data-href="/payments/adminpayments/recursion/<?=$events_detail->data->object->id;?>">
+                                <tr data-href="../recursions/<?=$events_detail->data->object->id;?>">
                                     <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr[substr($events_detail->type, 0, strcspn($events_detail->type,'.'))];?>&nbsp;<?=number_format(h($events_detail->data->object->amount))."円";?></td>
                                     <td class="col-xs-5 col-sm-5 col-md-6"><?=h($events_detail->data->object->description);?></td>
                                     <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $events_detail->created));?>
