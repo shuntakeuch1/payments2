@@ -29,7 +29,7 @@
                             <tbody>
                                 <?php foreach($events as $key => $event): ?>
                                     <?php echo
-                                    "<tr data-href=\"events/".$event->id. "\">"; ?>
+                                    "<tr class=\"cursor_pointer\" data-href=\"events/".$event->id. "\">"; ?>
                                         <td class="col-xs-7 col-sm-9 col-md-9"><?=$awesome_arr[substr($event->type, 0, strcspn($event->type,'.'))];?>&nbsp;<?=h($log_arr[$event->type]);?></td>
                                         <td class="col-xs-5 col-sm-3 col-md-3"><?=h(date('Y/m/d H:i', $event->created));?></td>
                                     </tr>
@@ -38,23 +38,51 @@
                             </table>
                         <?php endif; ?>
 
-                        <div class="pagiWrapper pagiCenter">
+                        <div class="pagiWrapper pagiColor">
                             <?php if($page>1): ?>
-                                <?=$this->Html->link('<< 前へ',
+                                <?=$this->Html->link('<<',
                                                         array('controller'=>'adminpayments',
                                                         'action'=>'events',
                                                         "?" => array("page" => $page-1)
                                                         )
                                                     );?>
-                                &nbsp;&nbsp;&nbsp;
+                                &nbsp;
                             <?php endif; ?>
+
+                            <?php foreach($page_counts as $page_count): ?>
+                                <?php if($page_count==$page): ?>
+                                    <?=$this->Html->link($page_count,
+                                                            array('controller'=>'adminpayments',
+                                                            'action'=>'events',
+                                                            "?" => array("page" => $page_count)
+                                                            ),
+                                                            array('class' => 'page_strong')
+                                                        );?>
+                                <?php else: ?>
+                                    <?=$this->Html->link($page_count,
+                                                            array('controller'=>'adminpayments',
+                                                            'action'=>'events',
+                                                            "?" => array("page" => $page_count)
+                                                            )
+                                                        );?>
+                                <?php endif; ?>
+                                &nbsp;
+                            <?php endforeach;?>
+
                             <?php if($next_flg): ?>
-                                <?=$this->Html->link('次へ >>',
+                                <?=$this->Html->link('>>',
                                                         array('controller'=>'adminpayments',
                                                         'action'=>'events',
                                                         "?" => array("page" => $page+1)
                                                         )
                                                     );?>
+                            <?php endif; ?>
+
+                            <br>
+                            <?php if($page*$count > $number): ?>
+                                <?=($page-1)*$count+1;?> ~ <?=$number;?>件目 (全<?=$number;?>件)
+                            <?php else: ?>
+                                <?=($page-1)*$count+1;?> ~ <?=($page)*$count;?>件目 (全<?=$number;?>件)
                             <?php endif; ?>
                         </div>
 

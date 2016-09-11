@@ -39,7 +39,7 @@ select{
 body{
     font-size: 13px;
     line-height: 23px;
-    color: #666;
+    color: #000;
     background:#111;
     padding-top: 45px;
     -webkit-font-smoothing: antialiased;
@@ -50,7 +50,7 @@ body{
 h1,h2,h3,h4,h5,h6{
     padding: 2px 0px;
     margin: 5px 0px;
-    color: #777;
+    color: #000;
     font-weight: 400;
 }
 
@@ -124,6 +124,7 @@ hr{
 
 .btn{
     font-size: 13px !important;
+    color: #000 !important;
 }
 
 a.btn{
@@ -156,6 +157,10 @@ a.btn{
 .picker{
    padding:5px;
    border-radius:5px !important;
+}
+
+td {
+    /* border: 1px solid #000 !important; */
 }
 
 /* Sparkline tooltip */
@@ -609,7 +614,7 @@ form{
   padding: 10px 0px;
   padding-left: 42px;
   text-decoration: none;
-  color: #999;
+  color: #fff;
   border-bottom: 1px solid #222;
 }
 
@@ -624,6 +629,7 @@ form{
 .sidebar .navi li ul li a:hover {
   background: #131313;
   border-bottom: 1px solid #222;
+  color: #888;
 }
 
 /* Sidebar colors */

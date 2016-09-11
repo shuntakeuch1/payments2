@@ -122,7 +122,7 @@
                             </thead>
                             <tbody>
                                 <?php echo
-                                "<tr data-href=\"../customers/".$charges_detail->customer. "\">"; ?>
+                                "<tr class=\"cursor_pointer\" data-href=\"../customers/".$charges_detail->customer. "\">"; ?>
                                         <td class="col-xs-9 col-sm-8 col-md-8"><?=$awesome_arr["customer"];?>&nbsp;<?=h($customer_detail->email);?></td>
                                         <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $customer_detail->created));?>
                                                                                <div class="visible-xs-inline" style=""><br></div>
@@ -144,7 +144,7 @@
                             </thead>
                             <tbody>
                                     <?php echo
-                                    "<tr data-href=\"../recursions/".$recursion_detail->id. "\">"; ?>
+                                    "<tr class=\"cursor_pointer\" data-href=\"../recursions/".$recursion_detail->id. "\">"; ?>
                                         <td class="col-xs-6 col-sm-5 col-md-5"><?=$awesome_arr["recursion"];?>&nbsp;<?=h($recursion_detail->description);?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h($recursion_detail->status);?></td>
                                         <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $recursion_detail->created));?>
