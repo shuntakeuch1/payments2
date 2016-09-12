@@ -8,7 +8,8 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="h3title">課金の履歴</h3>
+                        <div style="display: inline-block"><h3 class="h3title">課金の履歴</h3></div>
+                        <div class="max500">最大500件まで表示</div>
                         <?php if(empty($charges)): ?>
                             <?="<h5>課金の履歴はありません。</h5>"; ?>
                         <?php else: ?>
@@ -92,6 +93,11 @@
                                 <?=($page-1)*$count+1;?> ~ <?=$number;?>件目 (全<?=$number;?>件)
                             <?php else: ?>
                                 <?=($page-1)*$count+1;?> ~ <?=($page)*$count;?>件目 (全<?=$number;?>件)
+                            <?php endif; ?>
+
+                            <br>
+                            <?php if(!$next_flg && $number>500): ?>
+                                <strong class="after500">500件目以降は、WEBPAY上の管理画面で確認してください</strong>
                             <?php endif; ?>
                         </div>
 

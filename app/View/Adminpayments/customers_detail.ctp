@@ -89,7 +89,7 @@
                                     <?php echo
                                     "<tr class=\"cursor_pointer\" data-href=\"../recursions/".$recursion->id. "\">"; ?>
                                         <td class="col-xs-4 col-sm-4 col-md-3"><?=$awesome_arr["recursion"];?>&nbsp;<?=number_format(h($recursion->amount))."円";?></td>
-                                        <td class="col-xs-5 col-sm-5 col-md-6"><?=h($recursion->description);?></td>
+                                        <td class="col-xs-5 col-sm-5 col-md-6"><?=h($recursion->description);?>&nbsp;<?=$recursion_arr[$recursion->status];?></td>
                                         <td class="col-xs-3 col-sm-3 col-md-3"><?=h(date('Y/m/d ', $recursion->created));?>
                                                                                <div class="visible-xs-inline" style=""><br></div>
                                                                                <?=h(date('H:i', $recursion->created));?></td>
@@ -108,6 +108,7 @@
                                                     'id'=>'btn-return')
                                                 );?>
                         </div>
+                        <br><br>
                     </div>
                 </div>
                 <!-- /MODULE TITLE -->

@@ -127,6 +127,11 @@ hr{
     color: #000 !important;
 }
 
+.btn_f{
+    font-size: 13px !important;
+    color: #fff !important;
+}
+
 a.btn{
     font-size: 13px !important;
 }
