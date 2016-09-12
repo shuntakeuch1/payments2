@@ -78,23 +78,6 @@
                                     ),
                                     )); ?>
                     <?=$this->Form->input('id')?>
-                    <?=$this->Form->input('password_current', array(
-                                    'type' => 'password',
-                                    'label' => array(
-                                        'text' => 'パスワード',
-                                        'class' => 'col col-md-2 control-label',
-                                        ),
-                                    'between' => '<div class="col-md-8">',
-                                    'after' => '</div>',
-                                    'placeholder' => ' ',
-                                    'class' => 'form-control',
-                                    'error' => array(
-                                        'attributes' => array(
-                                            'wrap' => 'div',
-                                            'class' => 'col-md-offset-2 col-md-8 text-danger'
-                                        )
-                                    ),
-                                    )); ?>
                     <?=$this->Form->input('編集', array(
                                     'type' => 'submit',
                                     'label' => false,

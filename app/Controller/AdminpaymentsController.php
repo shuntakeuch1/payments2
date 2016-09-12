@@ -4,8 +4,6 @@ App::uses('CakeEmail', 'Network/Email');
 
 require VENDORS . 'autoload.php';
 use WebPay\WebPay;
-// require_once "webpay-php-full-2.2.2/autoload.php";
-// use WebPay\WebPay;
 
 class AdminpaymentsController extends AppController {
 
@@ -603,6 +601,7 @@ class AdminpaymentsController extends AppController {
             $this->set('page', $page);
 
             $count=10;
+            $this->set('count', $count);
             if(empty($page)) $offset=0;
             else $offset=$count*($page-1);
 
@@ -616,9 +615,38 @@ class AdminpaymentsController extends AppController {
             else $next_flg=1;
 
             $this->set('next_flg', $next_flg);
+            // データの総数
+            $count_c=100;
+            $offset_c=500;
+            while(1) {
+                $recursion_c = $webpay->recursion->all(array("count"=>$count_c, "offset"=>$offset_c));
 
-        }
-        else {
+                if((count($recursion_c->data)>0) or ($offset_c==0)) {
+                    $number = $offset_c + count($recursion_c->data);
+                    break;
+                }
+                else
+                    $offset_c -= 100;
+            }
+            $this->set('number', $number);
+
+            $page_counts = array();
+            $page_range = 4;
+
+
+            if($number % $count == 0) $page_max = $number / $count;
+            else $page_max = $number / $count + 1;
+
+            for($i=-$page_range; $i<$page_range+1; $i++) {
+                $page_count_tmp = $page + $i;
+
+               if(($page_count_tmp >0) && ($page_count_tmp <= $page_max))
+                    array_push($page_counts, $page_count_tmp);
+            }
+
+            $this->set('page_counts', $page_counts);
+
+        }else {
             $this->set('title_for_layout','定期課金の詳細 | ELITES');
 
             $webpay = new WebPay($this->secret_key);

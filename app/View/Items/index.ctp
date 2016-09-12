@@ -6,6 +6,7 @@
                     <a href="index.html" class="navbar-brand"><span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                       ELITES PAYMENTS</span></a>
         </div>
+        <!-- ログイン状態の時表示 -->
         <?php if ($currentUser) : ?>
                 <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                     <!-- Notifications -->
@@ -56,14 +57,17 @@
                           <br>
                           <div clas="col-md-12">
                           <?php foreach($items as $item) :?>
-                           <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
+                            <?php if($currentUser) :?>
+                              <a href="/payments/items/edit/<?=$item['Item']['id'] ?>" >
+                            <?php else :?>
+                             <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
+                            <?php endif;?>
+
                             <table class="table-bordered" style="margin-bottom:10px;">
                               <tr>
                                 <td rowspan="2" class="col-sm-1" style="width:10%">
-                                  <?=$this->Html->link(
-                                      $this->Item->photoImage($item, ['style' => 'width: 100%; height:auto;']),
-                                      ['action' => 'view', $item['Item']['id']],
-                                      ['escape' => false]);?>
+                                  <?=$this->Item->photoImage($item, ['style' => 'width: 100%; height:auto;']);
+                                      ?>
                                 </td>
                                <td class="col-sm-offset-1 col-sm-9"><?=h($item['Item']['name'])?></td>
                                <?php if ($currentUser) : ?>

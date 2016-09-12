@@ -22,6 +22,8 @@ ELITES PAYMENTS</span></a>
         <div class="row">
           <div class="col-md-12 col-xs-12">
           <h3>ELITESログインページ</h3>
+
+          <?=$this->Session->flash(); ?>
           <?=$this->Flash->render('auth');?>
             <div class="widget wblue">
                       <div class="widget-head">

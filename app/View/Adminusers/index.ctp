@@ -46,6 +46,8 @@
                             echo $this->Paginator->next(' 次へ >');
                             }
                           ?>
+                          <br>
+                          <?php echo $this->paginator->counter(array('format' => '%start%~%end%件目 (全%count%件)'));?>
                           </div>
                     </div>
                 </div>

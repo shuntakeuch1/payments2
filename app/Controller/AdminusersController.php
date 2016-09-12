@@ -52,7 +52,7 @@ class AdminusersController extends AppController {
                 'conditions' => ['id' => $this->Auth->user('id')]
                 ]);
         $this->Auth->login($user['User']);
-        return $this->redirect($this->Auth->redirectUrl());
+        return $this->redirect(['action' => 'index']);
       }
     }else{
       $this->request->data = $this->Adminuser->findById($id);
@@ -64,7 +64,7 @@ class AdminusersController extends AppController {
     if($this->request->is(['post','put'])){
       if($this->Adminuser->save($this->request->data)){
         $this->Flash->success('パスワードを更新しました');
-        return $this->redirect($this->Auth->redirectUrl());
+        return $this->redirect(['action' => 'index']);
       }
     }else{
       $this->request->data = ['Adminuser' => ['id' => $this->Auth->user('id')]];
@@ -104,6 +104,7 @@ class AdminusersController extends AppController {
   }
 
   public function logout(){
+    // $this->Session->setFlash('ログアウトしました');
     $this->redirect($this->Auth->logout());
   }
 }

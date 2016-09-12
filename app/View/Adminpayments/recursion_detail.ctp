@@ -97,9 +97,11 @@
                                                 );?>
                             <?=$this->Form->postlink('定期課金を削除する',
                                                     array('controller'=>'adminpayments',
-                                                          'action'=>'recursions_delete',$recursions_detail->id
+                                                          'action'=>'recursion_delete',
+                                                          $recursions_detail->id
                                                 ),
                                                     array(
+                                                        'style' =>'',
                                                         'escape' => false,
                                                         'class'=>'btn btn-danger pull-right',
                                                         'role' =>'button',

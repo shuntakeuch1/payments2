@@ -26,7 +26,14 @@
                             <?php foreach($recursions as $recursion):?>
                                 <a>
                                 <?php echo"<tr data-href=\"recursions/".$recursion->id. "\" style=\"cursor:pointer;\" >"; ?>
-                                <td><?=$awesome_arr["recursion"];?>&nbsp;<?=$recursion->description;?></td>
+                                <td><?=$awesome_arr["recursion"];?>&nbsp;
+                                    <!-- 空の場合IDを表示 -->
+                                    <?php if($recursion->description==""){
+                                        echo $recursion->id ;
+                                    }else{
+                                        echo $recursion->description ;
+                                    }?>
+                                </td>
                                 <td><?php if ($recursion->status=="active"){
                                     echo "<span class=\"badge badge-success\">有効</span>" ;
                                     }else{
@@ -38,23 +45,52 @@
                             </tbody>
                             </table>
                         <?php endif; ?>
-                        <div class="pagiWrapper pagiCenter">
+
+                        <div class="pagiWrapper pagiColor">
                             <?php if($page>1): ?>
-                                <?=$this->Html->link('<< 前へ',
+                                <?=$this->Html->link('<<',
                                                         array('controller'=>'adminpayments',
                                                         'action'=>'recursions',
                                                         "?" => array("page" => $page-1)
                                                         )
                                                     );?>
-                                &nbsp;&nbsp;&nbsp;
+                                &nbsp;
                             <?php endif; ?>
+
+                            <?php foreach($page_counts as $page_count): ?>
+                                <?php if($page_count==$page): ?>
+                                    <?=$this->Html->link($page_count,
+                                                            array('controller'=>'adminpayments',
+                                                            'action'=>'recursions',
+                                                            "?" => array("page" => $page_count)
+                                                            ),
+                                                            array('class' => 'page_strong')
+                                                        );?>
+                                <?php else: ?>
+                                    <?=$this->Html->link($page_count,
+                                                            array('controller'=>'adminpayments',
+                                                            'action'=>'recursions',
+                                                            "?" => array("page" => $page_count)
+                                                            )
+                                                        );?>
+                                <?php endif; ?>
+                                &nbsp;
+                            <?php endforeach;?>
+
                             <?php if($next_flg): ?>
-                                <?=$this->Html->link('次へ >>',
+                                <?=$this->Html->link('>>',
                                                         array('controller'=>'adminpayments',
                                                         'action'=>'recursions',
                                                         "?" => array("page" => $page+1)
                                                         )
                                                     );?>
+                            <?php endif; ?>
+
+                            <br>
+                            <?php if($page*$count > $number): ?>
+                                <?=($page-1)*$count+1;?> ~ <?=$number;?>件目 (全<?=$number;?>件)
+                            <?php else: ?>
+                                <?=($page-1)*$count+1;?> ~ <?=($page)*$count;?>件目 (全<?=$number;?>件)
                             <?php endif; ?>
                         </div>
 
