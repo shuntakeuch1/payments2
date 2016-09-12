@@ -104,6 +104,7 @@ class AdminusersController extends AppController {
   }
 
   public function logout(){
+    $this->Flash->set('ログアウトしました');
     $this->redirect($this->Auth->logout());
   }
 }

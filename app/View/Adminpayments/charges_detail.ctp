@@ -146,7 +146,7 @@
                                     <?php echo
                                     "<tr class=\"cursor_pointer\" data-href=\"../recursions/".$recursion_detail->id. "\">"; ?>
                                         <td class="col-xs-6 col-sm-5 col-md-5"><?=$awesome_arr["recursion"];?>&nbsp;<?=h($recursion_detail->description);?></td>
-                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=h($recursion_detail->status);?></td>
+                                        <td class="col-xs-3 col-sm-3 col-md-3"><?=$recursion_arr[$recursion_detail->status];?></td>
                                         <td class="col-xs-3 col-sm-4 col-md-4"><?=h(date('Y/m/d ', $recursion_detail->created));?>
                                                                                <div class="visible-xs-inline" style=""><br></div>
                                                                                <?=h(date('H:i', $recursion_detail->created));?></td>
@@ -179,6 +179,7 @@
                                                     );?>
                             <?php endif; ?>
                         </div>
+                        <br><br>
                     </div>
                 </div>
                 <!-- /MODULE TITLE -->
