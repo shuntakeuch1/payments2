@@ -103,7 +103,7 @@
                                                     array(
                                                         'style' =>'',
                                                         'escape' => false,
-                                                        'class'=>'btn btn-danger pull-right',
+                                                        'class'=>'btn_f btn-danger pull-right',
                                                         'role' =>'button',
                                                         'confirm' => "本当に削除してよろしいですか?",
                                                     'id'=>'btn-return')

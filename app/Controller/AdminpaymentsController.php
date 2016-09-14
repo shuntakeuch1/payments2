@@ -59,6 +59,7 @@ class AdminpaymentsController extends AppController {
             "active" => "<span class=\"badge badge-success\">有効</span>",
             "suspended" => "<span class=\"badge badge-warning\">一時停止中</span>",
             "closed" => "<span class=\"badge badge-important\">停止</span>",
+            null => "<span class=\"badge badge-default\">削除済</span>",
         );
         $this->set('recursion_arr', $recursion_arr);
     }
