@@ -52,7 +52,7 @@
                                 </tr>
                             </table>
 
-                        <?php elseif(($type_flg) and ($type==="recursion")): ?>
+                        <?php elseif(($type_flg) and ($type==="recursion") and ($events_detail->type!=="recursion.deleted")): ?>
                             <h4>このイベントに関連するオブジェクト</h4>
                             <table class="table table-bordered table-generated table-hover">
                                 <tr class="cursor_pointer" data-href="../recursions/<?=$events_detail->data->object->id;?>">

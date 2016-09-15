@@ -1,26 +1,14 @@
-      <!-- Main bar -->
-      <div class="mainbar">
-        <!-- Page heading -->
-        <div class="page-head">
-          <!-- Page heading -->
-          <h2 class="pull-left">個別決済画面発行ページ</h2>
-          <div class="clearfix"></div>
-        </div><!--/ Page heading ends -->
-        <!-- Matter -->
-        <div class="matter">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 col-xs-12">
-                <div class="widget wblue">
-                          <div class="widget-head">
-                    <div class="pull-left">個別決済画面発行ページ</div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="widget-content">
-                    <div class="padd">
-
-                    <!-- Form starts.  -->
-                      <?=$this->Form->create('Admin',array(
+<div class="mainbar">
+    <!-- WRAPPER -->
+    <div class="wrapper">
+        <!-- SERVICES -->
+        <section class="module">
+            <div class="container">
+                <!-- MODULE TITLE -->
+                <div class="row">
+                    <div class="col-md-12">
+                    <h3 class="h3title">個別決済画面発行ページ</h3>
+                    <?=$this->Form->create('Admin',array(
                                     'url' => array(
                                         'controller' => 'admin',
                                         'action' => 'generate'),
@@ -142,10 +130,11 @@
 
                     <?=$this->form->end();?>
                     </div>
-                  </div>
                 </div>
-              </div>
+                <!-- /MODULE TITLE -->
             </div>
-          </div>
-        </div><!--/ Matter ends -->
-      </div><!--/ Mainbar ends -->
+        </section>
+      </div>
+        <!-- /SERVICES -->
+    </div>
+</div><!--/ Mainbar ends

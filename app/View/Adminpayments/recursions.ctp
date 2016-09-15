@@ -98,7 +98,6 @@
                             <?php if(!$next_flg && $number>500): ?>
                                 <strong class="after500">500件目以降は、WEBPAY上の管理画面で確認してください</strong>
                             <?php endif; ?>
-
                         </div>
 
 

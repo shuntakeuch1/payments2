@@ -132,7 +132,25 @@
                             </table>
                         <?php endif; ?>
 
-                        <?php if(isset($recursion_detail)): ?>
+                        <?php if(isset($recursion_detail) && ($recursion_detail->status===null)): ?>
+                        <h4>関連した定期課金</h4>
+                            <table class="table table-bordered table-generated table-hover">
+                            <thead>
+                                <tr>
+                                    <td>内容</td>
+                                    <td>ステータス</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <?php echo
+                                    "<tr class=\"cursor_pointer_n\">"; ?>
+                                        <td class="col-xs-6 col-sm-5 col-md-5" style="color:red"><?=$awesome_arr["recursion"];?>&nbsp;<?=h($recursion_detail->id);?></td>
+                                        <td class="col-xs-6 col-sm-7 col-md-7"><?=$recursion_arr[$recursion_detail->status];?></td>
+                                    </tr>
+                            </tbody>
+                            </table>
+
+                        <?php elseif(isset($recursion_detail)): ?>
                         <h4>関連した定期課金</h4>
                             <table class="table table-bordered table-generated table-hover">
                             <thead>
