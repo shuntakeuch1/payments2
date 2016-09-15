@@ -7,7 +7,6 @@ class AdminusersController extends AppController {
 
   public function beforeFilter(){
     parent::beforeFilter();
-    $this->Auth->allow('create');
   }
 
   public function index (){
@@ -29,7 +28,6 @@ class AdminusersController extends AppController {
     $this->layout = 'adminLayout';
     if($this->request->is('post')){
       $this->set('title_for_layout','管理者登録画面 | ELITES');
-      // $this->Adminuser->set($this->request->data);
 
       if($this->Adminuser->validates()){
         $this->Adminuser->create();
