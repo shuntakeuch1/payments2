@@ -17,13 +17,14 @@ class ItemsController extends AppController
     parent::beforeFilter();
     $this->Auth->allow('index','id','purchased');
   }
+
   public function index()
   {
     $this->set('maxitem',$this->Item->find('count','all'));
     $p_limit = 5;
     $this->set('p_limit',$p_limit);
     // $this->autoLayout = false;  // レイアウトをOFFにする
-     $this->layout = 'itemLayout';
+    $this->layout = 'itemLayout';
     $this->set('title_for_layout','商材一覧画面 | ELITES') ;
     $this->Paginator->settings = array(
         'limit' => $p_limit,
@@ -273,6 +274,22 @@ class ItemsController extends AppController
         return $this->redirect(['action' => 'index']);
 
     }
+  public function adminindex()
+  {
+    $this->set('maxitem',$this->Item->find('count','all'));
+    $p_limit = 5;
+    $this->set('p_limit',$p_limit);
+    // $this->autoLayout = false;  // レイアウトをOFFにする
+    $this->layout = 'adminLayout';
+    $this->set('title_for_layout','商材管理画面 | ELITES') ;
+    $this->Paginator->settings = array(
+        'limit' => $p_limit,
+        'order' => array('created' => 'desc'),
+        'recusive' =>3
+      );
+    $this->set('items',$this->paginate());
+    // $this->set('items',$this->Item->find('all'));
+  }
 
 
 }

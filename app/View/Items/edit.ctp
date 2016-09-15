@@ -113,7 +113,7 @@
                                     'label' => false,
                                     'before' => '<div class="col-md-offset-2 col-md-4">',
                                     'after' => '</div>',
-                                    'class' => 'btn btn-block btn-primary'
+                                    'class' => 'btn btn-block btn-primary btn_f'
                                     )); ?>
                     <?=$this->form->end();?>
                     </div>

@@ -4,15 +4,21 @@
         <!-- SERVICES -->
         <section class="module">
             <div class="container">
-
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-md-12">
-
-                        <h3 class="h3title">管理者ユーザ一覧
+                    <div style="display: inline-block">
+                    <h3 class="h3title">管理者ユーザ一覧</h3></div>
+                        <div class="max500">
                         <?=$this->Html->link('新規登録','create',
-                          array('class'=>'btn btn-default pull-right',
-                                  'id'=>'btn-return'))?></h3>
+                          array('class'=>'btn btn-default',
+                                  'id'=>'btn-return'))?>
+                        <?=$this->Html->link('パスワード変更',
+                            ['action' => 'changePassword'],
+                                array('class'=>'btn btn-default',
+                                  'id'=>'btn-return'))?></div><br><br>
+
+
                         <?=$this->Html->css("../css/successmessage");?>
                         <?=$this->Session->flash(); ?>
 
@@ -38,16 +44,19 @@
                           <?php endforeach ;?>
 
                           <!-- ページネーション機能 -->
-                          <div style = "text-align:center;">
-                          <?php
-                            if($p_limit < $maxitem){
-                            echo $this->Paginator->prev('< 前へ ');
-                            echo $this->Paginator->numbers();
-                            echo $this->Paginator->next(' 次へ >');
-                            }
-                          ?>
-                          <br>
-                          <?php echo $this->paginator->counter(array('format' => '%start%~%end%件目 (全%count%件)'));?>
+                          <div class="pagiWrapper pagiColor">
+                            <?php
+                              if($p_limit < $maxitem){
+                                echo $this->Paginator->prev('<< ',array(), null, array('class' => 'prev disabled'));
+                              echo $this->Paginator->numbers(
+                                                      ['separator' => '  ',
+                                                      'currentClass' => 'page_strong']);
+                              echo $this->Paginator->next(' >>',array(), null, array('class' => 'next disabled'));
+                              }
+                            ?>
+                            <br>
+                            <?php echo $this->paginator->counter(array('format' => '%start%~%end%件目 (全%count%件)'));?>
+
                           </div>
                     </div>
                 </div>

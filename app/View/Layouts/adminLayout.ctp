@@ -134,7 +134,7 @@
                                 </li>
                                 <li><?=$this->Html->link('商材管理',
                                                         array('controller'=>'items',
-                                                        'action'=>'index'));?>
+                                                        'action'=>'adminindex'));?>
                                 </li>
                             </ul>
                         </li>
@@ -219,7 +219,7 @@
                     </li>
                     <li><?=$this->Html->link('商材管理',
                                             array('controller'=>'items',
-                                            'action'=>'index'));?>
+                                            'action'=>'adminindex'));?>
                     </li>
                 </ul>
             </li>

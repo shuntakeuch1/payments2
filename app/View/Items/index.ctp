@@ -3,32 +3,9 @@
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
           <!-- <a href="#" class="navbar-brand">ELITES PAYMENTS</a> -->
-                    <a href="index.html" class="navbar-brand"><span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                      ELITES PAYMENTS</span></a>
+          <a href="index.html" class="navbar-brand"><span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+            ELITES PAYMENTS</span></a>
         </div>
-        <!-- ログイン状態の時表示 -->
-        <?php if ($currentUser) : ?>
-                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-                    <!-- Notifications -->
-
-                    <!-- Notifications -->
-                    <ul class="nav navbar-nav navbar-right" style="height:50px;">
-                        <li>
-                            <a>
-                                <i class="fa fa-user"></i> <?=$currentUser['name'];?>
-                            </a>
-                        </li>
-                        <li>
-                            <!-- <i class="fa fa-sign-out"></i> -->
-                            <?=$this->Html->link('<i class="fa fa-sign-out"></i> ログアウト',
-                                                ['controller' => 'adminusers',
-                                                'action' => 'logout'],
-                                                ['escape' => false ]);?>
-                        </li>
-
-                      </ul>
-                    </nav>
-          <?php endif ;?>
       </div>
     </div>
 
@@ -45,15 +22,7 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <h3>ELITES商材一覧
-                        <?php if ($currentUser) : ?>
-                          <?=$this->Html->link('新規登録',['action' => 'add'],
-                                          array('class'=>'btn btn-default pull-right',
-                                                  'style' =>'border-radius:5px',
-                                                'id'=>'btn-return'))?>
-
-                        <?php endif;?>
-                        </h3>
+                        <h3>ELITES商材一覧</h3>
                           <br>
                           <div clas="col-md-12">
                           <?php foreach($items as $item) :?>
@@ -70,25 +39,6 @@
                                       ?>
                                 </td>
                                <td class="col-sm-offset-1 col-sm-9"><?=h($item['Item']['name'])?></td>
-                               <?php if ($currentUser) : ?>
-                                   <td rowspan="2" class="col-sm-1 sample" style="width:5%;">
-                                    <?=$this->Html->link('編集',[
-                                      'action' => 'edit',
-                                      $item['Item']['id']],[
-                                      'class' => 'btn btn-primary btn-sm','role' => 'button'
-                                    ]) ;?></td>
-                                   <td rowspan="2" class="col-sm-1" style="width:5%;">
-                                      <div>
-                                        <?=$this->Form->postLink('削除',
-                                        ['action' => 'delete',$item['Item']['id']],
-                                        ['escape' => false,
-                                        'class' => 'btn btn-primary btn-sm',
-                                        'role' => 'button',
-                                        'confirm' =>'本当に削除してよろしいですか?']
-                                        ) ;?>
-                                      </div>
-                                    </td>
-                              <?php endif;?>
                               </tr>
                               <tr>
                                 <td class="col-sm-9">

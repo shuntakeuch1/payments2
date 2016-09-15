@@ -17,25 +17,29 @@ App::uses('BlowfishPasswordHasher','Controller/Component/Auth');
             'rule' => 'notBlank',
             'message' => 'メールアドレスを入力して下さい'
             ),
-          'validEmail' => array(
-            'rule' => 'email',
-            'message' => '正しいメールアドレスを入力して下さい'
-            ),
-          'emailExists' => array(
-            'rule' => array('isUnique','email'),
-            'message' => '入力されたメールアドレスは既に登録されています'
-            )
+              'validEmail' => array(
+                'rule' => 'email',
+                'message' => '正しいメールアドレスを入力して下さい'
+                ),
+              'emailExists' => array(
+                'rule' => array('isUnique','email'),
+                'message' => '入力されたメールアドレスは既に登録されています'
+                )
           ),
                'password' => array(
-            'required' => array(
-                'rule' => 'notBlank',
-                'message' => 'パスワードを入力してください'
-            ),
-            // バリデーションにメソッドを指定
-            'match' => array(
-                'rule' => 'passwordConfirm',
-                'message' => 'パスワードが一致していません'
-            ),
+                    'required' => array(
+                        'rule' => 'notBlank',
+                        'message' => 'パスワードを入力してください'
+                            ),
+                            // バリデーションにメソッドを指定
+                            'match' => array(
+                                'rule' => 'passwordConfirm',
+                                'message' => 'パスワードが一致していません'
+                           ),
+                            'passBetween' => array(
+                                'rule' => array('between',8,20),
+                                'message' => '8文字以上必要です'
+                                )
         ),
         'password_confirm' => array(
             'required' => array(

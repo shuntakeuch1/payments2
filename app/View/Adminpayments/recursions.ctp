@@ -8,7 +8,9 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="h3title">定期課金の一覧</h3>
+                    <div style="display: inline-block">
+                        <h3 class="h3title">定期課金の一覧</h3></div>
+                        <div class="max500">最大500件まで表示</div>
                         <?=$this->Html->css("../css/successmessage");?>
                         <?=$this->Session->flash(); ?>
                         <?php if(empty($recursions)): ?>
@@ -92,6 +94,11 @@
                             <?php else: ?>
                                 <?=($page-1)*$count+1;?> ~ <?=($page)*$count;?>件目 (全<?=$number;?>件)
                             <?php endif; ?>
+                            <br>
+                            <?php if(!$next_flg && $number>500): ?>
+                                <strong class="after500">500件目以降は、WEBPAY上の管理画面で確認してください</strong>
+                            <?php endif; ?>
+
                         </div>
 
 
