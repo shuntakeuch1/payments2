@@ -32,8 +32,14 @@ App::uses('AppModel','Model');
             ),
         ),
       'amount' => array(
-        'rule' => array('notBlank'),
-        'message' => '金額を入力して下さい',
+        'rule1' => array(
+            'rule' => array('notBlank'),
+            'message' => '金額を入力して下さい',
+            ),
+        'rule2' => array(
+            'rule' => array('numeric'),
+            'message' => '数値を入力してください'
+            )
         ),
       'description' => array(
         'rule' => array('notBlank'),

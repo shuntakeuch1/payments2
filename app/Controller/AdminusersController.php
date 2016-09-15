@@ -26,9 +26,8 @@ class AdminusersController extends AppController {
   public function create (){
     //ログインの禁止
     $this->layout = 'adminLayout';
+    $this->set('title_for_layout','管理者登録画面 | ELITES');
     if($this->request->is('post')){
-      $this->set('title_for_layout','管理者登録画面 | ELITES');
-
       if($this->Adminuser->validates()){
         $this->Adminuser->create();
           if ($this->Adminuser->save($this->request->data)) {
@@ -41,6 +40,7 @@ class AdminusersController extends AppController {
 
   public function edit($id =null){
     $this->layout = 'adminLayout';
+    $this->set('title_for_layout','管理者編集画面 | ELITES');
     $this->set('id',$id);
     if($this->request->is(['post','put'])){
       if($this->Adminuser->save($this->request->data)){
@@ -59,6 +59,7 @@ class AdminusersController extends AppController {
 
   public function changePassword($id =null){
     $this->layout = 'adminLayout';
+    $this->set('title_for_layout','管理者編集画面 | ELITES');
     if($this->request->is(['post','put'])){
       if($this->Adminuser->save($this->request->data)){
         $this->Flash->success('パスワードを更新しました');

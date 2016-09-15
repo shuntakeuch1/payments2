@@ -1,3 +1,4 @@
+<?=$this->Html->css("selection");?>
     <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
       <div class="container">
         <!-- Menu button for smallar screens -->
@@ -20,6 +21,7 @@
                 <!-- MODULE TITLE -->
                 <div class="row">
                     <div class="col-sm-12">
+
                         <h3>決済情報を入力する</h3>
 
                         <form action="../purchased" method="post">

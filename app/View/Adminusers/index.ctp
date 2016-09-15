@@ -18,7 +18,7 @@
                                 array('class'=>'btn btn-default',
                                   'id'=>'btn-return'))?></div><br><br>
 
-
+                        <div clas="col-md-12">
                         <?=$this->Html->css("../css/successmessage");?>
                         <?=$this->Session->flash(); ?>
 
@@ -58,6 +58,7 @@
                             <?php echo $this->paginator->counter(array('format' => '%start%~%end%件目 (全%count%件)'));?>
 
                           </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /MODULE TITLE -->

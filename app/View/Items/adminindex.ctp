@@ -17,12 +17,10 @@
                                                     'id'=>'btn-return'))?></div>
                                                     <br><br>
                                   <div clas="col-md-12">
+                                  <?=$this->Html->css("../css/successmessage");?>
+                                  <?=$this->Session->flash(); ?>
                                   <?php foreach($items as $item) :?>
-                                    <?php if($currentUser) :?>
                                       <a href="/payments/items/edit/<?=$item['Item']['id'] ?>" >
-                                    <?php else :?>
-                                     <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
-                                    <?php endif;?>
 
                                     <table class="table-bordered" style="margin-bottom:10px;">
                                       <tr>

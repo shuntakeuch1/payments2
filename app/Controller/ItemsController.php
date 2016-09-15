@@ -225,7 +225,7 @@ class ItemsController extends AppController
 public function add(){
 
     $this->layout = 'adminLayout';
-
+    $this->set('title_for_layout','商材追加画面 | ELITES') ;
     if($this->request->is('post')){
         $this->Item->create();
 
@@ -258,6 +258,7 @@ public function add(){
 
   public function edit($id = null){
     $this->layout = 'adminLayout';
+    $this->set('title_for_layout','商材編集画面 | ELITES') ;
       if (!$this->Item->exists($id)) {
             throw new NotFoundException('アイテムがみつかりません');
         }
