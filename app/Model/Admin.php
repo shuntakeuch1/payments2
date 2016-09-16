@@ -44,6 +44,10 @@
                     'rule' => 'naturalNumber',
                     'message' => '決済金額を正しく入力してください'
                 ),
+                'rule3' => array(
+                    'rule' => array( 'range', 0, 1000001),
+                    'message' => '決済金額は100万円未満で入力してください'
+                ),
             ),
           );
 
