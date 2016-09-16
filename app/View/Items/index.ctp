@@ -26,10 +26,10 @@
                           <br>
                           <div clas="col-md-12">
                           <?php foreach($items as $item) :?>
-                             <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
+                             <a href="/payments2/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
                             <table class="table-bordered" style="margin-bottom:10px;">
                               <tr>
-                                <td rowspan="2" class="col-sm-1" style="width:10%">
+                                <td rowspan="2" style="width:10%; padding:0 1% ;">
                                   <?=$this->Item->photoImage($item, ['style' => 'width: 100%; height:auto;']);
                                       ?>
                                 </td>
