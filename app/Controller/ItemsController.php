@@ -222,27 +222,40 @@ class ItemsController extends AppController
       }
     }
   }
-  public function add(){
-    $this->layout = 'adminLayout';
-    if($this->request->is('post')){
-      $this->Item->create();
-      if($this->Item->validates()){
-          $this->request->data['Item']['cha_rec_id'] = "" ;
-          if($this->request->data['Item']['period']=="1"){
-            $this->request->data['Item']['cha_rec_id'] = "rec_".$this->request->data['Item']['cha_rec_num'];
-            $data = $this->request->data;
-          }else{
-            $this->request->data['Item']['cha_rec_id'] = "cha_".$this->request->data['Item']['cha_rec_num'];
-            $data = $this->request->data;
-          }
 
-          if($this->Item->save($data)){
-            $this->Flash->success('アイテムを登録しました');
-            return $this-> redirect(['action' => 'index']);
-          }
-      }
+public function add(){
+
+    $this->layout = 'adminLayout';
+
+    if($this->request->is('post')){
+        $this->Item->create();
+
+        $tmp = $this->request->data['Item']['cha_rec_num'];
+
+        if($this->Item->validates()){
+
+            if($this->request->data['Item']['cha_rec_num']){
+                if($this->request->data['Item']['period']=="1"){
+                    $this->request->data['Item']['cha_rec_num'] = "rec_".$this->request->data['Item']['cha_rec_num'];
+                }
+                else{
+                    $this->request->data['Item']['cha_rec_num'] = "cha_".$this->request->data['Item']['cha_rec_num'];
+                }
+            }
+
+            if($this->Item->validates()){
+                $data = $this->request->data;
+
+                if($this->Item->save($data)){
+                    $this->Flash->success('アイテムを登録しました');
+                    return $this-> redirect(['action' => 'adminindex']);
+                }
+            }
+        }
+
+        $this->request->data['Item']['cha_rec_num'] = $tmp;
     }
-  }
+}
 
   public function edit($id = null){
     $this->layout = 'adminLayout';
@@ -252,7 +265,7 @@ class ItemsController extends AppController
         if ($this->request->is(['post', 'put'])) {
             if ($this->Item->save($this->request->data)) {
                 $this->Flash->success('アイテムを更新しました');
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'adminindex']);
             }
         } else {
             $this->request->data = $this->Item->findById($id);
@@ -271,7 +284,7 @@ class ItemsController extends AppController
             $this->Flash->error('アイテムを削除できませんでした');
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'adminindex']);
 
     }
   public function adminindex()

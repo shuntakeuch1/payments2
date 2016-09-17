@@ -22,8 +22,14 @@ App::uses('AppModel','Model');
         'message' => '商品名を入力して下さい',
         ),
       'cha_rec_num'=>array(
-        'rule'=>array('notBlank'),
-        'message' => '商品番号を入力して下さい',
+        'rule1' => array(
+            'rule'=>array('notBlank'),
+            'message' => '商品番号を入力して下さい',
+            ),
+        'rule2' => array(
+            'rule'=>array('myIsUnique'),
+            'message' => '既に登録されている番号です',
+            ),
         ),
       'amount' => array(
         'rule' => array('notBlank'),
@@ -58,4 +64,22 @@ App::uses('AppModel','Model');
       ]
     );
 
- }
+
+    public function myIsUnique($check){
+
+        $params = array(
+            'conditions' => array(
+                'Item.cha_rec_id' => $check['cha_rec_num'],
+            )
+        );
+
+        $results = $this->find('count', $params);
+
+        if($results){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+}
