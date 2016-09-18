@@ -20,7 +20,7 @@
                                   <?=$this->Html->css("../css/successmessage");?>
                                   <?=$this->Session->flash(); ?>
                                   <?php foreach($items as $item) :?>
-                                      <a href="/payments2/items/edit/<?=$item['Item']['id'] ?>" >
+                                      <a href="/payments/items/edit/<?=$item['Item']['id'] ?>" >
 
                                     <table class="table-bordered" style="margin-bottom:10px;">
                                       <tr>

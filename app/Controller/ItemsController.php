@@ -244,6 +244,7 @@ public function add(){
 
             if($this->Item->validates()){
                 $data = $this->request->data;
+                $data['Item']['cha_rec_id'] = $data['Item']['cha_rec_num'];
 
                 if($this->Item->save($data)){
                     $this->Flash->success('アイテムを登録しました');

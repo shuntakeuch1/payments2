@@ -21,6 +21,7 @@ App::uses('AppModel','Model');
         'rule'=>array('notBlank'),
         'message' => '商品名を入力して下さい',
         ),
+      //登録用
       'cha_rec_num'=>array(
         'rule1' => array(
             'rule'=>array('notBlank'),
@@ -28,6 +29,17 @@ App::uses('AppModel','Model');
             ),
         'rule2' => array(
             'rule'=>array('myIsUnique'),
+            'message' => '既に登録されている番号です',
+            ),
+        ),
+      //編集用
+      'cha_rec_id'=>array(
+        'rule1' => array(
+            'rule'=>array('notBlank'),
+            'message' => '商品番号を入力して下さい',
+            ),
+        'rule2' => array(
+            'rule'=>array('isUnique'),
             'message' => '既に登録されている番号です',
             ),
         ),
