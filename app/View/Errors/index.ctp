@@ -2,7 +2,7 @@
       <div class="container">
         <!-- Menu button for smallar screens -->
         <div class="navbar-header">
-          <a href="#" class="navbar-brand"> <span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+          <a href="http://elite.sc/" class="navbar-brand"> <span class="bold"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
  ELITES PAYMENTS</span></a>
         </div>
       </div>
