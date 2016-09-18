@@ -9,18 +9,19 @@
                     <div class="col-md-12">
                     <div style="display: inline-block">
                     <h3 class="h3title">管理者ユーザ一覧</h3></div>
-                        <div class="max500">
+
+                        <div class="max500" style="margin-bottom:5px;">
                         <?=$this->Html->link('新規登録','create',
                           array('class'=>'btn btn-default',
-                                  'id'=>'btn-return'))?>
+                          'id'=>'btn-return'))?>
                         <?=$this->Html->link('パスワード変更',
                             ['action' => 'changePassword'],
                                 array('class'=>'btn btn-default',
-                                  'id'=>'btn-return'))?></div><br><br>
-
-                        <div clas="col-md-12">
+                                  'id'=>'btn-return'))?></div>
+                                  <div style="clear:both; margin-bottom:10px;">
                         <?=$this->Html->css("../css/successmessage");?>
-                        <?=$this->Session->flash(); ?>
+                        <?=$this->Session->flash(); ?></div>
+
 
                           <?php foreach($adminusers as $user) :?>
                             <table class="table table-bordered" style="margin-bottom:10px; width:100%;">
@@ -59,7 +60,7 @@
 
                           </div>
                         </div>
-                    </div>
+
                 </div>
                 <!-- /MODULE TITLE -->
             </div>
