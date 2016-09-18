@@ -39,7 +39,11 @@ App::uses('BlowfishPasswordHasher','Controller/Component/Auth');
                             'passBetween' => array(
                                 'rule' => array('between',8,20),
                                 'message' => '8文字以上必要です'
-                                )
+                          ),
+                            'checkMix' => array(
+                                'rule' => 'checkMixPassword',
+                                'message' => '英数字記号がそれぞれ1文字以上必要です'
+                          )
         ),
         'password_confirm' => array(
             'required' => array(
@@ -86,4 +90,10 @@ App::uses('BlowfishPasswordHasher','Controller/Component/Auth');
       }
     }
 
+    public function checkMixPassword($check){
+        if(preg_match('/\A(?=.*?[a-z])(?=.*?\d)(?=.*?[!-\/:-@[-`{-~])[!-~]+\z/i',$check['password']) ){
+            return true;
+        }
+        return false;
+    }
  }
