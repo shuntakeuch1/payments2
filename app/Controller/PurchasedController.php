@@ -5,6 +5,12 @@ class PurchasedController extends AppController
 {
   public $components = array('Session','Paginator','Cookie');
 
+  public function beforeFilter(){
+      parent::beforeFilter();
+      $this->Auth->allow('index');
+    }
+
+
   public function index()
   {
     // $this->autoLayout = false;  // レイアウトをOFFにする

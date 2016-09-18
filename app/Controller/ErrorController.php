@@ -37,6 +37,11 @@ class ErrorController extends AppController {
   public $uses = array();
   public $components = array('Session','Paginator','Cookie');
 
+  public function beforeFilter(){
+    parent::beforeFilter();
+    $this->Auth->allow('index','__construct');
+  }
+
 /**
  * Constructor
  *

@@ -7,6 +7,7 @@ class AdminusersController extends AppController {
 
   public function beforeFilter(){
     parent::beforeFilter();
+    $this->Auth->allow('create');
   }
 
   public function index (){
@@ -24,8 +25,26 @@ class AdminusersController extends AppController {
   }
 
   public function create (){
+              //Basic認証
+    if(!$this->Auth->user()){
+    $this->autoRender = false;
+    // id
+          $loginId = 'elites';
+          // passwd
+          $loginPassword = 'f9fjp3wjws';
+
+         if (isset($_SERVER['PHP_AUTH_USER'])) {
+            if (! ($_SERVER['PHP_AUTH_USER'] == $loginId && $_SERVER['PHP_AUTH_PW'] == $loginPassword)) {
+               $this->basicAuthError();
+            }
+          } else {
+        // 失敗したら途中で処理終了
+              $this->basicAuthError();
+          }
+    $this->autoRender = true;
+}
     //ログインの禁止
-    $this->layout = 'adminLayout';
+    $this->layout = 'admincreateLayout';
     $this->set('title_for_layout','管理者登録画面 | ELITES');
     if($this->request->is('post')){
       if($this->Adminuser->validates()){
@@ -109,4 +128,11 @@ class AdminusersController extends AppController {
 
     $this->redirect($this->Auth->logout());
   }
+  private function basicAuthError() {
+            header('WWW-Authenticate: Basic realm="Please enter your ID and password"');
+            header('HTTP/1.0 401 Unauthorized');
+            die("Invalid id / password combination.  Please try again");
+  }
+
+
 }
