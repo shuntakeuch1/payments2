@@ -1,3 +1,4 @@
+<?=$this->Html->css("td_hide","stylesheet",array('media'=>"screen"));?>
 <div class="mainbar">
     <!-- WRAPPER -->
     <div class="wrapper">
@@ -19,24 +20,26 @@
                                 array('class'=>'btn btn-default',
                                   'id'=>'btn-return'))?></div>
                                   <div style="clear:both; margin-bottom:10px;">
-                        <?=$this->Html->css("../css/successmessage");?>
-                        <?=$this->Session->flash(); ?></div>
-
-
+                                  <?=$this->Session->flash(); ?></div>
                           <?php foreach($adminusers as $user) :?>
                             <table class="table table-bordered" style="margin-bottom:10px; width:100%;">
                               <tr>
-                                <td class="col-sm-2"><?=h($user['Adminuser']['staff_id'])?></td>
+                                <td style="width:5%"><?=h($user['Adminuser']['staff_id'])?></td>
                                 <td  class="col-sm-3"><?=h($user['Adminuser']['name'])?></td>
-                                <td class="col-sm-4" ><?=h($user['Adminuser']['email'])?></td>
-                                <td class="col-sm-1" style = "text-align:center;">
-                                <?=$this->Html->link('編集',['action' => 'edit',$user['Adminuser']['id']]
+                                <td class="col-sm-4" id="td_hide"><?=h($user['Adminuser']['email'])?></td>
+                                <td class="col-sm-1" style = "text-align:center; width:10%;">
+                                <?=$this->Html->link('編集',['action' => 'edit',$user['Adminuser']['id']],[
+                                  'class' => 'btn btn_f btn-primary btn-sm','role' =>'button']
                                 );?>
+
                                 </td>
-                                <td class="col-sm-1" style = "text-align:center;">
+                                <td class="col-sm-1" style = "text-align:center; width:10%;">
                                   <?=$this->Form->postLink('削除',
                                   ['action' => 'delete',$user['Adminuser']['id']],
-                                  ['confirm' => '本当に削除してよろしいですか?']
+                                    ['escape' => false,
+                                            'class' => 'btn btn_f btn-primary btn-sm',
+                                            'role' => 'button',
+                                            'confirm' =>'本当に削除してよろしいですか?']
                                   )?>
                                 </td>
                               </tr>

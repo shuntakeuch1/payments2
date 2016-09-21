@@ -18,8 +18,14 @@ App::uses('AppModel','Model');
 
     public $validate = array(
       'name'=>array(
-        'rule'=>array('notBlank'),
-        'message' => '商品名を入力して下さい',
+        'rule1' => array(
+            'rule'=>array('notBlank'),
+            'message' => '商品名を入力して下さい',
+            ),
+        'rule2' => array(
+            'rule' => array('maxLength',20),
+            'message' => '商品名は20文字以下にしてください'
+            )
         ),
       //登録用
       'cha_rec_num'=>array(
