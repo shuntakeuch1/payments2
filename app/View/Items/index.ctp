@@ -27,16 +27,17 @@
                           <div clas="col-md-12">
                           <?php foreach($items as $item) :?>
                              <a href="/payments/items/id/<?=$item['Item']['cha_rec_id'] ?>" >
-                            <table class="table-bordered" style="margin-bottom:10px;">
+                            <table class="table-bordered" style="margin-bottom:10px; width:100%;">
                               <tr>
                                 <td rowspan="2" style="width:10%; padding:0 1% ;">
                                   <?=$this->Item->photoImage($item, ['style' => 'width: 100%; height:auto;']);
                                       ?>
                                 </td>
-                               <td class="col-sm-offset-1 col-sm-9"><?=h($item['Item']['name'])?></td>
+                               <td class="col-sm-offset-1 col-sm-9" style="width:75%;"><?=h($item['Item']['name'])?></td>
                               </tr>
+
                               <tr>
-                                <td class="col-sm-9">
+                                <td class="col-sm-9" style="width:75%;">
                                   <?=h($item['Item']['description'])?>
                                   <br><?=h(number_format($item['Item']['amount']))?>円
                                 </td>
