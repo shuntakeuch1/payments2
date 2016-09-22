@@ -1,4 +1,5 @@
 <?=$this->Html->css("td_hide","stylesheet",array('media'=>"screen"));?>
+<?=$this->Html->css("../css/successmessage");?>
 <div class="mainbar">
     <!-- WRAPPER -->
     <div class="wrapper">

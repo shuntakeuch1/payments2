@@ -16,26 +16,25 @@
                                                       'style' =>'border-radius:5px',
                                                     'id'=>'btn-return'))?></div>
                                                     <br><br>
-                                  <div clas="col-md-12">
                                   <?=$this->Html->css("../css/successmessage");?>
                                   <?=$this->Session->flash(); ?>
                                   <?php foreach($items as $item) :?>
                                       <a href="/payments/items/edit/<?=$item['Item']['id'] ?>" >
 
-                                    <table class="table-bordered" style="margin-bottom:10px;">
+                                    <table class="table-bordered" style="margin-bottom:10px; width:100%;">
                                       <tr>
                                         <td rowspan="2" style="width:10%; padding:0 1% ;">
                                           <?=$this->Item->photoImage($item, ['style' => 'width: 100%; height:auto;']);
                                               ?>
                                         </td>
                                        <td class="col-sm-offset-1 col-sm-9"><?=h($item['Item']['name'])?></td>
-                                       <td rowspan="2" class="col-sm-1 sample" style="width:5%;">
+                                       <td rowspan="2" class="col-sm-1 sample" style="width:5%; padding:0 1%">
                                         <?=$this->Html->link('編集',[
                                                       'action' => 'edit',
                                                           $item['Item']['id']],[
                                                               'class' => 'btn btn_f btn-primary btn-sm','role' => 'button'
                                                                 ]) ;?></td>
-                                       <td rowspan="2" class="col-sm-1" style="width:5%;">
+                                       <td rowspan="2" class="col-sm-1" style="width:5%; padding:0 1%">
                                           <div>
                                             <?=$this->Form->postLink('削除',
                                             ['action' => 'delete',$item['Item']['id']],
@@ -72,7 +71,7 @@
                                   <br>
                                   <?php echo $this->paginator->counter(array('format' => '%start%~%end%件目 (全%count%件)'));?>
                           </div>
-                        </div>
+
 
                     </div>
                 </div>
