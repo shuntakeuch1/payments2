@@ -1,6 +1,8 @@
 # User specific & automatically generated files #
 #################################################
-#/app/Config/database.php
+/app/Controller/webpay-php-full-2.2.2/
+/app/Controller/AppController.php
+/app/Config/database.php
 /app/tmp
 #画像をGit管理しない
 /app/webroot/files/
