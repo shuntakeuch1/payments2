@@ -1,14 +1,15 @@
 # User specific & automatically generated files #
 #################################################
-/app/Config/
+#ポートフォリオ用 除外
 /lib/
-/app/Controller/webpay-php-full-2.2.2/
+/app/Config/
 /app/Controller/AppController.php
 /app/Config/database.php
 /app/tmp
 #画像をGit管理しない
 /app/webroot/files/
 
+/app/Controller/webpay-php-full-2.2.2/
 /app/Config/routes.php
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins

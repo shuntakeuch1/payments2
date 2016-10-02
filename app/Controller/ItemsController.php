@@ -71,7 +71,7 @@ class ItemsController extends AppController
       if($this->User->validates()){
     // API リクエスト
     try {
-          $webpay = new WebPay('test_secret_3Rn1BM2o8gtY8Dq1xPaVh6kl');
+          $webpay = new WebPay($this->secret_key);
           //エラー日本語化
           $webpay->setAcceptLanguage('ja');
           //取得したdataの定義
