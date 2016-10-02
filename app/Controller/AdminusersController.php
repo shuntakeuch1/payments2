@@ -29,9 +29,9 @@ class AdminusersController extends AppController {
     if(!$this->Auth->user()){
     $this->autoRender = false;
     // id
-          $loginId = 'elites';
+          $loginId = '####';
           // passwd
-          $loginPassword = 'f9fjp3wjws';
+          $loginPassword = '####';
 
          if (isset($_SERVER['PHP_AUTH_USER'])) {
             if (! ($_SERVER['PHP_AUTH_USER'] == $loginId && $_SERVER['PHP_AUTH_PW'] == $loginPassword)) {

@@ -1,5 +1,6 @@
 # User specific & automatically generated files #
 #################################################
+/app/Config/
 /lib/
 /app/Controller/webpay-php-full-2.2.2/
 /app/Controller/AppController.php
